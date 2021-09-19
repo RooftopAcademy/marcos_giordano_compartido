@@ -1,4 +1,14 @@
+import productDetails from "../src/components/productDetails.js";
 import productComments from "../src/components/productComments.js";
+import products from "../scripts/products.js";
+
+let url = new URL(window.location.href);
+let productID = url.searchParams.get("id");
+
+let product = products().find((prod) => prod.id == productID);
+
+let mainContent = document.getElementById("main-content");
+mainContent.innerHTML = productDetails(product);
 
 let productCommentsContainer = document.getElementById(
 	"product-comments-container"
