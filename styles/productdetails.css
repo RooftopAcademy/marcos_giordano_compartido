@@ -44,6 +44,23 @@
 	color: #d1030f;
 }
 
+.product-details-comments {
+	/* margin: 20px; */
+}
+
+.product-details-comments-title {
+	margin: 20px;
+}
+
+.product-details-comments-item {
+	margin: 20px;
+}
+
+.product-details-comments-item > h3 {
+	margin-bottom: 5px;
+	color: #d1030f;
+}
+
 @media (min-width: 650px) {
 	.product-aside {
 		display: flex;
