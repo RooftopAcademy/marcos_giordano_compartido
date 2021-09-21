@@ -1,6 +1,7 @@
 import productDetails from "../src/components/productDetails.js";
 import productComments from "../src/components/productComments.js";
 import products from "../scripts/products.js";
+import store from "./app.js";
 
 let url = new URL(window.location.href);
 let productID = url.searchParams.get("id");
@@ -35,3 +36,13 @@ fetch("https://jsonplaceholder.typicode.com/comments")
         </div>
         `;
 	});
+
+let buyButtons = document.getElementsByName("buy-button");
+buyButtons.forEach((button) => {
+	button.addEventListener("click", function () {
+		let product = products().find((prod) => prod.id == this.dataset.productId);
+		store.cart.add(product);
+		let productQuantity = document.getElementById("cart-quantity");
+		productQuantity.innerHTML = ` &nbsp ${store.cart.showAll().length}`;
+	});
+});
