@@ -1,4 +1,4 @@
-export default function headerRendering() {
+export default function headerRendering(cart) {
 	return `
     <div class="navigation">
 					<div class="navigation-upper">
@@ -25,11 +25,12 @@ export default function headerRendering() {
 						</div>
 
 						<div class="navigation-commands">
-							<a class="navigation-button" href="#">
+							<a class="navigation-button" href="#" id="search-button">
 								<i class="fas fa-search"></i>
 							</a>
-							<a class="navigation-button" href="#">
+							<a class="navigation-button" href="./cart.html">
 								<i class="fas fa-shopping-cart"></i>
+								<p id="cart-quantity"> &nbsp ${cart.length} </p>
 							</a>
 						</div>
 					</div>

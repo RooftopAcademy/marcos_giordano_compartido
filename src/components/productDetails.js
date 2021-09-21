@@ -10,7 +10,9 @@ export default function productDetails(product) {
 							product.price *
 							(1 - product.discount / 100)
 						).toFixed(0)}</h3>
-            <a class="button-link" href="#">Comprar</a>
+            <button class="button-link" data-product-id="${
+							product.id
+						}" name="buy-button">Comprar</button>
             <p class="product-description">${product.description}</p>
         </div>
         <div class="product-details-comments">
@@ -27,7 +29,9 @@ export default function productDetails(product) {
 							product.price *
 							(1 - product.discount / 100)
 						).toFixed(0)}</h3>
-            <a class="button-link" href="#">Comprar</a>
+            <button class="button-link" data-product-id="${
+							product.id
+						}" name="buy-button">Comprar</button>
         </div>
     </div>
     `;

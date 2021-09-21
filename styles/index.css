@@ -11,7 +11,7 @@
 body {
 	font-family: Roboto, sans-serif;
 	width: 100%;
-	background-color: rgb(246, 246, 246);
+	min-height: 100vh;
 }
 
 .app-wrapper {
@@ -54,7 +54,8 @@ header {
 	align-items: center;
 
 	height: 50px;
-	width: 50px;
+	min-width: 50px;
+	padding: 0px 10px;
 	color: white;
 	background-color: #d1030f;
 	border-style: none;
@@ -387,7 +388,7 @@ footer {
 
 @media (min-width: 1280px) {
 	.navigation-burguer-button,
-	.navigation-commands {
+	#search-button {
 		display: none;
 	}
 	.navigation-burger-logo a {
