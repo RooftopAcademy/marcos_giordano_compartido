@@ -64,6 +64,10 @@ header {
 	margin-right: 0px;
 }
 
+.navigation-button p {
+	white-space: nowrap;
+}
+
 .navigation-button:active {
 	background-color: white;
 	color: #d1030f;
