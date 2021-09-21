@@ -3,7 +3,7 @@ import Product from "../src/Product.js";
 export default function () {
 	let products = [];
 
-	for (let i = 0; i < 5; i++) {
+	for (let i = 0; i < 15; i++) {
 		if (i % 2 == 0) {
 			let product = new Product();
 			product.id = i;
