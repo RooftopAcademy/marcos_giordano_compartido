@@ -97,4 +97,16 @@ export default class Product {
 		this._discount = discount;
 	}
 	//#endregion discount
+
+	create(prod) {
+		this._id = prod._id;
+		this._name = prod._name;
+		this._type = prod._type;
+		this._price = prod._price;
+		this._description = prod._description;
+		this._image = prod._image;
+		this._thumbnail = prod._thumbnail;
+		this._stock = prod._stock;
+		this._discount = prod._discount;
+	}
 }
