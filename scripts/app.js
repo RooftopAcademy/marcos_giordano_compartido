@@ -4,10 +4,16 @@ import asideNavBar from "../src/components/asideNavBar.js";
 import products from "../scripts/products.js";
 import Store from "../src/Store.js";
 
+//Instanciate the store
+let store = new Store();
+store.loadCatalog(products());
+store.cart.load();
+let cart = store.cart.showAll();
+
 //header rendering
 
 let jsHeader = document.getElementById("js-header");
-jsHeader.innerHTML = headerRendering();
+jsHeader.innerHTML = headerRendering(cart);
 
 //footer rendering
 
@@ -40,10 +46,5 @@ burgerButton.addEventListener("click", () => {
 		footer.classList.add("disabled");
 	}
 });
-
-//Instanciate the store
-
-let store = new Store();
-store.loadCatalog(products());
 
 export default store;
