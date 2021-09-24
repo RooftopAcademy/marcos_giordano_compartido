@@ -1,112 +1,140 @@
-export default class Product {
-	constructor() {
-		this._id = String;
-		this._name = String;
-		this._type = String;
-		this._price = Number;
-		this._description = String;
-		this._image = String;
-		this._thumbnail = String;
-		this._stock = Number;
-		this._discount = Number;
-	}
-
-	//#region id
-	get id() {
-		return this._id;
-	}
-	set id(id) {
-		this._id = id;
-	}
-	//#endregion id
-
-	//#region name
-	get name() {
-		return this._name;
-	}
-	set name(name) {
-		this._name = name;
-	}
-	//#endregion name
-
-	//#region type
-	get type() {
-		return this._type;
-	}
-	set type(type) {
-		this._type = type;
-	}
-	//#endregion type
-
-	//#region price
-	get price() {
-		return this._price;
-	}
-	set price(price) {
-		this._price = price;
-	}
-	//#endregion price
-
-	//#region description
-	get description() {
-		return this._description;
-	}
-	set description(description) {
-		this._description = description;
-	}
-	//#endregion description
-
-	//#region image
-	get image() {
-		return this._image;
-	}
-	set image(image) {
-		this._image = image;
-	}
-	//#endregion image
-
-	//#region thumbnail
-	get thumbnail() {
-		return this._thumbnail;
-	}
-	set thumbnail(thumbnail) {
-		this._thumbnail = thumbnail;
-	}
-	//#endregion thumbnail
-
-	//#region stock
-	get stock() {
-		return this._stock;
-	}
-	set stock(stock) {
-		this._stock = stock;
-	}
-	increaseStock() {
-		this._stock++;
-	}
-	decreaseStock() {
-		this._stock--;
-	}
-	//#endregion stock
-
-	//#region discount
-	get discount() {
-		return this._discount;
-	}
-	set discount(discount) {
-		this._discount = discount;
-	}
-	//#endregion discount
-
-	create(prod) {
-		this._id = prod._id;
-		this._name = prod._name;
-		this._type = prod._type;
-		this._price = prod._price;
-		this._description = prod._description;
-		this._image = prod._image;
-		this._thumbnail = prod._thumbnail;
-		this._stock = prod._stock;
-		this._discount = prod._discount;
-	}
-}
+var Product = /** @class */ (function () {
+    function Product() {
+        this._id = "";
+        this._name = "";
+        this._type = "";
+        this._price = 0;
+        this._description = "";
+        this._image = "";
+        this._thumbnail = "";
+        this._stock = 0;
+        this._discount = 0;
+    }
+    Object.defineProperty(Product.prototype, "id", {
+        //#region id
+        get: function () {
+            return this._id;
+        },
+        set: function (id) {
+            this._id = id;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Product.prototype, "name", {
+        //#endregion id
+        //#region name
+        get: function () {
+            return this._name;
+        },
+        set: function (name) {
+            this._name = name;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Product.prototype, "type", {
+        //#endregion name
+        //#region type
+        get: function () {
+            return this._type;
+        },
+        set: function (type) {
+            this._type = type;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Product.prototype, "price", {
+        //#endregion type
+        //#region price
+        get: function () {
+            return this._price;
+        },
+        set: function (price) {
+            this._price = price;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Product.prototype, "description", {
+        //#endregion price
+        //#region description
+        get: function () {
+            return this._description;
+        },
+        set: function (description) {
+            this._description = description;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Product.prototype, "image", {
+        //#endregion description
+        //#region image
+        get: function () {
+            return this._image;
+        },
+        set: function (image) {
+            this._image = image;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Product.prototype, "thumbnail", {
+        //#endregion image
+        //#region thumbnail
+        get: function () {
+            return this._thumbnail;
+        },
+        set: function (thumbnail) {
+            this._thumbnail = thumbnail;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Product.prototype, "discount", {
+        //#endregion thumbnail
+        //#region discount
+        get: function () {
+            return this._discount;
+        },
+        set: function (discount) {
+            this._discount = discount;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Product.prototype, "stock", {
+        //#endregion discount
+        //#region stock
+        get: function () {
+            return this._stock;
+        },
+        set: function (stock) {
+            this._stock = stock;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Product.prototype.increaseStock = function () {
+        this._stock++;
+    };
+    Product.prototype.decreaseStock = function () {
+        this._stock--;
+    };
+    //#endregion stock
+    Product.prototype.create = function (prod) {
+        this._id = prod._id;
+        this._name = prod._name;
+        this._type = prod._type;
+        this._price = prod._price;
+        this._description = prod._description;
+        this._image = prod._image;
+        this._thumbnail = prod._thumbnail;
+        this._stock = prod._stock;
+        this._discount = prod._discount;
+    };
+    return Product;
+}());
+export default Product;
