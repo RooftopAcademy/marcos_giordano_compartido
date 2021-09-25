@@ -23,7 +23,7 @@ export default function headerRendering(store: Store): string {
 						</div>
 
 						<div class="navigation-login">
-							<a class="button-link js-user" href="#"><i class="fas fa-user"></i> &nbsp ${
+							<a class="button-link js-user" href="./user.html"><i class="fas fa-user"></i> &nbsp ${
 								store.user ? store.user.firstName.toUpperCase() : "Invitado"
 							}</a>
 						</div>
