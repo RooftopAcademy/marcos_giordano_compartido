@@ -1,4 +1,4 @@
-import Product from "../src/Product.js";
+import Product from "../src/Product";
 
 export default function (): Array<Product> {
 	let products: Array<Product> = [];

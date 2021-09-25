@@ -1,4 +1,4 @@
-import Comment from "../Comment.js";
+import Comment from "../Comment";
 
 export default function productComments(comment: Comment): string {
 	let name = comment.email.split("@");

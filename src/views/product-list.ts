@@ -1,6 +1,6 @@
-import productComponent from "../components/product.js";
-import Product from "../Product.js";
-import Store from "../Store.js";
+import productComponent from "../components/product";
+import Product from "../Product";
+import Store from "../Store";
 
 export default function returnProductListView(store: Store) {
 	let productContainer: HTMLElement =

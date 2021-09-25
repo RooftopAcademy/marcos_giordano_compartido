@@ -1,7 +1,7 @@
-import Cart from "./Cart.js";
-import Product from "./Product.js";
-import StoreUser from "./StoreUser.js";
-import products from "../scripts/products.js";
+import Cart from "./Cart";
+import Product from "./Product";
+import StoreUser from "./StoreUser";
+import products from "../scripts/products";
 
 export default class Store {
 	private _user?: StoreUser;
