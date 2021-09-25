@@ -4,17 +4,17 @@ import StoreUser from "./StoreUser";
 import products from "../scripts/products";
 
 export default class Store {
-	private _user?: StoreUser;
+	private _user?: StoreUser | undefined;
 	private _catalog: Array<Product> = [];
 	private _cart: Cart = new Cart();
 
 	constructor() {}
 
 	public get user() {
-		return this._user;
+		return this._user!;
 	}
 
-	public set user(user: StoreUser | undefined) {
+	public set user(user: StoreUser) {
 		this._user = user;
 		localStorage.setItem("user", JSON.stringify(user));
 	}
@@ -24,9 +24,13 @@ export default class Store {
 		if (loadData != null) {
 			let user: StoreUser = new StoreUser();
 			user.create(JSON.parse(loadData));
-
 			this._user = user;
 		}
+	}
+
+	public clearUser(): void {
+		this._user = undefined;
+		localStorage.removeItem("user");
 	}
 
 	public loadCatalog(): void {

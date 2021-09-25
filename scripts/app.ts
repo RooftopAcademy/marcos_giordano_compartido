@@ -8,6 +8,7 @@ import returnProductDetailsView from "../src/views/product-details";
 import returnProductListView from "../src/views/product-list";
 import returnSignUpView from "../src/views/sign-up";
 import Path from "../src/Path";
+import returnUserView from "../src/views/user";
 
 //Instanciate the store
 let store: Store = new Store();
@@ -60,6 +61,7 @@ const routes: Array<Path> = [
 	{ path: "productList.html", viewRendering: returnProductListView },
 	{ path: "signUp.html", viewRendering: returnSignUpView },
 	{ path: "cart.html", viewRendering: returnCartView },
+	{ path: "user.html", viewRendering: returnUserView },
 ];
 
 let path: string = window.location.pathname;

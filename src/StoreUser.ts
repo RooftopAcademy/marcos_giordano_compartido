@@ -1,8 +1,11 @@
+import PrivilegeEnum from "./PrivilegeEnum";
+
 export default class StoreUser {
 	private _firstName: string = "";
 	private _lastName: string = "";
 	private _mailAdress: string = "";
 	private _password: string = "";
+	private _privilege: PrivilegeEnum = PrivilegeEnum.normal;
 
 	constructor() {}
 
@@ -67,6 +70,13 @@ export default class StoreUser {
 			default:
 				this._password = p;
 		}
+	}
+
+	get privilege(): PrivilegeEnum {
+		return this._privilege;
+	}
+	set privilege(p: PrivilegeEnum) {
+		this._privilege = p;
 	}
 
 	public create(user: any) {
