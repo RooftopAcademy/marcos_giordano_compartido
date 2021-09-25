@@ -1,13 +1,13 @@
-import headerRendering from "../src/components/header.js";
-import footerRendering from "../src/components/footer.js";
-import asideNavBar from "../src/components/asideNavBar.js";
-import Store from "../src/Store.js";
-import returnCartView from "../src/views/cart.js";
-import returnIndexView from "../src/views/index.js";
-import returnProductDetailsView from "../src/views/product-details.js";
-import returnProductListView from "../src/views/product-list.js";
-import returnSignUpView from "../src/views/sign-up.js";
-import Path from "../src/Path.js";
+import headerRendering from "../src/components/header";
+import footerRendering from "../src/components/footer";
+import asideNavBar from "../src/components/asideNavBar";
+import Store from "../src/Store";
+import returnCartView from "../src/views/cart";
+import returnIndexView from "../src/views/index";
+import returnProductDetailsView from "../src/views/product-details";
+import returnProductListView from "../src/views/product-list";
+import returnSignUpView from "../src/views/sign-up";
+import Path from "../src/Path";
 
 //Instanciate the store
 let store: Store = new Store();
@@ -52,18 +52,21 @@ burgerButton.addEventListener("click", () => {
 	}
 });
 
+//Views rendering through paths
+
 const routes: Array<Path> = [
-	{ path: "/index.html", viewRendering: returnIndexView },
-	{ path: "/productDetails.html", viewRendering: returnProductDetailsView },
-	{ path: "/productList.html", viewRendering: returnProductListView },
-	{ path: "/signUp.html", viewRendering: returnSignUpView },
-	{ path: "/cart.html", viewRendering: returnCartView },
+	{ path: "index.html", viewRendering: returnIndexView },
+	{ path: "productDetails.html", viewRendering: returnProductDetailsView },
+	{ path: "productList.html", viewRendering: returnProductListView },
+	{ path: "signUp.html", viewRendering: returnSignUpView },
+	{ path: "cart.html", viewRendering: returnCartView },
 ];
 
 let path: string = window.location.pathname;
+let pathArray: Array<string> = path.split("/");
 
 let view = routes.filter((p) => {
-	return p.path == path;
+	return p.path == pathArray[pathArray.length - 1];
 });
 
 if (view.length != 0) {
