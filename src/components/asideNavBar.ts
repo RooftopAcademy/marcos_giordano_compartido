@@ -8,7 +8,7 @@ export default function asideNavBar(store: Store): string {
         >
         <a class="button-link" href="./signUp.html">REGISTRARSE</a>
         <div class="home-content-aside-login">
-            <a class="button-link js-user" href="#"><i class="fas fa-user"></i> &nbsp ${
+            <a class="button-link js-user" href="./user.html"><i class="fas fa-user"></i> &nbsp ${
 							store.user ? store.user.firstName.toUpperCase() : "Invitado"
 						}</a>
         </div>
