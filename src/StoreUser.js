@@ -80,6 +80,12 @@ var StoreUser = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    StoreUser.prototype.create = function (user) {
+        this._firstName = user._firstName;
+        this._lastName = user._lastName;
+        this._mailAdress = user._mailAdress;
+        this._password = user._Password;
+    };
     return StoreUser;
 }());
 export default StoreUser;

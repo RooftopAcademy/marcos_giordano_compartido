@@ -68,4 +68,11 @@ export default class StoreUser {
 				this._password = p;
 		}
 	}
+
+	public create(user: any) {
+		this._firstName = user._firstName;
+		this._lastName = user._lastName;
+		this._mailAdress = user._mailAdress;
+		this._password = user._Password;
+	}
 }
