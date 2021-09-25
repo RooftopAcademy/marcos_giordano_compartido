@@ -3,18 +3,17 @@ import footerRendering from "../src/components/footer.js";
 import asideNavBar from "../src/components/asideNavBar.js";
 import products from "../scripts/products.js";
 import Store from "../src/Store.js";
-import Product from "../src/Product.js";
 
 //Instanciate the store
 let store: Store = new Store();
 store.loadCatalog(products());
 store.cart.load();
-let cart: Array<Product> = store.cart.showAll();
+store.loadUser();
 
 //header rendering
 
 let jsHeader: HTMLElement = document.getElementById("js-header")!;
-jsHeader.innerHTML = headerRendering(cart);
+jsHeader.innerHTML = headerRendering(store);
 
 //footer rendering
 
@@ -24,7 +23,7 @@ jsFooter.innerHTML = footerRendering();
 //aside navigation bar rendering
 
 let asideNavBarContainer: HTMLElement = document.getElementById("side-bar")!;
-asideNavBarContainer.innerHTML = asideNavBar();
+asideNavBarContainer.innerHTML = asideNavBar(store);
 
 //Burger Button functionality
 
