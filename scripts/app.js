@@ -7,16 +7,16 @@ import Store from "../src/Store.js";
 var store = new Store();
 store.loadCatalog(products());
 store.cart.load();
-var cart = store.cart.showAll();
+store.loadUser();
 //header rendering
 var jsHeader = document.getElementById("js-header");
-jsHeader.innerHTML = headerRendering(cart);
+jsHeader.innerHTML = headerRendering(store);
 //footer rendering
 var jsFooter = document.getElementById("js-footer");
 jsFooter.innerHTML = footerRendering();
 //aside navigation bar rendering
 var asideNavBarContainer = document.getElementById("side-bar");
-asideNavBarContainer.innerHTML = asideNavBar();
+asideNavBarContainer.innerHTML = asideNavBar(store);
 //Burger Button functionality
 var burgerButton = document.querySelector("#burger-button");
 var sideBar = document.querySelector("#side-bar");
