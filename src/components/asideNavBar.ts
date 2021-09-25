@@ -1,4 +1,6 @@
-export default function asideNavBar(): string {
+import Store from "../Store";
+
+export default function asideNavBar(store: Store): string {
 	return `
     <div class="navigation-links-desktop">
         <a class="button-link" href="./productList.html"
@@ -6,7 +8,9 @@ export default function asideNavBar(): string {
         >
         <a class="button-link" href="./sign-up.html">REGISTRARSE</a>
         <div class="home-content-aside-login">
-            <a class="button-link" href="#">USUARIO: MARCOS_L14</a>
+            <a class="button-link js-user" href="#"><i class="fas fa-user"></i> &nbsp ${
+							store.user ? store.user.firstName.toUpperCase() : "Invitado"
+						}</a>
         </div>
     </div>
     `;
