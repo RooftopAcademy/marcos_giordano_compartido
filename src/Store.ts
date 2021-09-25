@@ -1,6 +1,7 @@
 import Cart from "./Cart.js";
 import Product from "./Product.js";
 import StoreUser from "./StoreUser.js";
+import products from "../scripts/products.js";
 
 export default class Store {
 	private _user?: StoreUser;
@@ -28,8 +29,8 @@ export default class Store {
 		}
 	}
 
-	public loadCatalog(products: Array<Product>): void {
-		this._catalog = products;
+	public loadCatalog(): void {
+		this._catalog = products();
 	}
 
 	public showCatalog(): Array<Product> {
