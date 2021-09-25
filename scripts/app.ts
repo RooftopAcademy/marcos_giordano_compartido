@@ -1,12 +1,17 @@
 import headerRendering from "../src/components/header.js";
 import footerRendering from "../src/components/footer.js";
 import asideNavBar from "../src/components/asideNavBar.js";
-import products from "../scripts/products.js";
 import Store from "../src/Store.js";
+import returnCartView from "../src/views/cart.js";
+import returnIndexView from "../src/views/index.js";
+import returnProductDetailsView from "../src/views/product-details.js";
+import returnProductListView from "../src/views/product-list.js";
+import returnSignUpView from "../src/views/sign-up.js";
+import Path from "../src/Path.js";
 
 //Instanciate the store
 let store: Store = new Store();
-store.loadCatalog(products());
+store.loadCatalog();
 store.cart.load();
 store.loadUser();
 
@@ -47,4 +52,22 @@ burgerButton.addEventListener("click", () => {
 	}
 });
 
-export default store;
+const routes: Array<Path> = [
+	{ path: "/index.html", viewRendering: returnIndexView },
+	{ path: "/productDetails.html", viewRendering: returnProductDetailsView },
+	{ path: "/productList.html", viewRendering: returnProductListView },
+	{ path: "/signUp.html", viewRendering: returnSignUpView },
+	{ path: "/cart.html", viewRendering: returnCartView },
+];
+
+let path: string = window.location.pathname;
+
+let view = routes.filter((p) => {
+	return p.path == path;
+});
+
+if (view.length != 0) {
+	view[0].viewRendering(store);
+} else {
+	mainContent.innerHTML = `<h1>Error 404</h1>`;
+}
