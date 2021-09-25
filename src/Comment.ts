@@ -1,4 +1,4 @@
-export default interface CartItem {
+export default interface Comment {
 	postId: number;
 	id: number;
 	name: string;
