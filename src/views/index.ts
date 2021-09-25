@@ -1,6 +1,6 @@
-import productCarrousel from "../components/productCarrousel.js";
-import Product from "../Product.js";
-import Store from "../Store.js";
+import productCarrousel from "../components/productCarrousel";
+import Product from "../Product";
+import Store from "../Store";
 
 export default function returnIndexView(store: Store) {
 	let productCarrouselContainer: HTMLElement = document.getElementById(

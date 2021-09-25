@@ -1,8 +1,8 @@
-import productDetails from "../components/productDetails.js";
-import productComments from "../components/productComments.js";
-import Product from "../Product.js";
-import Comment from "../Comment.js";
-import Store from "../Store.js";
+import productDetails from "../components/productDetails";
+import productComments from "../components/productComments";
+import Product from "../Product";
+import Comment from "../Comment";
+import Store from "../Store";
 
 export default function returnProductDetailsView(store: Store) {
 	let url: URL = new URL(window.location.href);

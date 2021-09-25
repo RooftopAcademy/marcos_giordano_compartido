@@ -1,5 +1,5 @@
-import Store from "../Store.js";
-import StoreUser from "../StoreUser.js";
+import Store from "../Store";
+import StoreUser from "../StoreUser";
 
 export default function returnSignUpView(store: Store) {
 	let signUpForm: HTMLFormElement = document.getElementById(

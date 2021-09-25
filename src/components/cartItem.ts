@@ -1,4 +1,4 @@
-import CartItem from "../CartItem.js";
+import CartItem from "../CartItem";
 
 export default function cartItem(item: CartItem): string {
 	return `

@@ -1,7 +1,7 @@
-import cartItem from "../components/cartItem.js";
-import Product from "../Product.js";
-import CartItem from "../CartItem.js";
-import Store from "../Store.js";
+import cartItem from "../components/cartItem";
+import Product from "../Product";
+import CartItem from "../CartItem";
+import Store from "../Store";
 
 export default function returnCartView(store: Store) {
 	let cartTable: HTMLElement = document.getElementById("cart-table")!;
