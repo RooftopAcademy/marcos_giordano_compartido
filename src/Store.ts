@@ -9,6 +9,25 @@ export default class Store {
 
 	constructor() {}
 
+	public get user() {
+		return this._user;
+	}
+
+	public set user(user: StoreUser | undefined) {
+		this._user = user;
+		localStorage.setItem("user", JSON.stringify(user));
+	}
+
+	public loadUser() {
+		let loadData: string | null = localStorage.getItem("user");
+		if (loadData != null) {
+			let user: StoreUser = new StoreUser();
+			user.create(JSON.parse(loadData));
+
+			this._user = user;
+		}
+	}
+
 	public loadCatalog(products: Array<Product>): void {
 		this._catalog = products;
 	}

@@ -1,6 +1,6 @@
-import Product from "../Product.js";
+import Store from "../Store.js";
 
-export default function headerRendering(cart: Array<Product>): string {
+export default function headerRendering(store: Store): string {
 	return `
     <div class="navigation">
 					<div class="navigation-upper">
@@ -23,7 +23,9 @@ export default function headerRendering(cart: Array<Product>): string {
 						</div>
 
 						<div class="navigation-login">
-							<a class="button-link" href="#">USUARIO: MARCOS_L14</a>
+							<a class="button-link js-user" href="#"><i class="fas fa-user"></i> &nbsp ${
+								store.user ? store.user.firstName.toUpperCase() : "Invitado"
+							}</a>
 						</div>
 
 						<div class="navigation-commands">
@@ -32,7 +34,7 @@ export default function headerRendering(cart: Array<Product>): string {
 							</a>
 							<a class="navigation-button" href="./cart.html">
 								<i class="fas fa-shopping-cart"></i>
-								<p id="cart-quantity"> &nbsp ${cart.length} </p>
+								<p id="cart-quantity"> &nbsp ${store.cart.showAll().length} </p>
 							</a>
 						</div>
 					</div>
