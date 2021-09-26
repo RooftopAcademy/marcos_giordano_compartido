@@ -9,6 +9,9 @@ import returnProductListView from "../src/views/product-list";
 import returnSignUpView from "../src/views/sign-up";
 import Path from "../src/Path";
 import returnUserView from "../src/views/user";
+import PrivilegeEnum from "../src/PrivilegeEnum";
+import createNewProductButton from "../src/components/createNewProductButton";
+import returnNewProductView from "../src/views/newProduct";
 
 //Instanciate the store
 let store: Store = new Store();
@@ -31,23 +34,32 @@ jsFooter.innerHTML = footerRendering();
 let asideNavBarContainer: HTMLElement = document.getElementById("side-bar")!;
 asideNavBarContainer.innerHTML = asideNavBar(store);
 
+let navBarContainer: HTMLElement =
+	document.getElementById("nav-bar-container")!;
+
+if (store.user != null) {
+	if (store.user.privilege === PrivilegeEnum.admin) {
+		let anchor = document.createElement("a");
+		anchor = createNewProductButton(anchor);
+		navBarContainer.appendChild(anchor);
+	}
+}
+
 //Burger Button functionality
 
 let burgerButton: HTMLElement = document.querySelector("#burger-button")!;
-
-let sideBar: HTMLElement = document.querySelector("#side-bar")!;
 let mainContent: HTMLElement = document.querySelector("#main-content")!;
 let footer: HTMLElement = document.querySelector("#footer")!;
 
 burgerButton.addEventListener("click", () => {
-	if (sideBar.style.display === "flex") {
-		sideBar.style.display = "none";
-		sideBar.classList.remove("float");
+	if (asideNavBarContainer.style.display === "flex") {
+		asideNavBarContainer.style.display = "none";
+		asideNavBarContainer.classList.remove("float");
 		mainContent.classList.remove("disabled");
 		footer.classList.remove("disabled");
 	} else {
-		sideBar.style.display = "flex";
-		sideBar.classList.add("float");
+		asideNavBarContainer.style.display = "flex";
+		asideNavBarContainer.classList.add("float");
 		mainContent.classList.add("disabled");
 		footer.classList.add("disabled");
 	}
@@ -62,6 +74,7 @@ const routes: Array<Path> = [
 	{ path: "signUp.html", viewRendering: returnSignUpView },
 	{ path: "cart.html", viewRendering: returnCartView },
 	{ path: "user.html", viewRendering: returnUserView },
+	{ path: "newProduct.html", viewRendering: returnNewProductView },
 ];
 
 let path: string = window.location.pathname;
