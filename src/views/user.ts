@@ -20,6 +20,10 @@ export default function returnUserView(store: Store) {
 			userName.forEach((element) => {
 				element.innerHTML = `<i class="fas fa-user"></i> &nbsp Invitado`;
 			});
+			let productCreationLink: HTMLAnchorElement = document.getElementById(
+				"product-creation-link"
+			) as HTMLAnchorElement;
+			navBarContainer.removeChild(productCreationLink);
 		});
 	}
 
