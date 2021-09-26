@@ -79,7 +79,7 @@ header {
 	justify-content: center;
 	align-items: center;
 
-	height: 50px;
+	min-height: 50px;
 	color: white;
 	background-color: #d1030f;
 	border-style: none;
@@ -162,6 +162,11 @@ header {
 .home-content-aside {
 	display: none;
 	background-color: #d1030f;
+}
+
+.navigation-links-desktop > * {
+	margin-top: 0px;
+	text-align: center;
 }
 
 .home-content-aside-login {
@@ -387,6 +392,9 @@ footer {
 	}
 	.home-content-aside-login {
 		display: none;
+	}
+	.navigation-links-desktop > * {
+		margin-top: 20px;
 	}
 }
 

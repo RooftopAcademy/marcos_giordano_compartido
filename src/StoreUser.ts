@@ -83,6 +83,7 @@ export default class StoreUser {
 		this._firstName = user._firstName;
 		this._lastName = user._lastName;
 		this._mailAdress = user._mailAdress;
-		this._password = user._Password;
+		this._password = user._password;
+		this._privilege = user._privilege;
 	}
 }

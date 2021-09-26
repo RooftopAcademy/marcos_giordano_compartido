@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="shortcut icon"
+			type="image/jpg"
+			href="./resources/images/favIcon.png"
+		/>
+		<link rel="stylesheet" href="./styles/index.css" />
+		<link rel="stylesheet" href="./styles/newProduct.css" />
+		<link
+			rel="stylesheet"
+			href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+			integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+			crossorigin="anonymous"
+		/>
+		<script src="./dist/bundle.js" type="module" defer></script>
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="app-wrapper">
+			<header id="js-header">
+				<!-- javascript rendered -->
+			</header>
+
+			<main>
+				<div class="home-content">
+					<div class="home-content-aside" id="side-bar">
+						<!-- javascript rendered -->
+					</div>
+
+					<div class="new-product-container" id="main-content">
+						<div class="new-product-title">
+							<h1>Crear nuevo producto</h1>
+						</div>
+
+						<div class="new-product-content">
+							<form class="new-product-form" id="new-product-form">
+								<div class="form-text-input-container">
+									<label>Nombre:</label>
+									<input
+										type="text"
+										placeholder="El nombre debe tener cant min y max de caracteres"
+										class="form-text-input"
+										name="product-name"
+									/>
+								</div>
+
+								<div class="form-text-input-container">
+									<label>Tipo:</label>
+									<select
+										class="form-text-input"
+										name="product-type"
+										id="type-selector"
+									>
+										<!-- javascript rendered -->
+									</select>
+								</div>
+
+								<div class="form-text-input-container">
+									<label>Precio:</label>
+									<input
+										type="number"
+										step="0.01"
+										min="0.00"
+										class="form-text-input"
+										name="product-price"
+									/>
+								</div>
+
+								<div class="form-text-input-container">
+									<label>Descripción:</label>
+									<input
+										type="text"
+										placeholder="La descripcion tiene que tener un minimo de caracteres"
+										class="form-text-input"
+										name="product-description"
+									/>
+								</div>
+
+								<div class="form-text-input-container">
+									<label>Imagen:</label>
+									<input
+										type="text"
+										placeholder="se debe escribir la url de la imagen"
+										class="form-text-input"
+										name="product-image"
+									/>
+								</div>
+
+								<div class="form-text-input-container">
+									<label>Imagen tipo thumbnail:</label>
+									<input
+										type="text"
+										placeholder="se debe escribir la url de la imagen"
+										class="form-text-input"
+										name="product-thumbnail"
+									/>
+								</div>
+
+								<div class="form-text-input-container">
+									<label>Stock:</label>
+									<input
+										type="number"
+										step="1"
+										min="0"
+										placeholder="unidades de stock"
+										class="form-text-input"
+										name="product-stock"
+									/>
+								</div>
+
+								<div class="form-text-input-container">
+									<label>Descuento:</label>
+									<input
+										type="number"
+										step="0.001"
+										min="0.00"
+										class="form-text-input"
+										name="product-discount"
+									/>
+								</div>
+
+								<div class="form-button-container">
+									<input
+										type="submit"
+										value="Crear Producto"
+										class="form-button"
+										id="new-product-submit-button"
+									/>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<footer id="js-footer">
+				<!-- javascript rendered -->
+			</footer>
+
+			<div id="info-container">
+				<p id="info-container-paragraph">Informacion</p>
+				<button id="info-container-button">Aceptar</button>
+			</div>
+		</div>
+	</body>
+</html>

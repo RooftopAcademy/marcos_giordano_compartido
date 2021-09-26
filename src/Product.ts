@@ -1,7 +1,9 @@
+import ProductTypeEnum from "./ProductTipeEnum";
+
 export default class Product {
 	private _id: string = "";
 	private _name: string = "";
-	private _type: string = "";
+	private _type: ProductTypeEnum = ProductTypeEnum.other;
 	private _price: number = 0;
 	private _description: string = "";
 	private _image: string = "";
@@ -25,15 +27,24 @@ export default class Product {
 		return this._name;
 	}
 	set name(name: string) {
-		this._name = name;
+		switch (true) {
+			case name.length < 3:
+				throw Error("El Nombre debe poseer al menos 3 caracteres.");
+			case name.length > 100:
+				throw Error("El Nombre debe poseer como máximo 100 caracteres.");
+			default:
+				this._name =
+					name.substring(0, 1).toUpperCase() +
+					name.substring(1, name.length).toLowerCase();
+		}
 	}
 	//#endregion name
 
 	//#region type
-	get type(): string {
+	get type(): ProductTypeEnum {
 		return this._type;
 	}
-	set type(type: string) {
+	set type(type: ProductTypeEnum) {
 		this._type = type;
 	}
 	//#endregion type
@@ -52,6 +63,14 @@ export default class Product {
 		return this._description;
 	}
 	set description(description: string) {
+		switch (true) {
+			case description.length < 3:
+				throw Error("La Descripcion debe poseer al menos 3 caracteres.");
+			case description.length > 5000:
+				throw Error("El Descripcion debe poseer como máximo 5000 caracteres.");
+			default:
+				this._description = description;
+		}
 		this._description = description;
 	}
 	//#endregion description

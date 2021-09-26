@@ -33,6 +33,10 @@ export default class Store {
 		localStorage.removeItem("user");
 	}
 
+	public saveUser(): void {
+		localStorage.setItem("user", JSON.stringify(this._user));
+	}
+
 	public loadCatalog(): void {
 		this._catalog = products();
 	}

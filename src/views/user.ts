@@ -1,4 +1,4 @@
-import headerRendering from "../components/header";
+import createNewProductButton from "../components/createNewProductButton";
 import userComponent from "../components/userComponent";
 import PrivilegeEnum from "../PrivilegeEnum";
 import Store from "../Store";
@@ -27,12 +27,34 @@ export default function returnUserView(store: Store) {
 		"privilege"
 	) as HTMLSelectElement;
 
-	if (privilege) {
+	if (store.user != null) {
+		if (store.user.privilege == PrivilegeEnum.normal) {
+			privilege.selectedIndex = 0;
+		} else {
+			privilege.selectedIndex = 1;
+		}
+	}
+
+	let navBarContainer: HTMLElement =
+		document.getElementById("nav-bar-container")!;
+
+	if (privilege != undefined) {
 		privilege.addEventListener("change", function () {
 			if (privilege.value == "ADMIN") {
 				store.user.privilege = PrivilegeEnum.admin;
 			} else {
 				store.user.privilege = PrivilegeEnum.normal;
+			}
+			store.saveUser();
+			let anchor = document.createElement("a");
+			anchor = createNewProductButton(anchor);
+			if (store.user.privilege === PrivilegeEnum.admin) {
+				navBarContainer.appendChild(anchor);
+			} else {
+				let productCreationLink: HTMLAnchorElement = document.getElementById(
+					"product-creation-link"
+				) as HTMLAnchorElement;
+				navBarContainer.removeChild(productCreationLink);
 			}
 		});
 	}

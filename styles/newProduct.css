@@ -1,34 +1,28 @@
-.sign-up {
+.new-product-title {
+	text-align: center;
+	margin: 20px;
+}
+
+.new-product-container {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 }
 
-.sign-up-title {
-	text-align: center;
-	margin: 20px;
-}
-
-.sign-up-content {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-}
-
-.sign-up-form,
-.form-aside {
+.new-product-form {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: flex-start;
 	flex-wrap: nowrap;
-	width: 100%;
 	padding: 10px 20px 20px 20px;
+	width: 100%;
+
+	font-size: 16px;
 }
 
-.sign-up-form form {
-	width: 100%;
-	font-size: 16p;
+.new-product-form label {
+	margin-bottom: 5px;
 }
 
 .form-text-input-container {
@@ -38,11 +32,7 @@
 	justify-content: flex-start;
 	flex-wrap: nowrap;
 	width: 100%;
-	padding: 0px 20px 20px 20px;
-}
-
-.sign-up-form label {
-	margin-bottom: 5px;
+	padding: 0px 0px 20px 0px;
 }
 
 .form-text-input {
@@ -70,7 +60,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin: 20px;
+	margin-top: 20px;
 	width: 100%;
 }
 
@@ -94,23 +84,6 @@
 
 	border-width: 1px;
 	border-color: gray;
-}
-
-.form-aside > * {
-	margin-bottom: 20px;
-}
-
-.form-aside > ul {
-	margin-left: 30px;
-}
-
-.form-aside li {
-	list-style-type: none;
-}
-
-.form-aside i {
-	margin-right: 10px;
-	color: rgb(73, 194, 55);
 }
 
 #info-container {
@@ -156,10 +129,4 @@
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-}
-
-@media (max-width: 750px) {
-	.form-aside {
-		display: none;
-	}
 }
