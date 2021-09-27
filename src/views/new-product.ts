@@ -1,7 +1,8 @@
 import Product from "../Product";
 import ProductTypeEnum from "../ProductTipeEnum";
+import Store from "../Store";
 
-export default function returnNewProductView() {
+export default function returnNewProductView(store: Store) {
 	let typeSelector: HTMLSelectElement = document.getElementById(
 		"type-selector"
 	) as HTMLSelectElement;
@@ -66,6 +67,7 @@ export default function returnNewProductView() {
 				newProduct.thumbnail = productThumbnail.value;
 				newProduct.stock = parseInt(productStock.value);
 				newProduct.discount = parseFloat(productDiscount.value);
+				store.newProduct(newProduct);
 				displayInfoContainer("El producto ha sido creado correctamente.");
 			} catch (error) {
 				displayInfoContainer(`${error}`);

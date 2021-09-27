@@ -3,6 +3,7 @@ import productComments from "../components/productComments";
 import Product from "../Product";
 import Comment from "../Comment";
 import Store from "../Store";
+import PrivilegeEnum from "../PrivilegeEnum";
 
 export default function returnProductDetailsView(store: Store) {
 	let url: URL = new URL(window.location.href);
@@ -43,7 +44,10 @@ export default function returnProductDetailsView(store: Store) {
 
 	let buyButtons: NodeListOf<HTMLElement> =
 		document.getElementsByName("buy-button")!;
-	buyButtons.forEach((button) => {
+
+	let removeButton: HTMLButtonElement;
+
+	buyButtons.forEach((button: HTMLElement) => {
 		button.addEventListener("click", function () {
 			let product: Array<Product> = store
 				.showCatalog()
@@ -53,5 +57,52 @@ export default function returnProductDetailsView(store: Store) {
 				document.getElementById("cart-quantity")!;
 			productQuantity.innerHTML = ` &nbsp ${store.cart.showAll().length}`;
 		});
+
+		if (store.user.privilege == PrivilegeEnum.admin) {
+			removeButton = document.createElement("button");
+			removeButton.innerHTML = "Eliminar";
+			removeButton.classList.add("button-link");
+			removeButton.name = "remove-button";
+			button.after(removeButton);
+		}
 	});
+
+	let infoContainer: HTMLElement = document.getElementById("info-container")!;
+	let paragraph: HTMLParagraphElement = document.getElementById(
+		"info-container-paragraph"
+	) as HTMLParagraphElement;
+	let infoContainerButton: HTMLButtonElement = document.getElementById(
+		"info-container-button"
+	) as HTMLButtonElement;
+	let domElements: NodeListOf<HTMLElement> = document.querySelectorAll(
+		"header, main, footer"
+	)!;
+
+	let displayInfoContainer = (text: string) => {
+		domElements.forEach((element: HTMLElement) => {
+			element.style.opacity = "0.4";
+			element.style.pointerEvents = "none";
+		});
+		infoContainer.classList.add("display-info-container");
+		paragraph.innerText = text;
+	};
+
+	infoContainerButton.addEventListener("click", () => {
+		domElements.forEach((element: HTMLElement) => {
+			element.setAttribute("style", "");
+		});
+		infoContainer.classList.remove("display-info-container");
+	});
+
+	let removeButtons: NodeListOf<HTMLElement> =
+		document.getElementsByName("remove-button")!;
+
+	if (removeButtons != null) {
+		removeButtons.forEach((button: HTMLElement) => {
+			button.addEventListener("click", function () {
+				store.removeProduct(productID);
+				displayInfoContainer("El producto ha sido eliminado correctamente.");
+			});
+		});
+	}
 }

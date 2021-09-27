@@ -1,5 +1,5 @@
-import Product from "../src/Product";
-import ProductTypeEnum from "../src/ProductTipeEnum";
+import Product from "../Product";
+import ProductTypeEnum from "../ProductTipeEnum";
 
 export default function (): Array<Product> {
 	let products: Array<Product> = [];
@@ -7,7 +7,9 @@ export default function (): Array<Product> {
 	for (let i: number = 0; i < 15; i++) {
 		if (i % 2 == 0) {
 			let product: Product = new Product();
-			product.id = i.toString();
+			product.id = window.crypto
+				.getRandomValues(new Uint32Array(1))[0]
+				.toString();
 			product.name = 'Smart TV Philips 50 " 4K Ultra HD 50PUD6654/77';
 			product.type = ProductTypeEnum.tv;
 			product.price = 79000;
@@ -20,7 +22,9 @@ export default function (): Array<Product> {
 			products.push(product);
 		} else {
 			let product2: Product = new Product();
-			product2.id = i.toString();
+			product2.id = window.crypto
+				.getRandomValues(new Uint32Array(1))[0]
+				.toString();
 			product2.name = "Lavarropas Automático Samsung 9 KG WW90J5410GS.- Plata";
 			product2.type = ProductTypeEnum.washingMachine;
 			product2.price = 105000;

@@ -1,7 +1,7 @@
 import Cart from "./Cart";
 import Product from "./Product";
 import StoreUser from "./StoreUser";
-import products from "../scripts/products";
+import products from "./components/products";
 
 export default class Store {
 	private _user?: StoreUser | undefined;
@@ -38,11 +38,36 @@ export default class Store {
 	}
 
 	public loadCatalog(): void {
-		this._catalog = products();
+		let loadData: string | null = localStorage.getItem("products");
+		let loadDataJson: Array<any>;
+		if (loadData != null) {
+			loadDataJson = JSON.parse(loadData);
+		} else {
+			localStorage.setItem("products", JSON.stringify(products()));
+			loadData = localStorage.getItem("products")!;
+			loadDataJson = JSON.parse(loadData) as Array<any>;
+		}
+		loadDataJson.forEach((element) => {
+			let prod: Product = new Product();
+			prod.create(element);
+			this._catalog.push(prod);
+		});
 	}
 
 	public showCatalog(): Array<Product> {
 		return this._catalog;
+	}
+
+	public newProduct(prod: Product) {
+		this._catalog.push(prod);
+		localStorage.setItem("products", JSON.stringify(this._catalog));
+	}
+
+	public removeProduct(id: String) {
+		let productSelected: number = this._catalog.findIndex((p) => p.id == id);
+		this._catalog.splice(productSelected, 1);
+		console.log(this._catalog);
+		localStorage.setItem("products", JSON.stringify(this._catalog));
 	}
 
 	get cart(): Cart {

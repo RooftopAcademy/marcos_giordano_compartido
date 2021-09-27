@@ -11,7 +11,7 @@ import Path from "../src/Path";
 import returnUserView from "../src/views/user";
 import PrivilegeEnum from "../src/PrivilegeEnum";
 import createNewProductButton from "../src/components/createNewProductButton";
-import returnNewProductView from "../src/views/newProduct";
+import returnNewProductView from "../src/views/new-product";
 
 //Instanciate the store
 let store: Store = new Store();
