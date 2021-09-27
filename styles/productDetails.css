@@ -13,8 +13,15 @@
 	margin: 20px;
 }
 
-.product-details-text > button {
+.product-details-buttons {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.product-details-buttons > button {
 	min-width: 200px;
+	margin-right: 20px;
 }
 
 .product-details-img {
