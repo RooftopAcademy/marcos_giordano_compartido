@@ -353,6 +353,53 @@ footer {
 	color: #016ab3;
 }
 
+/*--------------------------- info container ---------------------------*/
+
+#info-container {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+
+	width: 200px;
+	height: 200px;
+	margin-top: -100px;
+	margin-left: -100px;
+	padding: 20px;
+
+	background-color: #d1030f;
+	color: white;
+	font-size: 16px;
+	border-style: solid;
+	border-radius: 10px;
+}
+
+#info-container button {
+	padding: 5px 5px 5px 5px;
+	color: #d1030f;
+	background-color: white;
+	font-size: 20px;
+	margin-top: 10px;
+
+	border-radius: 50px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: white;
+}
+
+#info-container button:active {
+	color: white;
+	background-color: #d1030f;
+}
+
+.display-info-container {
+	display: flex !important;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
 /*--------------------------- special clases ---------------------------*/
 
 .disabled {
