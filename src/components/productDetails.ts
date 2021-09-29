@@ -1,7 +1,7 @@
-import Product from "../Product";
+import Product from "../classes/Product";
 
 export default function productDetails(product: Product) {
-	return `
+  return `
     <div class="product-details">
         <div class="product-details-img">
             <img src="${product.image}" alt="${product.name}" />
@@ -9,13 +9,13 @@ export default function productDetails(product: Product) {
         <div class="product-details-text">
             <h6 class="product-name">${product.name}</h6>
             <h3 class="product-price">$${(
-							product.price *
-							(1 - product.discount / 100)
-						).toFixed(0)}</h3>
+              product.price *
+              (1 - product.discount / 100)
+            ).toFixed(0)}</h3>
             <div class="product-details-buttons">
                 <button class="button-link" data-product-id="${
-									product.id
-								}" name="buy-button">Comprar</button>
+                  product.id
+                }" name="buy-button">Comprar</button>
             </div>
             <p class="product-description">${product.description}</p>
         </div>
@@ -30,12 +30,12 @@ export default function productDetails(product: Product) {
         <div class="product-aside-text">
             <h6 class="product-name">${product.name}</h6>
             <h3 class="product-price">$${(
-							product.price *
-							(1 - product.discount / 100)
-						).toFixed(0)}</h3>
+              product.price *
+              (1 - product.discount / 100)
+            ).toFixed(0)}</h3>
             <button class="button-link" data-product-id="${
-							product.id
-						}" name="buy-button">Comprar</button>
+              product.id
+            }" name="buy-button">Comprar</button>
         </div>
     </div>
     `;
