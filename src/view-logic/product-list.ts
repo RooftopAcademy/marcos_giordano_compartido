@@ -1,4 +1,4 @@
-import productComponent from "../components/product";
+import productComponent from "../components/productList";
 import Product from "../classes/Product";
 import Store from "../classes/Store";
 
