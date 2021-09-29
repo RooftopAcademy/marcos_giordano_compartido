@@ -1,6 +1,6 @@
 import Product from "../classes/Product";
 
-export default function productComponent(product: Product): string {
+export default function productList(product: Product): string {
   return `
     <a href="./productDetails.html?id=${product.id}" class="content-product">
         <img src="${product.image}" alt="${product.name}" />
