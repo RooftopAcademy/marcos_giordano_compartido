@@ -4,7 +4,6 @@ export default function burgerButtonComponent(
   asideNavBarContainer: HTMLElement,
   mainContent: HTMLElement
 ) {
-  console.log(burgerButton);
   burgerButton.addEventListener("click", burgerButtonClickEvent);
 
   function burgerButtonClickEvent() {
