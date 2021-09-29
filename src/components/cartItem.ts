@@ -1,7 +1,7 @@
-import CartItem from "../CartItem";
+import CartItem from "../interfaces/CartItemInterface";
 
 export default function cartItem(item: CartItem): string {
-	return `
+  return `
     <tr>
         <td>${item.item.name}</td>
         <td>${item.item.price}</td>

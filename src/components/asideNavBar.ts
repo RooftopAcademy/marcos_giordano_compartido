@@ -1,7 +1,7 @@
-import Store from "../Store";
+import Store from "../classes/Store";
 
 export default function asideNavBar(store: Store): string {
-	return `
+  return `
     <div class="navigation-links-desktop" id="nav-bar-container">
         <a class="button-link" href="./productList.html"
             >PRODUCTOS</a
@@ -11,8 +11,8 @@ export default function asideNavBar(store: Store): string {
             <a class="button-link js-user" href="./user.html">
                 <i class="fas fa-user"></i> 
                 &nbsp ${
-									store.user ? store.user.firstName.toUpperCase() : "Invitado"
-								}
+                  store.user ? store.user.firstName.toUpperCase() : "Invitado"
+                }
             </a>
         </div>
     </div>

@@ -1,7 +1,7 @@
-import Store from "../Store";
+import Store from "../classes/Store";
 
 export default function headerRendering(store: Store): string {
-	return `
+  return `
     <div class="navigation">
 					<div class="navigation-upper">
 						<div class="navigation-burguer">
@@ -24,8 +24,8 @@ export default function headerRendering(store: Store): string {
 
 						<div class="navigation-login">
 							<a class="button-link js-user" href="./user.html"><i class="fas fa-user"></i> &nbsp ${
-								store.user ? store.user.firstName.toUpperCase() : "Invitado"
-							}</a>
+                store.user ? store.user.firstName.toUpperCase() : "Invitado"
+              }</a>
 						</div>
 
 						<div class="navigation-commands">
