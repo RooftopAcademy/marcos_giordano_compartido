@@ -3,7 +3,7 @@ import userComponent from "../components/userComponent";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
 import Store from "../classes/Store";
 
-export default function returnUserView(store: Store) {
+export default function UserView(store: Store) {
   let main: HTMLElement = document.getElementById("main-content")!;
   main.innerHTML = userComponent(store);
 

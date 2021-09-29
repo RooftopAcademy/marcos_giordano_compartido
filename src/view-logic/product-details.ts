@@ -5,7 +5,7 @@ import Comment from "../interfaces/CommentInterface";
 import Store from "../classes/Store";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
 
-export default function returnProductDetailsView(store: Store) {
+export default function ProductDetailsView(store: Store) {
   let url: URL = new URL(window.location.href);
   let productID: string = url.searchParams.get("id")!;
 

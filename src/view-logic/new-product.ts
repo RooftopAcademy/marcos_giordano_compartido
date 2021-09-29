@@ -2,7 +2,7 @@ import Product from "../classes/Product";
 import ProductTypeEnum from "../enums/ProductTipeEnum";
 import Store from "../classes/Store";
 
-export default function returnNewProductView(store: Store) {
+export default function NewProductView(store: Store) {
   let typeSelector: HTMLSelectElement = document.getElementById(
     "type-selector"
   ) as HTMLSelectElement;

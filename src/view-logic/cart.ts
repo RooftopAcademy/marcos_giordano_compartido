@@ -3,7 +3,7 @@ import Product from "../classes/Product";
 import CartItem from "../interfaces/CartItemInterface";
 import Store from "../classes/Store";
 
-export default function returnCartView(store: Store) {
+export default function CartView(store: Store) {
   let cartTable: HTMLElement = document.getElementById("cart-table")!;
   let cart: Array<Product> = store.cart.showAll();
   let cartReduced: Array<CartItem> = [];

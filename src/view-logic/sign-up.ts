@@ -1,7 +1,7 @@
 import Store from "../classes/Store";
 import StoreUser from "../classes/StoreUser";
 
-export default function returnSignUpView(store: Store) {
+export default function SignUpView(store: Store) {
   let signUpForm: HTMLFormElement = document.getElementById(
     "sign-up-form"
   )! as HTMLFormElement;
