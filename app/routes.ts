@@ -8,6 +8,8 @@ import ProductListView from "../src/view-logic/product-list";
 import SignUpView from "../src/view-logic/sign-up";
 import UserView from "../src/view-logic/user";
 
+let path: string = window.location.pathname;
+
 const routes: Array<PathInterface> = [
   { path: "index.html", viewRendering: IndexView },
   { path: "productDetails.html", viewRendering: ProductDetailsView },
@@ -18,11 +20,7 @@ const routes: Array<PathInterface> = [
   { path: "newProduct.html", viewRendering: NewProductView },
 ];
 
-export default function Router(
-  store: Store,
-  path: string,
-  mainContent: HTMLElement
-) {
+export default function Router(store: Store, mainContent: HTMLElement) {
   let pathArray: Array<string> = path.split("/");
 
   let view = routes.filter((p) => {

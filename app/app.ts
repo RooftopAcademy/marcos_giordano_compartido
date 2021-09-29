@@ -13,5 +13,4 @@ let mainContent: HTMLElement = document.querySelector("#main-content")!;
 commonComponentsRendering(store, mainContent);
 
 //Views rendering through paths
-let path: string = window.location.pathname;
-Router(store, path, mainContent);
+Router(store, mainContent);
