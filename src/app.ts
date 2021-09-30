@@ -1,6 +1,6 @@
-import Store from "../src/classes/Store";
-import commonComponentsRendering from "../src/view-logic/commonComponentsRendering";
-import Router from "./routes";
+import Store from "./classes/Store";
+import commonComponentsRendering from "./views-logic/commonComponentsRendering";
+import Router from "./routes/routes";
 
 //Instanciate the store
 let store: Store = new Store();

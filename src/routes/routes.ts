@@ -1,12 +1,12 @@
-import Store from "../src/classes/Store";
-import PathInterface from "../src/interfaces/PathInterface";
-import CartView from "../src/view-logic/cart";
-import IndexView from "../src/view-logic/index";
-import NewProductView from "../src/view-logic/new-product";
-import ProductDetailsView from "../src/view-logic/product-details";
-import ProductListView from "../src/view-logic/product-list";
-import SignUpView from "../src/view-logic/sign-up";
-import UserView from "../src/view-logic/user";
+import Store from "../classes/Store";
+import PathInterface from "../interfaces/PathInterface";
+import CartView from "../views-logic/cart";
+import IndexView from "../views-logic/index";
+import NewProductView from "../views-logic/new-product";
+import ProductDetailsView from "../views-logic/product-details";
+import ProductListView from "../views-logic/product-list";
+import SignUpView from "../views-logic/sign-up";
+import UserView from "../views-logic/user";
 
 let path: string = window.location.pathname;
 
