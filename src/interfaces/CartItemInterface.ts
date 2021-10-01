@@ -1,4 +1,4 @@
-import Product from "../classes/Product";
+import Product from "../entities/Product";
 
 export default interface CartItemInterface {
   item: Product;
