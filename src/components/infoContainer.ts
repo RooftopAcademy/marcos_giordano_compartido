@@ -1,4 +1,8 @@
-export default function displayInfoContainer(text: string) {
+export default function displayInfoContainer(
+  text: string
+  // showCancelButton: boolean = false,
+  // performFunction: Function = function () {}
+) {
   let domElements: NodeListOf<HTMLElement> = document.querySelectorAll(
     "header, main, footer"
   )!;
@@ -14,16 +18,38 @@ export default function displayInfoContainer(text: string) {
   infoContainer.classList.add("display-info-container");
   paragraph.innerText = text;
 
-  let infoContainerButton: HTMLButtonElement = document.getElementById(
-    "info-container-button"
+  let infoContainerOKButton: HTMLButtonElement = document.getElementById(
+    "info-container-ok-button"
   ) as HTMLButtonElement;
 
-  if (infoContainerButton) {
-    infoContainerButton.addEventListener("click", () => {
+  let exists = document.getElementById("info-container-cancel-button");
+  if (exists) {
+    infoContainer.removeChild(exists);
+  }
+
+  // if (showCancelButton) {
+  //   let cancelButton = document.createElement("button");
+  //   cancelButton.innerHTML = "Cancelar";
+  //   cancelButton.id = "info-container-cancel-button";
+  //   infoContainerOKButton.after(cancelButton);
+
+  //   cancelButton.addEventListener("click", function () {
+  //     domElements.forEach((element: HTMLElement) => {
+  //       element.removeAttribute("style");
+  //     });
+  //     infoContainer.classList.remove("display-info-container");
+  //   });
+  // }
+
+  if (infoContainerOKButton) {
+    infoContainerOKButton.addEventListener("click", () => {
       domElements.forEach((element: HTMLElement) => {
         element.removeAttribute("style");
       });
       infoContainer.classList.remove("display-info-container");
+      // if (showCancelButton) {
+      //   performFunction();
+      // }
     });
   }
 }
