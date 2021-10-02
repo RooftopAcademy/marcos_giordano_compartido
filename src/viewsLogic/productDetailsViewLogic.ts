@@ -1,66 +1,32 @@
-import productDetails from "../components/productDetails";
-import productComments from "../components/productComments";
 import Product from "../entities/Product";
-import Comment from "../interfaces/CommentInterface";
 import Store from "../entities/Store";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
 import productDetailsView from "../views/productDetailsView";
+import getComments from "../services/jsonPlaceHolderAPI";
+import createRemoveButton from "../components/removeButton";
 
 export default function ProductDetailsViewLogic(
   store: Store,
   mainContent: HTMLElement
 ) {
-  mainContent.innerHTML = productDetailsView();
-
   let productID: Array<string> = window.location.href.split("?")[1].split("=");
+  let product: Array<Product> = store.getProductById(productID[1]);
 
-  console.log(productID);
+  //load the view
+  mainContent.innerHTML = productDetailsView(product[0]);
 
-  let product: Array<Product> = store
-    .showCatalog()
-    .filter((prod: Product) => prod.id == productID[1]);
-
-  let productDetailsContent: HTMLElement = document.getElementById(
-    "product-details-content"
-  )!;
-  productDetailsContent.innerHTML = productDetails(product[0]);
-
+  //get the comments
   let productCommentsContainer: HTMLElement = document.getElementById(
     "product-comments-container"
   )!;
+  getComments(productCommentsContainer);
 
-  fetch("https://jsonplaceholder.typicode.com/comments")
-    .then((response: Response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw Error("Error de conexión con el servidor.");
-      }
-    })
-    .then((data: Array<Comment>) => {
-      let dataReduced = data.slice(0, 10);
-      dataReduced.forEach((comment: Comment) => {
-        productCommentsContainer.innerHTML += productComments(comment);
-      });
-    })
-    .catch((err: Error) => {
-      productCommentsContainer.innerHTML += `
-        <div class="product-details-comments-item">
-            <h3>${err}</h3>
-        </div>
-        `;
-    });
-
+  //add events to buy buttons
   let buyButtons: NodeListOf<HTMLElement> =
     document.getElementsByName("buy-button")!;
 
-  let removeButton: HTMLButtonElement;
-
-  buyButtons.forEach((button: HTMLElement) => {
-    button.addEventListener("click", function () {
-      let product: Array<Product> = store
-        .showCatalog()
-        .filter((prod: Product) => prod.id == this.dataset.productId);
+  buyButtons.forEach((buyButton: HTMLElement) => {
+    buyButton.addEventListener("click", function () {
       store.cart.add(product[0]);
       let productQuantity: HTMLElement =
         document.getElementById("cart-quantity")!;
@@ -68,11 +34,7 @@ export default function ProductDetailsViewLogic(
     });
 
     if (store.user.privilege == PrivilegeEnum.admin) {
-      removeButton = document.createElement("button");
-      removeButton.innerHTML = "Eliminar";
-      removeButton.classList.add("button-link");
-      removeButton.name = "remove-button";
-      button.after(removeButton);
+      buyButton.after(createRemoveButton());
     }
   });
 
