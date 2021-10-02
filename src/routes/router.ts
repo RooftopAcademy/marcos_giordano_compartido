@@ -1,5 +1,5 @@
 import Store from "../entities/Store";
-import PathInterface from "../interfaces/PathInterface";
+import ViewInterface from "../interfaces/ViewInterface";
 import cartViewLogic from "../viewsLogic/cartViewLogic";
 import homeViewLogic from "../viewsLogic/homeViewLogic";
 import newProductViewLogic from "../viewsLogic/newProductViewLogic";
@@ -8,7 +8,7 @@ import productListViewLogic from "../viewsLogic/productListViewLogic";
 import signUpViewLogic from "../viewsLogic/signUpViewLogic";
 import userViewLogic from "../viewsLogic/userViewLogic";
 
-const routes: Array<PathInterface> = [
+const routes: Array<ViewInterface> = [
   { path: "", viewRendering: homeViewLogic },
   { path: "productList", viewRendering: productListViewLogic },
   { path: "productDetails", viewRendering: productDetailsViewLogic },
@@ -27,8 +27,8 @@ export default function router(
   let pathArrayWithoutParams: Array<string> =
     pathArray[pathArray.length - 1].split("?");
 
-  let view = routes.filter((p) => {
-    return p.path == pathArrayWithoutParams[0];
+  let view = routes.filter((view) => {
+    return view.path == pathArrayWithoutParams[0];
   });
 
   view.length != 0
