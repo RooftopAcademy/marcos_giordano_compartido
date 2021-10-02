@@ -71,7 +71,6 @@ export default class Store {
   public removeProduct(id: String) {
     let productSelected: number = this._catalog.findIndex((p) => p.id == id);
     this._catalog.splice(productSelected, 1);
-    console.log(this._catalog);
     localStorage.setItem("products", JSON.stringify(this._catalog));
   }
 
