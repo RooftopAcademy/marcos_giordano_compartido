@@ -1,6 +1,7 @@
 import Store from "./entities/Store";
 import commonComponentsRendering from "./viewsLogic/commonComponentsRendering";
 import router from "./routes/router";
+import enableMainAndFooter from "./helpers/enableMainAndFooter";
 
 //Instanciate the store
 let store: Store = new Store();
@@ -17,12 +18,9 @@ commonComponentsRendering(store, mainContent);
 router("", store, mainContent);
 
 window.addEventListener("hashchange", function () {
-  let footer: HTMLElement = document.getElementById("js-footer")!;
+  let footer: HTMLElement = document.getElementById("footer")!;
   let asideNavBarContainer: HTMLElement = document.getElementById("side-bar")!;
-  asideNavBarContainer.style.display = "none";
-  asideNavBarContainer.classList.remove("float");
-  mainContent.classList.remove("disabled");
-  footer.classList.remove("disabled");
+  enableMainAndFooter(asideNavBarContainer, mainContent, footer);
 
   router(this.location.hash, store, mainContent);
 });

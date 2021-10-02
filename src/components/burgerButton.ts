@@ -1,3 +1,6 @@
+import disableMainAndFooter from "../helpers/disableMainAndFooter";
+import enableMainAndFooter from "../helpers/enableMainAndFooter";
+
 export default function burgerButtonComponent(
   burgerButton: HTMLElement,
   footer: HTMLElement,
@@ -8,17 +11,9 @@ export default function burgerButtonComponent(
 
   function burgerButtonClickEvent() {
     if (asideNavBarContainer.style.display === "flex") {
-      asideNavBarContainer.style.display = "none";
-      asideNavBarContainer.classList.remove("float");
-      mainContent.classList.remove("disabled");
-      footer.classList.remove("disabled");
+      enableMainAndFooter(asideNavBarContainer, mainContent, footer);
     } else {
-      asideNavBarContainer.style.display = "flex";
-      asideNavBarContainer.classList.add("float");
-      mainContent.classList.add("disabled");
-      footer.classList.add("disabled");
+      disableMainAndFooter(asideNavBarContainer, mainContent, footer);
     }
   }
-
-  return burgerButton;
 }
