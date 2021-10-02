@@ -12,6 +12,9 @@ export default function UserViewLogic(store: Store, mainContent: HTMLElement) {
 
   let userName: NodeListOf<HTMLElement> = document.querySelectorAll(".js-user");
 
+  let navBarContainer: HTMLElement =
+    document.getElementById("nav-bar-container")!;
+
   if (logOutButton) {
     logOutButton.addEventListener("click", () => {
       store.clearUser();
@@ -37,9 +40,6 @@ export default function UserViewLogic(store: Store, mainContent: HTMLElement) {
       privilege.selectedIndex = 1;
     }
   }
-
-  let navBarContainer: HTMLElement =
-    document.getElementById("nav-bar-container")!;
 
   if (privilege != undefined) {
     privilege.addEventListener("change", function () {
