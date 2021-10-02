@@ -11,10 +11,11 @@ export default function ProductDetailsViewLogic(
   store: Store,
   mainContent: HTMLElement
 ) {
+  //get product Id from params
   let productID: Array<string> = window.location.href.split("?")[1].split("=");
   let product: Array<Product> = store.getProductById(productID[1]);
 
-  //load the view
+  //rendering the view
   mainContent.innerHTML = productDetailsView(product[0]);
 
   //get the comments
@@ -40,13 +41,26 @@ export default function ProductDetailsViewLogic(
     }
   });
 
+  //add events to remove buttons
   let removeButtons: NodeListOf<HTMLElement> =
     document.getElementsByName("remove-button")!;
 
   if (removeButtons != null) {
     removeButtons.forEach((button: HTMLElement) => {
       button.addEventListener("click", function () {
+        // function performfunction() {
+        //   store.removeProduct(productID[1]);
+        //   // return home and show info container success.
+        //   returnHome();
+        //   displayInfoContainer("El producto ha sido eliminado correctamente.");
+        // }
+        // displayInfoContainer(
+        //   "¿Está seguro que desea eliminar éste producto?.",
+        //   true,
+        //   performfunction
+        // );
         store.removeProduct(productID[1]);
+        // return home and show info container success.
         returnHome();
         displayInfoContainer("El producto ha sido eliminado correctamente.");
       });
