@@ -1,7 +1,7 @@
 export default function displayInfoContainer(
-  text: string
-  // showCancelButton: boolean = false,
-  // performFunction: Function = function () {}
+  text: string,
+  showCancelButton: boolean = false,
+  performFunction?: Function
 ) {
   let domElements: NodeListOf<HTMLElement> = document.querySelectorAll(
     "header, main, footer"
@@ -27,29 +27,32 @@ export default function displayInfoContainer(
     infoContainer.removeChild(exists);
   }
 
-  // if (showCancelButton) {
-  //   let cancelButton = document.createElement("button");
-  //   cancelButton.innerHTML = "Cancelar";
-  //   cancelButton.id = "info-container-cancel-button";
-  //   infoContainerOKButton.after(cancelButton);
+  if (showCancelButton) {
+    let cancelButton = document.createElement("button");
+    cancelButton.innerHTML = "Cancelar";
+    cancelButton.id = "info-container-cancel-button";
+    infoContainerOKButton.after(cancelButton);
 
-  //   cancelButton.addEventListener("click", function () {
-  //     domElements.forEach((element: HTMLElement) => {
-  //       element.removeAttribute("style");
-  //     });
-  //     infoContainer.classList.remove("display-info-container");
-  //   });
-  // }
-
-  if (infoContainerOKButton) {
-    infoContainerOKButton.addEventListener("click", () => {
+    cancelButton.addEventListener("click", function () {
       domElements.forEach((element: HTMLElement) => {
         element.removeAttribute("style");
       });
       infoContainer.classList.remove("display-info-container");
-      // if (showCancelButton) {
-      //   performFunction();
-      // }
     });
+  }
+
+  if (infoContainerOKButton) {
+    infoContainerOKButton.addEventListener("click", pepe);
+  }
+
+  function pepe() {
+    domElements.forEach((element: HTMLElement) => {
+      element.removeAttribute("style");
+    });
+    infoContainer.classList.remove("display-info-container");
+    if (performFunction && showCancelButton) {
+      performFunction();
+      infoContainerOKButton.removeEventListener("click", pepe);
+    }
   }
 }
