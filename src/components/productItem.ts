@@ -1,6 +1,6 @@
 import Product from "../entities/Product";
 
-export default function productItemComponent(product: Product): string {
+export default function productItem(product: Product): string {
   return `
     <a href="#/productDetails?id=${product.id}" class="content-product">
         <img src="${product.image}" alt="${product.name}" />
