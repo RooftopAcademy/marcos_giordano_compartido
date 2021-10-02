@@ -48,22 +48,19 @@ export default function ProductDetailsViewLogic(
   if (removeButtons != null) {
     removeButtons.forEach((button: HTMLElement) => {
       button.addEventListener("click", function () {
-        // function performfunction() {
-        //   store.removeProduct(productID[1]);
-        //   // return home and show info container success.
-        //   returnHome();
-        //   displayInfoContainer("El producto ha sido eliminado correctamente.");
-        // }
-        // displayInfoContainer(
-        //   "¿Está seguro que desea eliminar éste producto?.",
-        //   true,
-        //   performfunction
-        // );
-        store.removeProduct(productID[1]);
-        // return home and show info container success.
-        returnHome();
-        displayInfoContainer("El producto ha sido eliminado correctamente.");
+        displayInfoContainer(
+          "¿Está seguro que desea eliminar éste producto?.",
+          true,
+          removeItem
+        );
       });
     });
+  }
+
+  function removeItem() {
+    store.removeProduct(productID[1]);
+    // return home and show info container success.
+    returnHome();
+    displayInfoContainer("El producto ha sido eliminado correctamente.");
   }
 }
