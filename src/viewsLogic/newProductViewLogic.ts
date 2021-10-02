@@ -3,6 +3,7 @@ import ProductTypeEnum from "../enums/ProductTipeEnum";
 import Store from "../entities/Store";
 import newProductView from "../views/newProductView";
 import returnHome from "../helpers/returnHome";
+import displayInfoContainer from "../components/infoContainer";
 
 export default function NewProductViewLogic(
   store: Store,
@@ -36,22 +37,6 @@ export default function NewProductViewLogic(
     "new-product-submit-button"
   ) as HTMLInputElement;
 
-  let infoContainer: HTMLElement = document.getElementById("info-container")!;
-  let paragraph: HTMLParagraphElement = document.getElementById(
-    "info-container-paragraph"
-  ) as HTMLParagraphElement;
-  let domElements: NodeListOf<HTMLElement> = document.querySelectorAll(
-    "header, main, footer"
-  )!;
-  let displayInfoContainer = (text: string) => {
-    domElements.forEach((element: HTMLElement) => {
-      element.style.opacity = "0.4";
-      element.style.pointerEvents = "none";
-    });
-    infoContainer.classList.add("display-info-container");
-    paragraph.innerText = text;
-  };
-
   newProductSubmitButton.addEventListener(
     "click",
     function (event: Event): void {
@@ -77,17 +62,4 @@ export default function NewProductViewLogic(
       }
     }
   );
-
-  let infoContainerButton: HTMLButtonElement = document.getElementById(
-    "info-container-button"
-  ) as HTMLButtonElement;
-
-  if (infoContainerButton) {
-    infoContainerButton.addEventListener("click", () => {
-      domElements.forEach((element: HTMLElement) => {
-        element.setAttribute("style", "");
-      });
-      infoContainer.classList.remove("display-info-container");
-    });
-  }
 }

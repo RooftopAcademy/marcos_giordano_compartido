@@ -1,3 +1,4 @@
+import displayInfoContainer from "../components/infoContainer";
 import Store from "../entities/Store";
 import StoreUser from "../entities/StoreUser";
 import returnHome from "../helpers/returnHome";
@@ -19,26 +20,6 @@ export default function SignUpViewLogic(
   let password: HTMLInputElement = signUpForm["password"];
   let passwordRepeat: HTMLInputElement = signUpForm["password-repeat"];
   let submitButton: HTMLButtonElement = signUpForm["submit-button"];
-
-  let infoContainer: HTMLElement = document.getElementById("info-container")!;
-  let paragraph: HTMLParagraphElement = document.getElementById(
-    "info-container-paragraph"
-  ) as HTMLParagraphElement;
-  let infoContainerButton: HTMLButtonElement = document.getElementById(
-    "info-container-button"
-  ) as HTMLButtonElement;
-  let domElements: NodeListOf<HTMLElement> = document.querySelectorAll(
-    "header, main, footer"
-  )!;
-
-  let displayInfoContainer = (text: string) => {
-    domElements.forEach((element: HTMLElement) => {
-      element.style.opacity = "0.4";
-      element.style.pointerEvents = "none";
-    });
-    infoContainer.classList.add("display-info-container");
-    paragraph.innerText = text;
-  };
 
   submitButton.addEventListener("click", (event: Event) => {
     event.preventDefault();
@@ -69,13 +50,4 @@ export default function SignUpViewLogic(
       displayInfoContainer(`${error}`);
     }
   });
-
-  if (infoContainerButton) {
-    infoContainerButton.addEventListener("click", () => {
-      domElements.forEach((element: HTMLElement) => {
-        element.setAttribute("style", "");
-      });
-      infoContainer.classList.remove("display-info-container");
-    });
-  }
 }

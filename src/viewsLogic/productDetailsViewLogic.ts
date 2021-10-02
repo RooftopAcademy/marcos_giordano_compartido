@@ -5,6 +5,7 @@ import productDetailsView from "../views/productDetailsView";
 import getComments from "../services/jsonPlaceHolderAPI";
 import createRemoveButton from "../components/removeButton";
 import returnHome from "../helpers/returnHome";
+import displayInfoContainer from "../components/infoContainer";
 
 export default function ProductDetailsViewLogic(
   store: Store,
@@ -38,35 +39,6 @@ export default function ProductDetailsViewLogic(
       buyButton.after(createRemoveButton());
     }
   });
-
-  let infoContainer: HTMLElement = document.getElementById("info-container")!;
-  let paragraph: HTMLParagraphElement = document.getElementById(
-    "info-container-paragraph"
-  ) as HTMLParagraphElement;
-  let infoContainerButton: HTMLButtonElement = document.getElementById(
-    "info-container-button"
-  ) as HTMLButtonElement;
-  let domElements: NodeListOf<HTMLElement> = document.querySelectorAll(
-    "header, main, footer"
-  )!;
-
-  let displayInfoContainer = (text: string) => {
-    domElements.forEach((element: HTMLElement) => {
-      element.style.opacity = "0.4";
-      element.style.pointerEvents = "none";
-    });
-    infoContainer.classList.add("display-info-container");
-    paragraph.innerText = text;
-  };
-
-  if (infoContainerButton) {
-    infoContainerButton.addEventListener("click", () => {
-      domElements.forEach((element: HTMLElement) => {
-        element.setAttribute("style", "");
-      });
-      infoContainer.classList.remove("display-info-container");
-    });
-  }
 
   let removeButtons: NodeListOf<HTMLElement> =
     document.getElementsByName("remove-button")!;
