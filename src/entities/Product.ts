@@ -54,6 +54,9 @@ export default class Product {
     return this._price;
   }
   set price(price: number) {
+    if (price <= 0 || isNaN(price)) {
+      throw Error("El Precio debe ser mayor a 0.");
+    }
     this._price = price;
   }
   //#endregion price
@@ -98,6 +101,9 @@ export default class Product {
     return this._discount;
   }
   set discount(discount: number) {
+    if (isNaN(discount)) {
+      throw Error("El descuento debe ser al menos 0.");
+    }
     this._discount = discount;
   }
   //#endregion discount
@@ -107,12 +113,18 @@ export default class Product {
     return this._stock;
   }
   set stock(stock: number) {
+    if (stock <= 0 || isNaN(stock)) {
+      throw Error("El Descuento debe ser mayor a 0.");
+    }
     this._stock = stock;
   }
   public increaseStock(): void {
     this._stock++;
   }
   public decreaseStock(): void {
+    if (this.stock === 0) {
+      throw Error("Éste producto no posee más unidades en stock.");
+    }
     this._stock--;
   }
   //#endregion stock
