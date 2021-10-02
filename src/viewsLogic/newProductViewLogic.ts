@@ -2,6 +2,7 @@ import Product from "../entities/Product";
 import ProductTypeEnum from "../enums/ProductTipeEnum";
 import Store from "../entities/Store";
 import newProductView from "../views/newProductView";
+import returnHome from "../helpers/returnHome";
 
 export default function NewProductViewLogic(
   store: Store,
@@ -69,6 +70,7 @@ export default function NewProductViewLogic(
         newProduct.stock = parseInt(productStock.value);
         newProduct.discount = parseFloat(productDiscount.value);
         store.newProduct(newProduct);
+        returnHome();
         displayInfoContainer("El producto ha sido creado correctamente.");
       } catch (error) {
         displayInfoContainer(`${error}`);

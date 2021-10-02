@@ -1,5 +1,6 @@
 import Store from "../entities/Store";
 import StoreUser from "../entities/StoreUser";
+import returnHome from "../helpers/returnHome";
 import signUpView from "../views/signUpView";
 
 export default function SignUpViewLogic(
@@ -57,18 +58,12 @@ export default function SignUpViewLogic(
 
       store.user = storeUser;
 
-      firstName.value = "";
-      lastName.value = "";
-      mailAdress.value = "";
-      password.value = "";
-      passwordRepeat.value = "";
-
       let userName: NodeListOf<HTMLElement> =
         document.querySelectorAll(".js-user");
       userName.forEach((element) => {
         element.innerHTML = `<i class="fas fa-user"></i> &nbsp ${storeUser.firstName.toUpperCase()}`;
       });
-
+      returnHome();
       displayInfoContainer("El usuario ha sido creado correctamente.");
     } catch (error) {
       displayInfoContainer(`${error}`);

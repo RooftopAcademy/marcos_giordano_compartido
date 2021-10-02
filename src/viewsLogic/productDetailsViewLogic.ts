@@ -4,6 +4,7 @@ import PrivilegeEnum from "../enums/PrivilegeEnum";
 import productDetailsView from "../views/productDetailsView";
 import getComments from "../services/jsonPlaceHolderAPI";
 import createRemoveButton from "../components/removeButton";
+import returnHome from "../helpers/returnHome";
 
 export default function ProductDetailsViewLogic(
   store: Store,
@@ -74,6 +75,7 @@ export default function ProductDetailsViewLogic(
     removeButtons.forEach((button: HTMLElement) => {
       button.addEventListener("click", function () {
         store.removeProduct(productID[1]);
+        returnHome();
         displayInfoContainer("El producto ha sido eliminado correctamente.");
       });
     });
