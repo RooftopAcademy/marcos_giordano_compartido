@@ -1,10 +1,10 @@
+import CommmonComponentsInterface from "../interfaces/CommonComponentsinterface";
+
 export default function enableMainAndFooter(
-  asideNavBarContainer: HTMLElement,
-  mainContent: HTMLElement,
-  footer: HTMLElement
+  commonComponents: CommmonComponentsInterface
 ) {
-  asideNavBarContainer.style.display = "none";
-  asideNavBarContainer.classList.remove("float");
-  mainContent.classList.remove("disabled");
-  footer.classList.remove("disabled");
+  commonComponents.asideNavBarContainer.style.display = "none";
+  commonComponents.asideNavBarContainer.classList.remove("float");
+  commonComponents.mainContent.classList.remove("disabled");
+  commonComponents.footer.classList.remove("disabled");
 }

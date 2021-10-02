@@ -5,18 +5,15 @@ import createNewProductButton from "../components/newProductButton";
 import footerRendering from "../components/footer";
 import headerRendering from "../components/header";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
+import CommmonComponentsInterface from "../interfaces/CommonComponentsinterface";
 
 export default function commonComponentsRendering(
   store: Store,
-  mainContent: HTMLElement
+  commonComponents: CommmonComponentsInterface
 ) {
-  let header: HTMLElement = document.getElementById("header")!;
-  let footer: HTMLElement = document.getElementById("footer")!;
-  let asideNavBarContainer: HTMLElement = document.getElementById("side-bar")!;
-
-  header.innerHTML = headerRendering(store);
-  footer.innerHTML = footerRendering();
-  asideNavBarContainer.innerHTML = asideNavBar(store);
+  commonComponents.header.innerHTML = headerRendering(store);
+  commonComponents.footer.innerHTML = footerRendering();
+  commonComponents.asideNavBarContainer.innerHTML = asideNavBar(store);
 
   //aside navigation bar rendering according to user privileges
   let navBarContainer: HTMLElement =
@@ -33,10 +30,5 @@ export default function commonComponentsRendering(
   //Burger Button functionality
   let burgerButton: HTMLElement = document.getElementById("burger-button")!;
 
-  burgerButtonComponent(
-    burgerButton,
-    footer,
-    asideNavBarContainer,
-    mainContent
-  );
+  burgerButtonComponent(burgerButton, commonComponents);
 }

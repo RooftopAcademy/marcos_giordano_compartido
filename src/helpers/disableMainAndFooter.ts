@@ -1,10 +1,10 @@
+import CommmonComponentsInterface from "../interfaces/CommonComponentsinterface";
+
 export default function disableMainAndFooter(
-  asideNavBarContainer: HTMLElement,
-  mainContent: HTMLElement,
-  footer: HTMLElement
+  commonComponents: CommmonComponentsInterface
 ) {
-  asideNavBarContainer.style.display = "flex";
-  asideNavBarContainer.classList.add("float");
-  mainContent.classList.add("disabled");
-  footer.classList.add("disabled");
+  commonComponents.asideNavBarContainer.style.display = "flex";
+  commonComponents.asideNavBarContainer.classList.add("float");
+  commonComponents.mainContent.classList.add("disabled");
+  commonComponents.footer.classList.add("disabled");
 }

@@ -1,19 +1,18 @@
 import disableMainAndFooter from "../helpers/disableMainAndFooter";
 import enableMainAndFooter from "../helpers/enableMainAndFooter";
+import CommmonComponentsInterface from "../interfaces/CommonComponentsinterface";
 
 export default function burgerButtonComponent(
   burgerButton: HTMLElement,
-  footer: HTMLElement,
-  asideNavBarContainer: HTMLElement,
-  mainContent: HTMLElement
+  commonComponents: CommmonComponentsInterface
 ) {
   burgerButton.addEventListener("click", burgerButtonClickEvent);
 
   function burgerButtonClickEvent() {
-    if (asideNavBarContainer.style.display === "flex") {
-      enableMainAndFooter(asideNavBarContainer, mainContent, footer);
+    if (commonComponents.asideNavBarContainer.style.display === "flex") {
+      enableMainAndFooter(commonComponents);
     } else {
-      disableMainAndFooter(asideNavBarContainer, mainContent, footer);
+      disableMainAndFooter(commonComponents);
     }
   }
 }
