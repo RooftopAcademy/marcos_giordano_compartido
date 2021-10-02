@@ -1,4 +1,4 @@
-import createNewProductButton from "../components/createNewProductButton";
+import createNewProductButton from "../components/newProductButton";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
 import Store from "../entities/Store";
 import userView from "../views/userView";
