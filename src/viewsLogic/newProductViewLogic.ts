@@ -1,8 +1,13 @@
-import Product from "../classes/Product";
+import Product from "../entities/Product";
 import ProductTypeEnum from "../enums/ProductTipeEnum";
-import Store from "../classes/Store";
+import Store from "../entities/Store";
+import newProductView from "../views/newProductView";
 
-export default function NewProductView(store: Store) {
+export default function NewProductViewLogic(
+  store: Store,
+  mainContent: HTMLElement
+) {
+  mainContent.innerHTML = newProductView();
   let typeSelector: HTMLSelectElement = document.getElementById(
     "type-selector"
   ) as HTMLSelectElement;
@@ -12,10 +17,6 @@ export default function NewProductView(store: Store) {
     newOption.innerHTML = Object.values(ProductTypeEnum)[item];
     typeSelector.appendChild(newOption);
   }
-  // typeSelector.addEventListener("change", function (): void {
-  // 	console.log(this.selectedOptions[0].innerHTML);
-  // 	console.log(this.selectedOptions[0].value);
-  // });
 
   let newProductForm: HTMLFormElement = document.getElementById(
     "new-product-form"
@@ -79,10 +80,12 @@ export default function NewProductView(store: Store) {
     "info-container-button"
   ) as HTMLButtonElement;
 
-  infoContainerButton.addEventListener("click", () => {
-    domElements.forEach((element: HTMLElement) => {
-      element.setAttribute("style", "");
+  if (infoContainerButton) {
+    infoContainerButton.addEventListener("click", () => {
+      domElements.forEach((element: HTMLElement) => {
+        element.setAttribute("style", "");
+      });
+      infoContainer.classList.remove("display-info-container");
     });
-    infoContainer.classList.remove("display-info-container");
-  });
+  }
 }

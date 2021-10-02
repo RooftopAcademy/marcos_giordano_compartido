@@ -1,4 +1,4 @@
-import Product from "../classes/Product";
+import Product from "../entities/Product";
 import ProductTypeEnum from "../enums/ProductTipeEnum";
 
 export default function (): Array<Product> {

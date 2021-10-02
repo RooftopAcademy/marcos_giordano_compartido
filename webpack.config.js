@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./app/app.ts",
+  entry: "./src/app.ts",
   output: {
     chunkFormat: "commonjs",
     filename: "./bundle.js",

@@ -1,4 +1,4 @@
-import Store from "../classes/Store";
+import Store from "../entities/Store";
 import asideNavBar from "../components/asideNavBar";
 import burgerButtonComponent from "../components/burgerButton";
 import createNewProductButton from "../components/createNewProductButton";

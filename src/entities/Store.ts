@@ -1,7 +1,7 @@
 import Cart from "./Cart";
 import Product from "./Product";
 import StoreUser from "./StoreUser";
-import products from "../components/products";
+import products from "../viewsLogic/products";
 
 export default class Store {
   private _user?: StoreUser | undefined;

@@ -1,9 +1,11 @@
 import cartItem from "../components/cartItem";
-import Product from "../classes/Product";
+import Product from "../entities/Product";
 import CartItem from "../interfaces/CartItemInterface";
-import Store from "../classes/Store";
+import Store from "../entities/Store";
+import cartView from "../views/cartView";
 
-export default function CartView(store: Store) {
+export default function CartViewLogic(store: Store, mainContent: HTMLElement) {
+  mainContent.innerHTML = cartView();
   let cartTable: HTMLElement = document.getElementById("cart-table")!;
   let cart: Array<Product> = store.cart.showAll();
   let cartReduced: Array<CartItem> = [];
@@ -22,7 +24,6 @@ export default function CartView(store: Store) {
     }
   });
 
-  let mainContent: HTMLElement = document.getElementById("main-content")!;
   if (cartReduced.length === 0) {
     mainContent.innerHTML = "<h1>Usted no posee artículos en su carrito</h1>";
   } else {

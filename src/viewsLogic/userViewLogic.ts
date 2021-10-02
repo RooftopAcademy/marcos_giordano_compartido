@@ -1,11 +1,10 @@
 import createNewProductButton from "../components/createNewProductButton";
-import userComponent from "../components/userComponent";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
-import Store from "../classes/Store";
+import Store from "../entities/Store";
+import userView from "../views/userView";
 
-export default function UserView(store: Store) {
-  let main: HTMLElement = document.getElementById("main-content")!;
-  main.innerHTML = userComponent(store);
+export default function UserViewLogic(store: Store, mainContent: HTMLElement) {
+  mainContent.innerHTML = userView(store);
 
   let logOutButton: HTMLButtonElement = document.getElementById(
     "log-out"
@@ -16,7 +15,7 @@ export default function UserView(store: Store) {
   if (logOutButton) {
     logOutButton.addEventListener("click", () => {
       store.clearUser();
-      main.innerHTML = userComponent(store);
+      mainContent.innerHTML = userView(store);
       userName.forEach((element) => {
         element.innerHTML = `<i class="fas fa-user"></i> &nbsp Invitado`;
       });

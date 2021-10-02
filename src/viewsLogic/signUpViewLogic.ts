@@ -1,7 +1,13 @@
-import Store from "../classes/Store";
-import StoreUser from "../classes/StoreUser";
+import Store from "../entities/Store";
+import StoreUser from "../entities/StoreUser";
+import signUpView from "../views/signUpView";
 
-export default function SignUpView(store: Store) {
+export default function SignUpViewLogic(
+  store: Store,
+  mainContent: HTMLElement
+) {
+  mainContent.innerHTML = signUpView();
+
   let signUpForm: HTMLFormElement = document.getElementById(
     "sign-up-form"
   )! as HTMLFormElement;
@@ -69,10 +75,12 @@ export default function SignUpView(store: Store) {
     }
   });
 
-  infoContainerButton.addEventListener("click", () => {
-    domElements.forEach((element: HTMLElement) => {
-      element.setAttribute("style", "");
+  if (infoContainerButton) {
+    infoContainerButton.addEventListener("click", () => {
+      domElements.forEach((element: HTMLElement) => {
+        element.setAttribute("style", "");
+      });
+      infoContainer.classList.remove("display-info-container");
     });
-    infoContainer.classList.remove("display-info-container");
-  });
+  }
 }

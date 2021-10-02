@@ -1,4 +1,4 @@
-import Store from "../classes/Store";
+import Store from "../entities/Store";
 
 export default function headerRendering(store: Store): string {
   return `
@@ -11,28 +11,28 @@ export default function headerRendering(store: Store): string {
 								</button>
 							</div>
 							<div class="navigation-burger-logo">
-								<a class="button-link" href="./index.html">GARBARINO+</a>
+								<a class="button-link" href="#/">GARBARINO+</a>
 							</div>
 						</div>
 
 						<div class="navigation-search-bar">
 							<input type="text" />
-							<a class="navigation-button" href="#">
+							<a class="navigation-button" href="#/">
 								<i class="fas fa-search"></i>
 							</a>
 						</div>
 
 						<div class="navigation-login">
-							<a class="button-link js-user" href="./user.html"><i class="fas fa-user"></i> &nbsp ${
+							<a class="button-link js-user" href="#/user"><i class="fas fa-user"></i> &nbsp ${
                 store.user ? store.user.firstName.toUpperCase() : "Invitado"
               }</a>
 						</div>
 
 						<div class="navigation-commands">
-							<a class="navigation-button" href="#" id="search-button">
+							<a class="navigation-button" href="#/" id="search-button">
 								<i class="fas fa-search"></i>
 							</a>
-							<a class="navigation-button" href="./cart.html">
+							<a class="navigation-button" href="#/cart">
 								<i class="fas fa-shopping-cart"></i>
 								<p id="cart-quantity"> &nbsp ${store.cart.showAll().length} </p>
 							</a>

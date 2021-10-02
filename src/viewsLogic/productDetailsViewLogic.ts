@@ -1,20 +1,29 @@
 import productDetails from "../components/productDetails";
 import productComments from "../components/productComments";
-import Product from "../classes/Product";
+import Product from "../entities/Product";
 import Comment from "../interfaces/CommentInterface";
-import Store from "../classes/Store";
+import Store from "../entities/Store";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
+import productDetailsView from "../views/productDetailsView";
 
-export default function ProductDetailsView(store: Store) {
-  let url: URL = new URL(window.location.href);
-  let productID: string = url.searchParams.get("id")!;
+export default function ProductDetailsViewLogic(
+  store: Store,
+  mainContent: HTMLElement
+) {
+  mainContent.innerHTML = productDetailsView();
+
+  let productID: Array<string> = window.location.href.split("?")[1].split("=");
+
+  console.log(productID);
 
   let product: Array<Product> = store
     .showCatalog()
-    .filter((prod: Product) => prod.id == productID);
+    .filter((prod: Product) => prod.id == productID[1]);
 
-  let mainContent: HTMLElement = document.getElementById("main-content")!;
-  mainContent.innerHTML = productDetails(product[0]);
+  let productDetailsContent: HTMLElement = document.getElementById(
+    "product-details-content"
+  )!;
+  productDetailsContent.innerHTML = productDetails(product[0]);
 
   let productCommentsContainer: HTMLElement = document.getElementById(
     "product-comments-container"
@@ -87,12 +96,14 @@ export default function ProductDetailsView(store: Store) {
     paragraph.innerText = text;
   };
 
-  infoContainerButton.addEventListener("click", () => {
-    domElements.forEach((element: HTMLElement) => {
-      element.setAttribute("style", "");
+  if (infoContainerButton) {
+    infoContainerButton.addEventListener("click", () => {
+      domElements.forEach((element: HTMLElement) => {
+        element.setAttribute("style", "");
+      });
+      infoContainer.classList.remove("display-info-container");
     });
-    infoContainer.classList.remove("display-info-container");
-  });
+  }
 
   let removeButtons: NodeListOf<HTMLElement> =
     document.getElementsByName("remove-button")!;
@@ -100,7 +111,7 @@ export default function ProductDetailsView(store: Store) {
   if (removeButtons != null) {
     removeButtons.forEach((button: HTMLElement) => {
       button.addEventListener("click", function () {
-        store.removeProduct(productID);
+        store.removeProduct(productID[1]);
         displayInfoContainer("El producto ha sido eliminado correctamente.");
       });
     });
