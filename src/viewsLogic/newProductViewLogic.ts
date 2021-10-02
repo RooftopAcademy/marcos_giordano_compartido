@@ -9,7 +9,10 @@ export default function NewProductViewLogic(
   store: Store,
   mainContent: HTMLElement
 ) {
+  //rendering the view
   mainContent.innerHTML = newProductView();
+
+  //propulate product type option values
   let typeSelector: HTMLSelectElement = document.getElementById(
     "type-selector"
   ) as HTMLSelectElement;
@@ -20,18 +23,10 @@ export default function NewProductViewLogic(
     typeSelector.appendChild(newOption);
   }
 
+  //new product form functionality
   let newProductForm: HTMLFormElement = document.getElementById(
     "new-product-form"
   )! as HTMLFormElement;
-  let productName: HTMLInputElement = newProductForm["product-name"];
-  let productType: HTMLSelectElement = newProductForm["product-type"];
-  let productPrice: HTMLInputElement = newProductForm["product-price"];
-  let productDescrition: HTMLInputElement =
-    newProductForm["product-description"];
-  let productImage: HTMLInputElement = newProductForm["product-image"];
-  let productThumbnail: HTMLInputElement = newProductForm["product-thumbnail"];
-  let productStock: HTMLInputElement = newProductForm["product-stock"];
-  let productDiscount: HTMLInputElement = newProductForm["product-discount"];
 
   let newProductSubmitButton: HTMLInputElement = document.getElementById(
     "new-product-submit-button"
@@ -46,18 +41,26 @@ export default function NewProductViewLogic(
         newProduct.id = window.crypto
           .getRandomValues(new Uint32Array(1))[0]
           .toString();
-        newProduct.name = productName.value;
-        newProduct.type = productType.value as ProductTypeEnum;
-        newProduct.price = parseFloat(productPrice.value);
-        newProduct.description = productDescrition.value;
-        newProduct.image = productImage.value;
-        newProduct.thumbnail = productThumbnail.value;
-        newProduct.stock = parseInt(productStock.value);
-        newProduct.discount = parseFloat(productDiscount.value);
+        newProduct.name = newProductForm["product-name"].value;
+        newProduct.type = newProductForm["product-type"]
+          .value as ProductTypeEnum;
+        newProduct.price = parseFloat(newProductForm["product-price"].value);
+        newProduct.description = newProductForm["product-description"].value;
+        newProduct.image = newProductForm["product-image"].value;
+        newProduct.thumbnail = newProductForm["product-thumbnail"].value;
+        newProduct.stock = parseInt(newProductForm["product-stock"].value);
+        newProduct.discount = parseFloat(
+          newProductForm["product-discount"].value
+        );
+
+        //add product to the store
         store.newProduct(newProduct);
-        returnHome();
+
+        //return home and show info container success
         displayInfoContainer("El producto ha sido creado correctamente.");
+        returnHome();
       } catch (error) {
+        //show info container error
         displayInfoContainer(`${error}`);
       }
     }
