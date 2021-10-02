@@ -16,7 +16,7 @@ export default class Store {
 
   public set user(user: StoreUser) {
     this._user = user;
-    localStorage.setItem("user", JSON.stringify(user));
+    this.saveUser();
   }
 
   public loadUser() {
