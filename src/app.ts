@@ -1,9 +1,9 @@
 import Store from "./entities/Store";
-import commonComponentsRendering from "./viewsLogic/commonComponentsRendering";
 import router from "./routes/router";
 import enableMainAndFooter from "./helpers/enableMainAndFooter";
 import CommmonComponentsInterface from "./interfaces/CommonComponentsinterface";
 import returnHome from "./helpers/returnHome";
+import { commonComponentsRendering } from "./viewsLogic/commonComponentsRendering";
 
 //Instanciate the store
 let store: Store = new Store();
