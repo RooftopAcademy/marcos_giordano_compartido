@@ -19,7 +19,13 @@ function loadCarrousselProducts(store: Store): void {
     "product-carrousel-container"
   )!;
 
-  store.showCatalog().forEach((product: Product) => {
+  let discountProducts = filterProductsByDiscount(store.showCatalog());
+
+  discountProducts.forEach((product: Product) => {
     productCarrouselContainer.innerHTML += productCarrousel(product);
   });
+}
+
+function filterProductsByDiscount(productList: Array<Product>): Array<Product> {
+  return productList.filter((product) => product.discount > 0);
 }
