@@ -1,6 +1,6 @@
 import Store from "../entities/Store";
 
-export default function userView(store: Store) {
+export default function userView(store: Store): string {
   let returnComponent: string;
   if (store.user) {
     returnComponent = `
@@ -18,7 +18,9 @@ export default function userView(store: Store) {
 		`;
   } else {
     returnComponent = `
-		<h2>USUARIO INVITADO </h2>
+		<div class="user-content">
+			<h2>USUARIO INVITADO</h2>
+		</div>
 		`;
   }
   return returnComponent;
