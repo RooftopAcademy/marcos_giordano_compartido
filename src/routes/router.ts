@@ -1,12 +1,12 @@
 import Store from "../entities/Store";
 import ViewInterface from "../interfaces/ViewInterface";
-import cartViewLogic from "../viewsLogic/cartViewLogic";
-import homeViewLogic from "../viewsLogic/homeViewLogic";
-import newProductViewLogic from "../viewsLogic/newProductViewLogic";
-import productDetailsViewLogic from "../viewsLogic/productDetailsViewLogic";
-import productListViewLogic from "../viewsLogic/productListViewLogic";
-import signUpViewLogic from "../viewsLogic/signUpViewLogic";
-import userViewLogic from "../viewsLogic/userViewLogic";
+import { cartViewLogic } from "../viewsLogic/cartViewLogic";
+import { homeViewLogic } from "../viewsLogic/homeViewLogic";
+import { newProductViewLogic } from "../viewsLogic/newProductViewLogic";
+import { productDetailsViewLogic } from "../viewsLogic/productDetailsViewLogic";
+import { productListViewLogic } from "../viewsLogic/productListViewLogic";
+import { signUpViewLogic } from "../viewsLogic/signUpViewLogic";
+import { userViewLogic } from "../viewsLogic/userViewLogic";
 
 const routes: Array<ViewInterface> = [
   { path: "", viewRendering: homeViewLogic },
