@@ -47,6 +47,7 @@ function findView(rawPath: string): ViewInterface {
     let errorView = routes.filter((view) => {
       return view.path == "error";
     });
+    window.location.hash = "error";
     return errorView[0];
   }
 }
