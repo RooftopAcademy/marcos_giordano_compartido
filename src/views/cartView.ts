@@ -1,5 +1,9 @@
-export default function cartView() {
-  return `
+import Store from "../entities/Store";
+
+export default function cartView(store: Store): string {
+  let returnComponent: string;
+  if (store.cart.showAll().length != 0) {
+    returnComponent = `
   <div class="cart-content" id="main-content">
     <table class="cart-content-table">
       <thead>
@@ -20,4 +24,12 @@ export default function cartView() {
     </button>
   </div>
   `;
+  } else {
+    returnComponent = `
+  <div class="cart-content" id="main-content">
+    <h1>Usted no posee artículos en su carrito</h1>
+  </div>
+  `;
+  }
+  return returnComponent;
 }
