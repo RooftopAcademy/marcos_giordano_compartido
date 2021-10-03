@@ -772,6 +772,17 @@ footer {
   color: #d1030f;
 }
 
+/*--------------------------- error view ---------------------------*/
+
+.error-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 30px;
+}
+
 /*--------------------------- info container ---------------------------*/
 
 #info-container {
