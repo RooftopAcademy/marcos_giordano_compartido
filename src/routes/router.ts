@@ -1,6 +1,7 @@
 import Store from "../entities/Store";
 import ViewInterface from "../interfaces/ViewInterface";
 import { cartViewLogic } from "../viewsLogic/cartViewLogic";
+import { errorViewLogic } from "../viewsLogic/errorViewLogic";
 import { homeViewLogic } from "../viewsLogic/homeViewLogic";
 import { newProductViewLogic } from "../viewsLogic/newProductViewLogic";
 import { productDetailsViewLogic } from "../viewsLogic/productDetailsViewLogic";
@@ -18,6 +19,7 @@ const routes: Array<ViewInterface> = [
   { path: "user", viewRendering: userViewLogic },
   { path: "newProduct", viewRendering: newProductViewLogic },
   { path: "search", viewRendering: searchViewLogic },
+  { path: "error", viewRendering: errorViewLogic },
 ];
 
 export default function router(
@@ -25,15 +27,26 @@ export default function router(
   store: Store,
   mainContent: HTMLElement
 ) {
+  let rawPath: string = searchRawHashValue(path);
+  let view = findView(rawPath);
+  view.viewRendering(store, mainContent);
+}
+
+function searchRawHashValue(path: string): string {
   let pathArray: Array<string> = path.split("/");
-  let pathArrayWithoutParams: Array<string> =
-    pathArray[pathArray.length - 1].split("?");
+  return pathArray[pathArray.length - 1].split("?")[0];
+}
 
-  let view = routes.filter((view) => {
-    return view.path == pathArrayWithoutParams[0];
+function findView(rawPath: string): ViewInterface {
+  let foundViews = routes.filter((view) => {
+    return view.path == rawPath;
   });
-
-  view.length != 0
-    ? view[0].viewRendering(store, mainContent)
-    : (mainContent.innerHTML = `<h1>Error 404</h1>`);
+  if (foundViews.length > 0) {
+    return foundViews[0];
+  } else {
+    let errorView = routes.filter((view) => {
+      return view.path == "error";
+    });
+    return errorView[0];
+  }
 }
