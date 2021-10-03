@@ -5,6 +5,7 @@ import { homeViewLogic } from "../viewsLogic/homeViewLogic";
 import { newProductViewLogic } from "../viewsLogic/newProductViewLogic";
 import { productDetailsViewLogic } from "../viewsLogic/productDetailsViewLogic";
 import { productListViewLogic } from "../viewsLogic/productListViewLogic";
+import { searchViewLogic } from "../viewsLogic/searchViewLogic";
 import { signUpViewLogic } from "../viewsLogic/signUpViewLogic";
 import { userViewLogic } from "../viewsLogic/userViewLogic";
 
@@ -15,7 +16,8 @@ const routes: Array<ViewInterface> = [
   { path: "cart", viewRendering: cartViewLogic },
   { path: "signUp", viewRendering: signUpViewLogic },
   { path: "user", viewRendering: userViewLogic },
-  { path: "newProductView", viewRendering: newProductViewLogic },
+  { path: "newProduct", viewRendering: newProductViewLogic },
+  { path: "search", viewRendering: searchViewLogic },
 ];
 
 export default function router(
