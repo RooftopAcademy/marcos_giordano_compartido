@@ -3,62 +3,92 @@ import PrivilegeEnum from "../enums/PrivilegeEnum";
 import Store from "../entities/Store";
 import userView from "../views/userView";
 
-export default function UserViewLogic(store: Store, mainContent: HTMLElement) {
-  mainContent.innerHTML = userView(store);
+export function userViewLogic(store: Store, mainContent: HTMLElement) {
+  viewRendering(mainContent, store);
+  let navBarContainer = loadNavBarContainer();
+  logOutEvent(store, navBarContainer, mainContent);
+  privilegeEvents(store, navBarContainer);
+}
 
+//view rendering
+
+function viewRendering(mainContent: HTMLElement, store: Store): void {
+  mainContent.innerHTML = userView(store);
+}
+
+//load Navigation Bar
+
+function loadNavBarContainer(): HTMLElement {
+  return document.getElementById("nav-bar-container")!;
+}
+
+//log out events
+
+function logOutEvent(
+  store: Store,
+  navBarContainer: HTMLElement,
+  mainContent: HTMLElement
+): void {
   let logOutButton: HTMLButtonElement = document.getElementById(
     "log-out"
   ) as HTMLButtonElement;
-
   let userName: NodeListOf<HTMLElement> = document.querySelectorAll(".js-user");
-
-  let navBarContainer: HTMLElement =
-    document.getElementById("nav-bar-container")!;
 
   if (logOutButton) {
     logOutButton.addEventListener("click", () => {
       store.clearUser();
-      mainContent.innerHTML = userView(store);
+      viewRendering(mainContent, store);
       userName.forEach((element) => {
         element.innerHTML = `<i class="fas fa-user"></i> &nbsp Invitado`;
       });
-      let productCreationLink: HTMLAnchorElement = document.getElementById(
-        "product-creation-link"
-      ) as HTMLAnchorElement;
-      navBarContainer.removeChild(productCreationLink);
+      removeNewProductLink(navBarContainer);
     });
   }
+}
 
-  let privilege: HTMLSelectElement = document.getElementById(
+//privilege events
+
+function privilegeEvents(store: Store, navBarContainer: HTMLElement): void {
+  let privilegeOptions: HTMLSelectElement = document.getElementById(
     "privilege"
   ) as HTMLSelectElement;
 
+  setDefaultOption(privilegeOptions, store);
+
+  privilegeOptions.addEventListener("change", function () {
+    setUserPrivilege(privilegeOptions, navBarContainer, store);
+    store.saveUser();
+  });
+}
+
+function setDefaultOption(privilegeOptions: HTMLSelectElement, store: Store) {
   if (store.user != null) {
     if (store.user.privilege == PrivilegeEnum.normal) {
-      privilege.selectedIndex = 0;
+      privilegeOptions.selectedIndex = 0;
     } else {
-      privilege.selectedIndex = 1;
+      privilegeOptions.selectedIndex = 1;
     }
   }
+}
 
-  if (privilege != undefined) {
-    privilege.addEventListener("change", function () {
-      if (privilege.value == "ADMIN") {
-        store.user.privilege = PrivilegeEnum.admin;
-      } else {
-        store.user.privilege = PrivilegeEnum.normal;
-      }
-      store.saveUser();
-      let anchor = document.createElement("a");
-      anchor = createNewProductButton(anchor);
-      if (store.user.privilege === PrivilegeEnum.admin) {
-        navBarContainer.appendChild(anchor);
-      } else {
-        let productCreationLink: HTMLAnchorElement = document.getElementById(
-          "product-creation-link"
-        ) as HTMLAnchorElement;
-        navBarContainer.removeChild(productCreationLink);
-      }
-    });
+function setUserPrivilege(
+  privilegeOptions: HTMLSelectElement,
+  navBarContainer: HTMLElement,
+  store: Store
+) {
+  if (privilegeOptions.value == "ADMIN") {
+    let newProductButton: HTMLAnchorElement = createNewProductButton();
+    store.user.privilege = PrivilegeEnum.admin;
+    navBarContainer.appendChild(newProductButton);
+  } else {
+    store.user.privilege = PrivilegeEnum.normal;
+    removeNewProductLink(navBarContainer);
   }
+}
+
+function removeNewProductLink(navBarContainer: HTMLElement) {
+  let productCreationLink: HTMLAnchorElement = document.getElementById(
+    "product-creation-link"
+  ) as HTMLAnchorElement;
+  navBarContainer.removeChild(productCreationLink);
 }
