@@ -1,46 +1,30 @@
 import Store from "../entities/Store";
 import asideNavBar from "../components/asideNavBar";
-import burgerButtonComponent from "../components/burgerButton";
-import createNewProductButton from "../components/createNewProductButton";
+import burgerButtonRendering from "../components/burgerButton";
+import createNewProductButton from "../components/newProductButton";
 import footerRendering from "../components/footer";
 import headerRendering from "../components/header";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
+import CommmonComponentsInterface from "../interfaces/CommonComponentsinterface";
 
-export default function commonComponentsRendering(
+export function commonComponentsRendering(
   store: Store,
-  mainContent: HTMLElement
+  commonComponents: CommmonComponentsInterface
 ) {
-  let jsHeader: HTMLElement = document.getElementById("js-header")!;
-  let jsFooter: HTMLElement = document.getElementById("js-footer")!;
-  let asideNavBarContainer: HTMLElement = document.getElementById("side-bar")!;
+  commonComponents.header.innerHTML = headerRendering(store);
+  commonComponents.footer.innerHTML = footerRendering();
+  commonComponents.asideNavBarContainer.innerHTML = asideNavBar(store);
+  sideNavRendering(store);
+  burgerButtonRendering(commonComponents);
+}
 
-  //header rendering
-  jsHeader.innerHTML = headerRendering(store);
-
-  //footer rendering
-
-  jsFooter.innerHTML = footerRendering();
-
-  //aside navigation bar rendering
-  asideNavBarContainer.innerHTML = asideNavBar(store);
-
-  //aside navigation bar rendering according to user privileges
+function sideNavRendering(store: Store) {
   let navBarContainer: HTMLElement =
     document.getElementById("nav-bar-container")!;
   if (store.user != null) {
     if (store.user.privilege === PrivilegeEnum.admin) {
-      let anchor = document.createElement("a");
-      anchor = createNewProductButton(anchor);
-      navBarContainer.appendChild(anchor);
+      let newProductLink: HTMLAnchorElement = createNewProductButton();
+      navBarContainer.appendChild(newProductLink);
     }
   }
-
-  //Burger Button functionality
-  let burgerButton: HTMLElement = document.querySelector("#burger-button")!;
-  burgerButtonComponent(
-    burgerButton,
-    jsFooter,
-    asideNavBarContainer,
-    mainContent
-  );
 }

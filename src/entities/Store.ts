@@ -1,7 +1,7 @@
 import Cart from "./Cart";
 import Product from "./Product";
 import StoreUser from "./StoreUser";
-import products from "../viewsLogic/products";
+import products from "../helpers/products";
 
 export default class Store {
   private _user?: StoreUser | undefined;
@@ -16,7 +16,7 @@ export default class Store {
 
   public set user(user: StoreUser) {
     this._user = user;
-    localStorage.setItem("user", JSON.stringify(user));
+    this.saveUser();
   }
 
   public loadUser() {
@@ -63,10 +63,14 @@ export default class Store {
     localStorage.setItem("products", JSON.stringify(this._catalog));
   }
 
+  public getProductById(id: string) {
+    let product = this.showCatalog().filter((prod: Product) => prod.id == id);
+    return product;
+  }
+
   public removeProduct(id: String) {
     let productSelected: number = this._catalog.findIndex((p) => p.id == id);
     this._catalog.splice(productSelected, 1);
-    console.log(this._catalog);
     localStorage.setItem("products", JSON.stringify(this._catalog));
   }
 

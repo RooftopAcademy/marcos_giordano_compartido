@@ -1,6 +1,9 @@
 import Store from "./entities/Store";
-import commonComponentsRendering from "./viewsLogic/commonComponentsRendering";
 import router from "./routes/router";
+import enableMainAndFooter from "./helpers/enableMainAndFooter";
+import CommmonComponentsInterface from "./interfaces/CommonComponentsinterface";
+import returnHome from "./helpers/returnHome";
+import { commonComponentsRendering } from "./viewsLogic/commonComponentsRendering";
 
 //Instanciate the store
 let store: Store = new Store();
@@ -9,20 +12,20 @@ store.cart.load();
 store.loadUser();
 
 //common components rendering
-let mainContent: HTMLElement = document.getElementById("main-content")!;
-commonComponentsRendering(store, mainContent);
+let commonComponents: CommmonComponentsInterface = {
+  header: document.getElementById("header")!,
+  mainContent: document.getElementById("main-content")!,
+  footer: document.getElementById("footer")!,
+  asideNavBarContainer: document.getElementById("side-bar")!,
+};
+
+commonComponentsRendering(store, commonComponents);
 
 //Views rendering through paths
-
-router("", store, mainContent);
+returnHome();
+router("", store, commonComponents.mainContent);
 
 window.addEventListener("hashchange", function () {
-  let footer: HTMLElement = document.getElementById("js-footer")!;
-  let asideNavBarContainer: HTMLElement = document.getElementById("side-bar")!;
-  asideNavBarContainer.style.display = "none";
-  asideNavBarContainer.classList.remove("float");
-  mainContent.classList.remove("disabled");
-  footer.classList.remove("disabled");
-
-  router(this.location.hash, store, mainContent);
+  enableMainAndFooter(commonComponents);
+  router(this.location.hash, store, commonComponents.mainContent);
 });

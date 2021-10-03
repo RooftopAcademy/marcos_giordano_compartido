@@ -1,86 +1,77 @@
+import displayInfoContainer from "../components/infoContainer";
 import Store from "../entities/Store";
 import StoreUser from "../entities/StoreUser";
+import PrivilegeEnum from "../enums/PrivilegeEnum";
+import returnHome from "../helpers/returnHome";
 import signUpView from "../views/signUpView";
 
-export default function SignUpViewLogic(
-  store: Store,
-  mainContent: HTMLElement
-) {
+export function signUpViewLogic(store: Store, mainContent: HTMLElement) {
+  viewRendering(mainContent);
+  signUpFormEvents(store);
+}
+//view rendering
+function viewRendering(mainContent: HTMLElement): void {
   mainContent.innerHTML = signUpView();
+}
 
+//Sign up for events
+function signUpFormEvents(store: Store): void {
   let signUpForm: HTMLFormElement = document.getElementById(
     "sign-up-form"
   )! as HTMLFormElement;
 
-  let firstName: HTMLInputElement = signUpForm["first-name"];
-  let lastName: HTMLInputElement = signUpForm["last-name"];
-  let mailAdress: HTMLInputElement = signUpForm["mail-adress"];
-  let password: HTMLInputElement = signUpForm["password"];
-  let passwordRepeat: HTMLInputElement = signUpForm["password-repeat"];
-  let submitButton: HTMLButtonElement = signUpForm["submit-button"];
-
-  let infoContainer: HTMLElement = document.getElementById("info-container")!;
-  let paragraph: HTMLParagraphElement = document.getElementById(
-    "info-container-paragraph"
-  ) as HTMLParagraphElement;
-  let infoContainerButton: HTMLButtonElement = document.getElementById(
-    "info-container-button"
-  ) as HTMLButtonElement;
-  let domElements: NodeListOf<HTMLElement> = document.querySelectorAll(
-    "header, main, footer"
-  )!;
-
-  let displayInfoContainer = (text: string) => {
-    domElements.forEach((element: HTMLElement) => {
-      element.style.opacity = "0.4";
-      element.style.pointerEvents = "none";
-    });
-    infoContainer.classList.add("display-info-container");
-    paragraph.innerText = text;
-  };
-
-  submitButton.addEventListener("click", (event: Event) => {
+  signUpForm["submit-button"].addEventListener("click", (event: Event) => {
     event.preventDefault();
     try {
-      let storeUser: StoreUser = new StoreUser();
-      storeUser.firstName = firstName.value;
-      storeUser.lastName = lastName.value;
-      storeUser.mailAdress = mailAdress.value;
-
-      if (password.value != passwordRepeat.value) {
-        throw Error(
-          "El campo 'Contraseña' y 'Repetir contraseña' no coinciden."
-        );
-      } else {
-        storeUser.password = password.value;
-      }
-
-      store.user = storeUser;
-
-      firstName.value = "";
-      lastName.value = "";
-      mailAdress.value = "";
-      password.value = "";
-      passwordRepeat.value = "";
-
-      let userName: NodeListOf<HTMLElement> =
-        document.querySelectorAll(".js-user");
-      userName.forEach((element) => {
-        element.innerHTML = `<i class="fas fa-user"></i> &nbsp ${storeUser.firstName.toUpperCase()}`;
-      });
-
+      let newUser: StoreUser = new StoreUser();
+      verifyUser(newUser, signUpForm);
+      store.user = newUser;
+      addUserNameToNavBar(newUser);
+      setViewAccordingToUserPrivilieges(newUser);
       displayInfoContainer("El usuario ha sido creado correctamente.");
+      returnHome();
     } catch (error) {
       displayInfoContainer(`${error}`);
     }
   });
+}
 
-  if (infoContainerButton) {
-    infoContainerButton.addEventListener("click", () => {
-      domElements.forEach((element: HTMLElement) => {
-        element.setAttribute("style", "");
-      });
-      infoContainer.classList.remove("display-info-container");
-    });
+//verify user creation according to UserStore Class rules
+
+function verifyUser(newUser: StoreUser, signUpForm: HTMLFormElement): void {
+  newUser.firstName = signUpForm["first-name"].value;
+  newUser.lastName = signUpForm["last-name"].value;
+  newUser.mailAdress = signUpForm["mail-adress"].value;
+
+  if (signUpForm["password"].value != signUpForm["password-repeat"].value) {
+    throw Error("El campo 'Contraseña' y 'Repetir contraseña' no coinciden.");
+  } else {
+    newUser.password = signUpForm["password"].value;
+  }
+}
+
+//Add user name to navigation bars
+
+function addUserNameToNavBar(newUser: StoreUser): void {
+  let userName: NodeListOf<HTMLElement> = document.querySelectorAll(".js-user");
+  userName.forEach((element) => {
+    element.innerHTML = `<i class="fas fa-user"></i> &nbsp ${newUser.firstName.toUpperCase()}`;
+  });
+}
+
+//Add user special Dom Elements according to his privilege
+
+function setViewAccordingToUserPrivilieges(newUser: StoreUser): void {
+  //should verify user privilege from server and act according.
+  //now is just removing some elements from DOM.
+  if (newUser.privilege == PrivilegeEnum.normal) {
+    let navBarContainer: HTMLElement =
+      document.getElementById("nav-bar-container")!;
+    let productCreationLink: HTMLAnchorElement = document.getElementById(
+      "product-creation-link"
+    ) as HTMLAnchorElement;
+    if (productCreationLink) {
+      navBarContainer.removeChild(productCreationLink);
+    }
   }
 }
