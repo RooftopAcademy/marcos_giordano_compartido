@@ -2,10 +2,10 @@ import disableMainAndFooter from "../helpers/disableMainAndFooter";
 import enableMainAndFooter from "../helpers/enableMainAndFooter";
 import CommmonComponentsInterface from "../interfaces/CommonComponentsinterface";
 
-export default function burgerButtonComponent(
-  burgerButton: HTMLElement,
+export default function burgerButtonRendering(
   commonComponents: CommmonComponentsInterface
 ) {
+  let burgerButton: HTMLElement = document.getElementById("burger-button")!;
   burgerButton.addEventListener("click", burgerButtonClickEvent);
 
   function burgerButtonClickEvent() {
