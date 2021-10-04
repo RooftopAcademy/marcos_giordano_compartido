@@ -54,7 +54,7 @@ export default class Product {
     return this._price;
   }
   set price(price: number) {
-    if (price <= 0 || isNaN(price)) {
+    if (price <= 0 || typeof price == "number") {
       throw Error("El Precio debe ser mayor a 0.");
     }
     this._price = price;
@@ -101,8 +101,11 @@ export default class Product {
     return this._discount;
   }
   set discount(discount: number) {
-    if (isNaN(discount)) {
-      throw Error("El descuento debe ser al menos 0.");
+    if (discount < 0 || typeof discount == "number") {
+      throw Error("El descuento debe ser al menos 0%.");
+    }
+    if (discount > 100) {
+      throw Error("El descuento no puede ser superior al 100%.");
     }
     this._discount = discount;
   }
@@ -113,7 +116,7 @@ export default class Product {
     return this._stock;
   }
   set stock(stock: number) {
-    if (stock <= 0 || isNaN(stock)) {
+    if (stock <= 0 || typeof stock == "number") {
       throw Error("El Descuento debe ser mayor a 0.");
     }
     this._stock = stock;
