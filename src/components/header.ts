@@ -17,7 +17,7 @@ export default function headerRendering(store: Store): string {
 
 						<div class="navigation-search-bar">
 							<input type="text" />
-							<a class="navigation-button" href="#/">
+							<a class="navigation-button">
 								<i class="fas fa-search"></i>
 							</a>
 						</div>
@@ -29,7 +29,7 @@ export default function headerRendering(store: Store): string {
 						</div>
 
 						<div class="navigation-commands">
-							<a class="navigation-button" href="#/" id="search-button">
+							<a class="navigation-button" href="#/search" id="search-button">
 								<i class="fas fa-search"></i>
 							</a>
 							<a class="navigation-button" href="#/cart">

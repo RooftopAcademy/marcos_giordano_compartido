@@ -152,6 +152,7 @@ header {
 /*--------------------------- main ---------------------------*/
 
 .content {
+  min-height: 79vh;
   margin-top: 50px;
   background-color: white;
   display: flex;
@@ -179,7 +180,7 @@ header {
 
 .content-main {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: nowrap;
   flex-direction: column;
   align-content: center;
@@ -323,10 +324,6 @@ header {
 
 footer {
   background-color: white;
-  /* border-style: solid;
-	border-color: black;
-	border-width: 5px 0px 0px 0px; */
-
   box-shadow: inset 0px 5px 4px -1px rgb(0 0 0 / 20%),
     0px 4px 5px 0px rgb(0 0 0 / 14%), 10px 0px 0px 0px rgb(0 0 0 / 12%);
 }
@@ -513,7 +510,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 20px;
+  padding: 20px;
   width: 100%;
 }
 
@@ -593,19 +590,22 @@ footer {
 
 .product-details-buttons {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
+  margin: 0px;
 }
 
 .product-details-buttons > button {
   min-width: 200px;
-  margin-right: 20px;
+  margin: 10px 20px;
 }
 
 .product-details-img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
 }
 
 .product-details-img > img {
@@ -638,10 +638,6 @@ footer {
   color: #d1030f;
 }
 
-.product-details-comments {
-  /* margin: 20px; */
-}
-
 .product-details-comments-title {
   margin: 20px;
 }
@@ -664,6 +660,12 @@ footer {
     align-items: center;
     width: 30%;
   }
+  .product-details-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -673,53 +675,6 @@ footer {
   .product-details-img > img {
     width: 50%;
   }
-}
-
-/*--------------------------- info container ---------------------------*/
-
-#info-container {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-
-  width: 200px;
-  height: 200px;
-  margin-top: -100px;
-  margin-left: -100px;
-  padding: 20px;
-
-  background-color: #d1030f;
-  color: white;
-  font-size: 16px;
-  border-style: solid;
-  border-radius: 10px;
-}
-
-#info-container button {
-  padding: 5px 5px 5px 5px;
-  color: #d1030f;
-  background-color: white;
-  font-size: 20px;
-  margin-top: 10px;
-
-  border-radius: 50px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: white;
-}
-
-#info-container button:active {
-  color: white;
-  background-color: #d1030f;
-}
-
-.display-info-container {
-  display: flex !important;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 
 /*--------------------------- sing up view ---------------------------*/
@@ -771,78 +726,108 @@ footer {
   margin-bottom: 5px;
 }
 
-.form-text-input {
-  width: 100%;
-  padding: 15px 10px 15px 10px;
-  font-size: 16px;
-
-  border-radius: 50px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: gray;
-  outline: none;
-}
-
-.form-text-input:hover {
-  border-color: #d1030f;
-}
-
-.form-text-input:focus {
-  border-color: blue;
-  border-width: 2px;
-}
-
-.form-button-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 20px;
-  width: 100%;
-}
-
-.form-button {
-  width: 100%;
-  padding: 15px 10px 15px 10px;
-  font-size: 24px;
-
-  color: white;
-  background-color: #d1030f;
-
-  border-radius: 50px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #d1030f;
-}
-
-.form-button:active {
-  color: #d1030f;
-  background-color: white;
-
-  border-width: 1px;
-  border-color: gray;
-}
-
-.form-aside > * {
-  margin-bottom: 20px;
-}
-
-.form-aside > ul {
-  margin-left: 30px;
-}
-
-.form-aside li {
-  list-style-type: none;
-}
-
-.form-aside i {
-  margin-right: 10px;
-  color: rgb(73, 194, 55);
-}
-
 @media (max-width: 750px) {
   .form-aside {
     display: none;
   }
+}
+
+/*--------------------------- search view ---------------------------*/
+
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  /* background-color: #d1030f; */
+}
+
+.search-bar > input {
+  width: 200px;
+  height: 50px;
+
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 25px 0px 0px 25px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #d1030f;
+  outline: none;
+}
+
+.search-bar > a {
+  border-radius: 0px 25px 25px 0px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #d1030f;
+  background-color: #d1030f;
+  color: white;
+}
+
+.search-bar > a:active {
+  border-radius: 0px 25px 25px 0px;
+  background-color: white;
+  color: #d1030f;
+}
+
+/*--------------------------- error view ---------------------------*/
+
+.error-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/*--------------------------- info container ---------------------------*/
+
+#info-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  width: 200px;
+  height: 200px;
+  margin-top: -100px;
+  margin-left: -100px;
+  padding: 20px;
+
+  background-color: #d1030f;
+  color: white;
+  font-size: 16px;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+#info-container button {
+  padding: 5px 5px 5px 5px;
+  color: #d1030f;
+  background-color: white;
+  font-size: 20px;
+  margin-top: 10px;
+
+  border-radius: 50px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+}
+
+#info-container button:active {
+  color: white;
+  background-color: #d1030f;
+}
+
+.display-info-container {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 /*--------------------------- special clases ---------------------------*/
@@ -888,6 +873,9 @@ footer {
   .navigation-links-desktop > * {
     margin-top: 20px;
   }
+  .search-bar > input {
+    width: 400px;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -916,7 +904,7 @@ footer {
     font-size: 30px;
   }
   .content {
-    margin-top: 70px;
+    margin-top: 80px;
   }
   .content-aside {
     display: flex !important;

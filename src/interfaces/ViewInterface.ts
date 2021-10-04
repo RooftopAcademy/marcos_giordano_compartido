@@ -1,4 +1,4 @@
-export default interface PathInterface {
+export default interface ViewInterface {
   path: string;
   viewRendering: Function;
 }

@@ -1,24 +1,18 @@
-export default function burgerButtonComponent(
-  burgerButton: HTMLElement,
-  footer: HTMLElement,
-  asideNavBarContainer: HTMLElement,
-  mainContent: HTMLElement
+import disableMainAndFooter from "../helpers/disableMainAndFooter";
+import enableMainAndFooter from "../helpers/enableMainAndFooter";
+import CommmonComponentsInterface from "../interfaces/CommonComponentsinterface";
+
+export default function burgerButtonRendering(
+  commonComponents: CommmonComponentsInterface
 ) {
+  let burgerButton: HTMLElement = document.getElementById("burger-button")!;
   burgerButton.addEventListener("click", burgerButtonClickEvent);
 
   function burgerButtonClickEvent() {
-    if (asideNavBarContainer.style.display === "flex") {
-      asideNavBarContainer.style.display = "none";
-      asideNavBarContainer.classList.remove("float");
-      mainContent.classList.remove("disabled");
-      footer.classList.remove("disabled");
+    if (commonComponents.asideNavBarContainer.style.display === "flex") {
+      enableMainAndFooter(commonComponents);
     } else {
-      asideNavBarContainer.style.display = "flex";
-      asideNavBarContainer.classList.add("float");
-      mainContent.classList.add("disabled");
-      footer.classList.add("disabled");
+      disableMainAndFooter(commonComponents);
     }
   }
-
-  return burgerButton;
 }
