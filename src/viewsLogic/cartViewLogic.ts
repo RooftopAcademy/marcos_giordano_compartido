@@ -55,7 +55,7 @@ function fillCartViewTable(cartReduced: Array<CartItem>) {
 // Remove products from cart button event
 function cleanCartButtonEvent(store: Store, mainContent: HTMLElement): void {
   const cleanCartBtn: HTMLElement = document.getElementById("clean-cart-btn")!;
-  if (cleanCartBtn != null) {
+  if (cleanCartBtn) {
     cleanCartBtn.addEventListener("click", function () {
       store.cart.clear();
       viewRendering(mainContent, store);

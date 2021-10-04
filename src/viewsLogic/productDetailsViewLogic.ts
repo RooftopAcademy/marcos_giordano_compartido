@@ -77,7 +77,7 @@ function removeProductEvents(productId: string, store: Store): void {
   const removeButtons: NodeListOf<HTMLElement> =
     document.getElementsByName("remove-button")!;
 
-  if (removeButtons != null) {
+  if (removeButtons) {
     removeButtons.forEach((button: HTMLElement) => {
       button.addEventListener("click", function () {
         displayInfoContainer(

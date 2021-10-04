@@ -21,7 +21,7 @@ export default class Store {
 
   public loadUser() {
     const loadData: string | null = localStorage.getItem("user");
-    if (loadData != null) {
+    if (loadData) {
       const user: StoreUser = new StoreUser();
       user.create(JSON.parse(loadData));
       this._user = user;
@@ -40,7 +40,7 @@ export default class Store {
   public loadCatalog(): void {
     let loadData: string | null = localStorage.getItem("products");
     let loadDataJson: Array<any>;
-    if (loadData != null) {
+    if (loadData) {
       loadDataJson = JSON.parse(loadData);
     } else {
       localStorage.setItem("products", JSON.stringify(products()));
