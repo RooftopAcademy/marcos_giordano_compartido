@@ -21,7 +21,7 @@ export function commonComponentsRendering(
 function sideNavRendering(store: Store) {
   const navBarContainer: HTMLElement =
     document.getElementById("nav-bar-container")!;
-  if (store.user != null) {
+  if (store.user) {
     if (store.user.privilege === PrivilegeEnum.admin) {
       const newProductLink: HTMLAnchorElement = createNewProductButton();
       navBarContainer.appendChild(newProductLink);
