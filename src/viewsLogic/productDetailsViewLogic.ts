@@ -6,6 +6,7 @@ import getComments from "../services/jsonPlaceHolderAPI";
 import createRemoveButton from "../components/removeButton";
 import returnHome from "../helpers/returnHome";
 import displayInfoContainer from "../components/infoContainer";
+import returnErrorView from "../helpers/returnErrorView";
 
 export function productDetailsViewLogic(
   store: Store,
@@ -18,18 +19,24 @@ export function productDetailsViewLogic(
   removeProductEvents(product.id, store);
 }
 
+//get product Id
+
+function getProduct(store: Store): Product {
+  let productID: string = window.location.href.split("?")[1].split("=")[1];
+  let product: Product;
+  try {
+    product = store.getProductById(productID)[0];
+  } catch {
+    returnErrorView();
+    product = new Product();
+  }
+  return product;
+}
+
 //view rendering
 
 function viewRendering(product: Product, mainContent: HTMLElement): void {
   mainContent.innerHTML = productDetailsView(product);
-}
-
-//get product Id
-
-function getProduct(store: Store): Product {
-  let productID: Array<string> = window.location.href.split("?")[1].split("=");
-  let product: Array<Product> = store.getProductById(productID[1]);
-  return product[0];
 }
 
 //get product comments

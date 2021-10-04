@@ -64,6 +64,9 @@ export default class Store {
   }
 
   public getProductById(id: string) {
+    if (!id) {
+      throw new Error("The id is not defined");
+    }
     let product = this.showCatalog().filter((prod: Product) => prod.id == id);
     return product;
   }
