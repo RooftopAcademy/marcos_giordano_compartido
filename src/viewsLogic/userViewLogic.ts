@@ -5,7 +5,7 @@ import userView from "../views/userView";
 
 export function userViewLogic(store: Store, mainContent: HTMLElement) {
   viewRendering(mainContent, store);
-  let navBarContainer = loadNavBarContainer();
+  const navBarContainer = loadNavBarContainer();
   logOutEvent(store, navBarContainer, mainContent);
   privilegeEvents(store, navBarContainer);
 }
@@ -29,10 +29,11 @@ function logOutEvent(
   navBarContainer: HTMLElement,
   mainContent: HTMLElement
 ): void {
-  let logOutButton: HTMLButtonElement = document.getElementById(
+  const logOutButton: HTMLButtonElement = document.getElementById(
     "log-out"
   ) as HTMLButtonElement;
-  let userName: NodeListOf<HTMLElement> = document.querySelectorAll(".js-user");
+  const userName: NodeListOf<HTMLElement> =
+    document.querySelectorAll(".js-user");
 
   if (logOutButton) {
     logOutButton.addEventListener("click", () => {
@@ -49,7 +50,7 @@ function logOutEvent(
 //privilege events
 
 function privilegeEvents(store: Store, navBarContainer: HTMLElement): void {
-  let privilegeOptions: HTMLSelectElement = document.getElementById(
+  const privilegeOptions: HTMLSelectElement = document.getElementById(
     "privilege"
   ) as HTMLSelectElement;
 
@@ -77,7 +78,7 @@ function setUserPrivilege(
   store: Store
 ) {
   if (privilegeOptions.value == "ADMIN") {
-    let newProductButton: HTMLAnchorElement = createNewProductButton();
+    const newProductButton: HTMLAnchorElement = createNewProductButton();
     store.user.privilege = PrivilegeEnum.admin;
     navBarContainer.appendChild(newProductButton);
   } else {
@@ -87,7 +88,7 @@ function setUserPrivilege(
 }
 
 function removeNewProductLink(navBarContainer: HTMLElement) {
-  let productCreationLink: HTMLAnchorElement = document.getElementById(
+  const productCreationLink: HTMLAnchorElement = document.getElementById(
     "product-creation-link"
   ) as HTMLAnchorElement;
   navBarContainer.removeChild(productCreationLink);

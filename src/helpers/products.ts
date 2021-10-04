@@ -6,7 +6,7 @@ export default function (): Array<Product> {
 
   for (let i: number = 0; i < 15; i++) {
     if (i % 3 == 0) {
-      let product: Product = new Product();
+      const product: Product = new Product();
       product.id = window.crypto
         .getRandomValues(new Uint32Array(1))[0]
         .toString();
@@ -21,7 +21,7 @@ export default function (): Array<Product> {
 
       products.push(product);
     } else if (i % 3 == 1) {
-      let product2: Product = new Product();
+      const product2: Product = new Product();
       product2.id = window.crypto
         .getRandomValues(new Uint32Array(1))[0]
         .toString();
@@ -36,7 +36,7 @@ export default function (): Array<Product> {
 
       products.push(product2);
     } else {
-      let product3: Product = new Product();
+      const product3: Product = new Product();
       product3.id = window.crypto
         .getRandomValues(new Uint32Array(1))[0]
         .toString();

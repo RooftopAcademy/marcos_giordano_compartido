@@ -15,11 +15,11 @@ function viewRendering(mainContent: HTMLElement): void {
 
 //load store products inside the carrousel according to price discounts
 function loadCarrousselProducts(store: Store): void {
-  let productCarrouselContainer: HTMLElement = document.getElementById(
+  const productCarrouselContainer: HTMLElement = document.getElementById(
     "product-carrousel-container"
   )!;
 
-  let discountProducts = filterProductsByDiscount(store.showCatalog());
+  const discountProducts = filterProductsByDiscount(store.showCatalog());
 
   discountProducts.forEach((product: Product) => {
     productCarrouselContainer.innerHTML += productCarrousel(product);

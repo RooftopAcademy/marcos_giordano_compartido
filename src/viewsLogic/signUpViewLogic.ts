@@ -16,14 +16,14 @@ function viewRendering(mainContent: HTMLElement): void {
 
 //Sign up for events
 function signUpFormEvents(store: Store): void {
-  let signUpForm: HTMLFormElement = document.getElementById(
+  const signUpForm: HTMLFormElement = document.getElementById(
     "sign-up-form"
   )! as HTMLFormElement;
 
   signUpForm["submit-button"].addEventListener("click", (event: Event) => {
     event.preventDefault();
     try {
-      let newUser: StoreUser = new StoreUser();
+      const newUser: StoreUser = new StoreUser();
       verifyUser(newUser, signUpForm);
       store.user = newUser;
       addUserNameToNavBar(newUser);
@@ -53,7 +53,8 @@ function verifyUser(newUser: StoreUser, signUpForm: HTMLFormElement): void {
 //Add user name to navigation bars
 
 function addUserNameToNavBar(newUser: StoreUser): void {
-  let userName: NodeListOf<HTMLElement> = document.querySelectorAll(".js-user");
+  const userName: NodeListOf<HTMLElement> =
+    document.querySelectorAll(".js-user");
   userName.forEach((element) => {
     element.innerHTML = `<i class="fas fa-user"></i> &nbsp ${newUser.firstName.toUpperCase()}`;
   });
@@ -65,9 +66,9 @@ function setViewAccordingToUserPrivilieges(newUser: StoreUser): void {
   //should verify user privilege from server and act according.
   //now is just removing some elements from DOM.
   if (newUser.privilege == PrivilegeEnum.normal) {
-    let navBarContainer: HTMLElement =
+    const navBarContainer: HTMLElement =
       document.getElementById("nav-bar-container")!;
-    let productCreationLink: HTMLAnchorElement = document.getElementById(
+    const productCreationLink: HTMLAnchorElement = document.getElementById(
       "product-creation-link"
     ) as HTMLAnchorElement;
     if (productCreationLink) {

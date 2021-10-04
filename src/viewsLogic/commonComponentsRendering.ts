@@ -19,11 +19,11 @@ export function commonComponentsRendering(
 }
 
 function sideNavRendering(store: Store) {
-  let navBarContainer: HTMLElement =
+  const navBarContainer: HTMLElement =
     document.getElementById("nav-bar-container")!;
   if (store.user != null) {
     if (store.user.privilege === PrivilegeEnum.admin) {
-      let newProductLink: HTMLAnchorElement = createNewProductButton();
+      const newProductLink: HTMLAnchorElement = createNewProductButton();
       navBarContainer.appendChild(newProductLink);
     }
   }

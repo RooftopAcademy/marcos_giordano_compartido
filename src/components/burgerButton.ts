@@ -5,7 +5,7 @@ import CommmonComponentsInterface from "../interfaces/CommonComponentsinterface"
 export default function burgerButtonRendering(
   commonComponents: CommmonComponentsInterface
 ) {
-  let burgerButton: HTMLElement = document.getElementById("burger-button")!;
+  const burgerButton: HTMLElement = document.getElementById("burger-button")!;
   burgerButton.addEventListener("click", burgerButtonClickEvent);
 
   function burgerButtonClickEvent() {

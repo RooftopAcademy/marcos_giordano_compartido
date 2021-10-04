@@ -12,7 +12,7 @@ export function productDetailsViewLogic(
   store: Store,
   mainContent: HTMLElement
 ) {
-  let product: Product = getProduct(store);
+  const product: Product = getProduct(store);
   viewRendering(product, mainContent);
   getProductComments(); //should bringh comments by ProductId from the API
   buyProductEvents(product, store);
@@ -22,7 +22,7 @@ export function productDetailsViewLogic(
 //get product Id
 
 function getProduct(store: Store): Product {
-  let productID: string = window.location.href.split("?")[1].split("=")[1];
+  const productID: string = window.location.href.split("?")[1].split("=")[1];
   let product: Product;
   try {
     product = store.getProductById(productID)[0];
@@ -42,7 +42,7 @@ function viewRendering(product: Product, mainContent: HTMLElement): void {
 //get product comments
 
 function getProductComments(): void {
-  let productCommentsContainer: HTMLElement = document.getElementById(
+  const productCommentsContainer: HTMLElement = document.getElementById(
     "product-comments-container"
   )!;
   getComments(productCommentsContainer);
@@ -51,7 +51,7 @@ function getProductComments(): void {
 //buy button event
 
 function buyProductEvents(product: Product, store: Store): void {
-  let buyButtons: NodeListOf<HTMLElement> =
+  const buyButtons: NodeListOf<HTMLElement> =
     document.getElementsByName("buy-button")!;
 
   buyButtons.forEach((buyButton: HTMLElement) => {
@@ -67,13 +67,14 @@ function buyProductEvents(product: Product, store: Store): void {
 }
 
 export function updateProductsQuantityInCart(store: Store): void {
-  let productQuantity: HTMLElement = document.getElementById("cart-quantity")!;
+  const productQuantity: HTMLElement =
+    document.getElementById("cart-quantity")!;
   productQuantity.innerHTML = ` &nbsp ${store.cart.showAll().length}`;
 }
 
 //remove button event
 function removeProductEvents(productId: string, store: Store): void {
-  let removeButtons: NodeListOf<HTMLElement> =
+  const removeButtons: NodeListOf<HTMLElement> =
     document.getElementsByName("remove-button")!;
 
   if (removeButtons != null) {

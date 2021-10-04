@@ -11,7 +11,7 @@ export default function getComments(productCommentsContainer: HTMLElement) {
       }
     })
     .then((data: Array<Comment>) => {
-      let dataReduced = data.slice(0, 10);
+      const dataReduced = data.slice(0, 10);
       dataReduced.forEach((comment: Comment) => {
         productCommentsContainer.innerHTML += productComments(comment);
       });
