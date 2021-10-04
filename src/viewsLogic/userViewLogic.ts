@@ -54,16 +54,18 @@ function privilegeEvents(store: Store, navBarContainer: HTMLElement): void {
     "privilege"
   ) as HTMLSelectElement;
 
-  setDefaultOption(privilegeOptions, store);
+  if (privilegeOptions) {
+    setDefaultOption(privilegeOptions, store);
 
-  privilegeOptions.addEventListener("change", function () {
-    setUserPrivilege(privilegeOptions, navBarContainer, store);
-    store.saveUser();
-  });
+    privilegeOptions.addEventListener("change", function () {
+      setUserPrivilege(privilegeOptions, navBarContainer, store);
+      store.saveUser();
+    });
+  }
 }
 
 function setDefaultOption(privilegeOptions: HTMLSelectElement, store: Store) {
-  if (store.user != null) {
+  if (store.user) {
     if (store.user.privilege == PrivilegeEnum.normal) {
       privilegeOptions.selectedIndex = 0;
     } else {
@@ -91,5 +93,7 @@ function removeNewProductLink(navBarContainer: HTMLElement) {
   const productCreationLink: HTMLAnchorElement = document.getElementById(
     "product-creation-link"
   ) as HTMLAnchorElement;
-  navBarContainer.removeChild(productCreationLink);
+  if (productCreationLink) {
+    navBarContainer.removeChild(productCreationLink);
+  }
 }
