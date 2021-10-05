@@ -6,22 +6,54 @@ import NullProduct from "./NullProduct";
 import NullStoreUser from "./NullStoreUser";
 
 export default class Store {
-  private _user?: StoreUser;
+  private _users: Array<StoreUser> = [];
+  private _user: StoreUser = new NullStoreUser();
   private _catalog: Array<Product> = [];
   private _cart: Cart = new Cart();
 
   constructor() {}
 
+  //Users
+  public loadUsers() {
+    const loadData: string | null = localStorage.getItem("users");
+    let loadDataJson: Array<any>;
+    if (loadData) {
+      loadDataJson = JSON.parse(loadData);
+      loadDataJson.forEach((element) => {
+        const user: StoreUser = new StoreUser();
+        user.create(element);
+        this._users.push(user);
+      });
+    }
+  }
+
+  //Loged user
   public get user() {
-    return this._user!;
+    return this._user;
   }
 
   public set user(user: StoreUser) {
     this._user = user;
-    this.saveUser();
+    localStorage.setItem("user", JSON.stringify(this._user));
   }
 
-  public loadUser() {
+  public registerUser(user: StoreUser) {
+    const existUser = this.verifyUserExists(user.mailAdress);
+    if (existUser.length == 0) {
+      this._user = user;
+      localStorage.setItem("user", JSON.stringify(this._user));
+      this._users.push(this._user);
+      localStorage.setItem("users", JSON.stringify(this._users));
+    } else {
+      throw new Error("El usuario que está intentando crear ya existe.");
+    }
+  }
+
+  public verifyUserExists(userMail: string) {
+    return this._users.filter((userEl) => userEl.mailAdress == userMail);
+  }
+
+  public getLogedUser() {
     const loadData: string | null = localStorage.getItem("user");
     if (loadData) {
       const user: StoreUser = new StoreUser();
@@ -39,7 +71,10 @@ export default class Store {
 
   public saveUser(): void {
     localStorage.setItem("user", JSON.stringify(this._user));
+    localStorage.setItem("users", JSON.stringify(this._users));
   }
+
+  //Catalog
 
   public loadCatalog(): void {
     let loadData: string | null = localStorage.getItem("products");
@@ -62,6 +97,8 @@ export default class Store {
     return this._catalog;
   }
 
+  //Products
+
   public newProduct(prod: Product): void {
     this._catalog.push(prod);
     localStorage.setItem("products", JSON.stringify(this._catalog));
@@ -80,6 +117,8 @@ export default class Store {
     productIndex != -1 ? this._catalog.splice(productIndex, 1) : null;
     localStorage.setItem("products", JSON.stringify(this._catalog));
   }
+
+  //Cart
 
   get cart(): Cart {
     return this._cart;
