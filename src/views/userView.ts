@@ -6,7 +6,7 @@ export default function userView(store: Store): string {
   if (store.user instanceof NullStoreUser) {
     returnComponent = `
 		<div class="user-content">
-			<h2>USUARIO INVITADO</h2>
+			<h2>Iniciar Sesión</h2>
 		</div>
 		`;
   } else {

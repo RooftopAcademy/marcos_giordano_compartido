@@ -26,7 +26,7 @@ export default function headerRendering(store: Store): string {
 						<div class="navigation-login">
 							<a class="button-link js-user" href="#/user"><i class="fas fa-user"></i> &nbsp ${
                 store.user instanceof NullStoreUser
-                  ? "Invitado"
+                  ? "Inicio"
                   : store.user.firstName.toUpperCase()
               }</a>
 						</div>

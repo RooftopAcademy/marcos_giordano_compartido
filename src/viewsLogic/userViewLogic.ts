@@ -40,7 +40,7 @@ function logOutEvent(
       store.clearUser();
       viewRendering(mainContent, store);
       userName.forEach((element) => {
-        element.innerHTML = `<i class="fas fa-user"></i> &nbsp Invitado`;
+        element.innerHTML = `<i class="fas fa-user"></i> &nbsp Inicio`;
       });
       removeNewProductLink(navBarContainer);
     });

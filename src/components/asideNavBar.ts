@@ -13,7 +13,7 @@ export default function asideNavBar(store: Store): string {
                 <i class="fas fa-user"></i> 
                 &nbsp ${
                   store.user instanceof NullStoreUser
-                    ? "Invitado"
+                    ? "Inicio"
                     : store.user.firstName.toUpperCase()
                 }
             </a>
