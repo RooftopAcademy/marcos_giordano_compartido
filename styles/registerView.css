@@ -1,0 +1,22 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.register-title {
+  text-align: center;
+  margin: 20px;
+}
+
+.register-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+@media (min-width: 540px) {
+}
+
+@media (min-width: 1280px) {
+}

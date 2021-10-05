@@ -1,12 +1,12 @@
 export default function newProductView() {
   return `
     <div class="new-product-container" id="main-content">
-      <div class="new-product-title">
+      <div class="form-title">
         <h1>Crear nuevo producto</h1>
       </div>
 
       <div class="new-product-content">
-        <form class="new-product-form" id="new-product-form">
+        <form class="form" id="form">
           <div class="form-text-input-container">
             <label>Nombre:</label>
             <input
