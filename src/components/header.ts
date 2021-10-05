@@ -1,3 +1,4 @@
+import NullStoreUser from "../entities/NullStoreUser";
 import Store from "../entities/Store";
 
 export default function headerRendering(store: Store): string {
@@ -24,7 +25,9 @@ export default function headerRendering(store: Store): string {
 
 						<div class="navigation-login">
 							<a class="button-link js-user" href="#/user"><i class="fas fa-user"></i> &nbsp ${
-                store.user ? store.user.firstName.toUpperCase() : "Invitado"
+                store.user instanceof NullStoreUser
+                  ? "Invitado"
+                  : store.user.firstName.toUpperCase()
               }</a>
 						</div>
 

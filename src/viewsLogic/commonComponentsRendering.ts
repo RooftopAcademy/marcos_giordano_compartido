@@ -6,6 +6,8 @@ import footerRendering from "../components/footer";
 import headerRendering from "../components/header";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
 import CommmonComponentsInterface from "../interfaces/CommonComponentsinterface";
+import NullStoreUser from "../entities/NullStoreUser";
+import StoreUser from "../entities/StoreUser";
 
 export function commonComponentsRendering(
   store: Store,
@@ -21,7 +23,7 @@ export function commonComponentsRendering(
 function sideNavRendering(store: Store) {
   const navBarContainer: HTMLElement =
     document.getElementById("nav-bar-container")!;
-  if (store.user) {
+  if (store.user instanceof StoreUser) {
     if (store.user.privilege === PrivilegeEnum.admin) {
       const newProductLink: HTMLAnchorElement = createNewProductButton();
       navBarContainer.appendChild(newProductLink);

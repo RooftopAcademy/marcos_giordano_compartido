@@ -1,8 +1,15 @@
+import NullStoreUser from "../entities/NullStoreUser";
 import Store from "../entities/Store";
 
 export default function userView(store: Store): string {
   let returnComponent: string;
-  if (store.user) {
+  if (store.user instanceof NullStoreUser) {
+    returnComponent = `
+		<div class="user-content">
+			<h2>USUARIO INVITADO</h2>
+		</div>
+		`;
+  } else {
     returnComponent = `
 		<div class="user-content">
 			<h2>Nombre: ${store.user.firstName.toUpperCase()} </h2>
@@ -14,12 +21,6 @@ export default function userView(store: Store): string {
 				<option value="ADMIN">ADMIN</option>
 			</select>
 			<button class="button-link" id="log-out">LOG-OUT</button>
-		</div>
-		`;
-  } else {
-    returnComponent = `
-		<div class="user-content">
-			<h2>USUARIO INVITADO</h2>
 		</div>
 		`;
   }

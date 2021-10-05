@@ -3,9 +3,10 @@ import Product from "./Product";
 import StoreUser from "./StoreUser";
 import products from "../helpers/products";
 import NullProduct from "./NullProduct";
+import NullStoreUser from "./NullStoreUser";
 
 export default class Store {
-  private _user?: StoreUser | undefined;
+  private _user?: StoreUser;
   private _catalog: Array<Product> = [];
   private _cart: Cart = new Cart();
 
@@ -26,11 +27,13 @@ export default class Store {
       const user: StoreUser = new StoreUser();
       user.create(JSON.parse(loadData));
       this._user = user;
+    } else {
+      this._user = new NullStoreUser();
     }
   }
 
   public clearUser(): void {
-    this._user = undefined;
+    this._user = new NullStoreUser();
     localStorage.removeItem("user");
   }
 

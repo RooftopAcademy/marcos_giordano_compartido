@@ -8,6 +8,8 @@ import returnHome from "../helpers/returnHome";
 import displayInfoContainer from "../components/infoContainer";
 import returnErrorView from "../helpers/returnErrorView";
 import NullProduct from "../entities/NullProduct";
+import StoreUser from "../entities/StoreUser";
+import NullStoreUser from "../entities/NullStoreUser";
 
 export function productDetailsViewLogic(
   store: Store,
@@ -58,10 +60,8 @@ function buyProductEvents(product: Product, store: Store): void {
       updateProductsQuantityInCart(store);
     });
 
-    if (store.user) {
-      if (store.user.privilege == PrivilegeEnum.admin) {
-        buyButton.after(createRemoveButton());
-      }
+    if (store.user.privilege == PrivilegeEnum.admin) {
+      buyButton.after(createRemoveButton());
     }
   });
 }
