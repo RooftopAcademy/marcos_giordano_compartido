@@ -6,7 +6,31 @@ export default function userView(store: Store): string {
   if (store.user instanceof NullStoreUser) {
     returnComponent = `
 		<div class="user-content">
-			<h2>Iniciar Sesión</h2>
+			<div class="form-title">
+        <h1>Iniciar Sesion</h1>
+      </div>
+			<div class="form">
+				<form id="log-in-form">
+					<div class="form-text-input-container">
+						<label>E-mail: </label>
+						<input
+							name="mail-adress"
+							class="form-text-input"
+							type="email"
+							placeholder="usuario@email.com"
+						/>
+					</div>
+					<div class="form-text-input-container">
+						<label>Contraseña: </label>
+						<input
+							name="password"
+							class="form-text-input"
+							type="password"
+							placeholder="Ingrese su password"
+						/>
+					</div>
+				</form>
+			</div>
 		</div>
 		`;
   } else {
