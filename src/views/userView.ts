@@ -31,10 +31,10 @@ export default function userView(store: Store): string {
 					</div>
 					<div class="form-button-container">
             <input
-              type="submit"
+              type="button"
               value="Ingresar"
               class="form-button"
-              id="sign-in-submit-button"
+              id="submit-button"
             />
           </div>
 				</form>

@@ -56,7 +56,7 @@ export default function registerView() {
             <input
               name="submit-button"
               class="form-button"
-              type="submit"
+              type="button"
               value="Registrarse!"
             />
           </div>
