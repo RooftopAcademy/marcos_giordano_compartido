@@ -29,6 +29,14 @@ export default function userView(store: Store): string {
 							placeholder="Ingrese su password"
 						/>
 					</div>
+					<div class="form-button-container">
+            <input
+              type="submit"
+              value="Ingresar"
+              class="form-button"
+              id="sign-in-submit-button"
+            />
+          </div>
 				</form>
 			</div>
 		</div>
