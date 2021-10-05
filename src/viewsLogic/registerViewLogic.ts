@@ -2,6 +2,7 @@ import displayInfoContainer from "../components/infoContainer";
 import Store from "../entities/Store";
 import StoreUser from "../entities/StoreUser";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
+import addUserNameToNavBar from "../helpers/addUserNameToNavBar";
 import returnHome from "../helpers/returnHome";
 import registerView from "../views/registerView";
 
@@ -20,13 +21,12 @@ function registerFormEvents(store: Store): void {
     "form"
   )! as HTMLFormElement;
 
-  registerForm["submit-button"].addEventListener("click", (event: Event) => {
-    event.preventDefault();
+  registerForm["submit-button"].addEventListener("click", function () {
     try {
       const newUser: StoreUser = new StoreUser();
-      verifyUser(newUser, registerForm);
-      store.user = newUser;
-      addUserNameToNavBar(newUser);
+      verifyInputData(newUser, registerForm);
+      store.registerUser(newUser);
+      addUserNameToNavBar(newUser.firstName.toUpperCase());
       setViewAccordingToUserPrivilieges(newUser);
       displayInfoContainer("El usuario ha sido creado correctamente.");
       returnHome();
@@ -38,7 +38,10 @@ function registerFormEvents(store: Store): void {
 
 //verify user creation according to UserStore Class rules
 
-function verifyUser(newUser: StoreUser, registerForm: HTMLFormElement): void {
+function verifyInputData(
+  newUser: StoreUser,
+  registerForm: HTMLFormElement
+): void {
   newUser.firstName = registerForm["first-name"].value;
   newUser.lastName = registerForm["last-name"].value;
   newUser.mailAdress = registerForm["mail-adress"].value;
@@ -48,16 +51,6 @@ function verifyUser(newUser: StoreUser, registerForm: HTMLFormElement): void {
   } else {
     newUser.password = registerForm["password"].value;
   }
-}
-
-//Add user name to navigation bars
-
-function addUserNameToNavBar(newUser: StoreUser): void {
-  const userName: NodeListOf<HTMLElement> =
-    document.querySelectorAll(".js-user");
-  userName.forEach((element) => {
-    element.innerHTML = `<i class="fas fa-user"></i> &nbsp ${newUser.firstName.toUpperCase()}`;
-  });
 }
 
 //Add user special Dom Elements according to his privilege

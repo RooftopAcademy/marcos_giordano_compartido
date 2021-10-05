@@ -2,13 +2,15 @@ import createNewProductButton from "../components/newProductButton";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
 import Store from "../entities/Store";
 import userView from "../views/userView";
+import displayInfoContainer from "../components/infoContainer";
+import returnHome from "../helpers/returnHome";
+import { commonComponentsRendering } from "./commonComponentsRendering";
+import addUserNameToNavBar from "../helpers/addUserNameToNavBar";
 
 export function userViewLogic(store: Store, mainContent: HTMLElement) {
   viewRendering(mainContent, store);
   const navBarContainer = loadNavBarContainer();
-
   logInEvent(store, navBarContainer, mainContent);
-
   logOutEvent(store, navBarContainer, mainContent);
   privilegeEvents(store, navBarContainer);
 }
@@ -23,6 +25,32 @@ function viewRendering(mainContent: HTMLElement, store: Store): void {
 
 function loadNavBarContainer(): HTMLElement {
   return document.getElementById("nav-bar-container")!;
+}
+
+// Log in events
+function logInEvent(
+  store: Store,
+  navBarContainer: HTMLElement,
+  mainContent: HTMLElement
+) {
+  let logInForm: HTMLFormElement = document.getElementById(
+    "log-in-form"
+  ) as HTMLFormElement;
+
+  if (logInForm) {
+    logInForm["submit-button"].addEventListener("click", function () {
+      const inputMail = logInForm["mail-adress"].value.trim();
+      const logInUser = store.verifyUserExists(inputMail)[0];
+      const inputPassword = logInForm["password"].value.trim();
+      if (inputPassword === logInUser.password) {
+        store.user = logInUser;
+        addUserNameToNavBar(store.user.firstName.toUpperCase());
+        returnHome();
+      } else {
+        displayInfoContainer("El password ingresado es incorrecto.");
+      }
+    });
+  }
 }
 
 //log out events
@@ -42,10 +70,9 @@ function logOutEvent(
     logOutButton.addEventListener("click", () => {
       store.clearUser();
       viewRendering(mainContent, store);
-      userName.forEach((element) => {
-        element.innerHTML = `<i class="fas fa-user"></i> &nbsp Inicio`;
-      });
+      addUserNameToNavBar("Inicio");
       removeNewProductLink(navBarContainer);
+      returnHome();
     });
   }
 }
@@ -99,19 +126,4 @@ function removeNewProductLink(navBarContainer: HTMLElement) {
   if (productCreationLink) {
     navBarContainer.removeChild(productCreationLink);
   }
-}
-
-//Log in events
-function logInEvent(
-  store: Store,
-  navBarContainer: HTMLElement,
-  mainContent: HTMLElement
-) {
-  let logInForm: HTMLFormElement = document.getElementById(
-    "log-in-form"
-  ) as HTMLFormElement;
-
-  logInForm.addEventListener("input", function () {
-    console.log(logInForm["mail-adress"].value);
-  });
 }
