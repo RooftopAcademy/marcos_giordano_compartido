@@ -2,6 +2,7 @@ import Cart from "./Cart";
 import Product from "./Product";
 import StoreUser from "./StoreUser";
 import products from "../helpers/products";
+import NullProduct from "./NullProduct";
 
 export default class Store {
   private _user?: StoreUser | undefined;
@@ -58,22 +59,22 @@ export default class Store {
     return this._catalog;
   }
 
-  public newProduct(prod: Product) {
+  public newProduct(prod: Product): void {
     this._catalog.push(prod);
     localStorage.setItem("products", JSON.stringify(this._catalog));
   }
 
-  public getProductById(id: string) {
-    if (!id) {
-      throw new Error("The id is not defined");
-    }
-    const product = this.showCatalog().filter((prod: Product) => prod.id == id);
+  public getProductById(id: string): Product {
+    let product: Product = this.showCatalog().filter(
+      (prod: Product) => prod.id == id
+    )[0];
+    id && product ? product : (product = new NullProduct());
     return product;
   }
 
   public removeProduct(id: String) {
-    const productSelected: number = this._catalog.findIndex((p) => p.id == id);
-    this._catalog.splice(productSelected, 1);
+    const productIndex: number = this._catalog.findIndex((p) => p.id == id);
+    productIndex != -1 ? this._catalog.splice(productIndex, 1) : null;
     localStorage.setItem("products", JSON.stringify(this._catalog));
   }
 
