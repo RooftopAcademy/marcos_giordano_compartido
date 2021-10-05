@@ -20,9 +20,9 @@ export default class Store {
   }
 
   public loadUser() {
-    let loadData: string | null = localStorage.getItem("user");
-    if (loadData != null) {
-      let user: StoreUser = new StoreUser();
+    const loadData: string | null = localStorage.getItem("user");
+    if (loadData) {
+      const user: StoreUser = new StoreUser();
       user.create(JSON.parse(loadData));
       this._user = user;
     }
@@ -40,7 +40,7 @@ export default class Store {
   public loadCatalog(): void {
     let loadData: string | null = localStorage.getItem("products");
     let loadDataJson: Array<any>;
-    if (loadData != null) {
+    if (loadData) {
       loadDataJson = JSON.parse(loadData);
     } else {
       localStorage.setItem("products", JSON.stringify(products()));
@@ -48,7 +48,7 @@ export default class Store {
       loadDataJson = JSON.parse(loadData) as Array<any>;
     }
     loadDataJson.forEach((element) => {
-      let prod: Product = new Product();
+      const prod: Product = new Product();
       prod.create(element);
       this._catalog.push(prod);
     });
@@ -67,12 +67,12 @@ export default class Store {
     if (!id) {
       throw new Error("The id is not defined");
     }
-    let product = this.showCatalog().filter((prod: Product) => prod.id == id);
+    const product = this.showCatalog().filter((prod: Product) => prod.id == id);
     return product;
   }
 
   public removeProduct(id: String) {
-    let productSelected: number = this._catalog.findIndex((p) => p.id == id);
+    const productSelected: number = this._catalog.findIndex((p) => p.id == id);
     this._catalog.splice(productSelected, 1);
     localStorage.setItem("products", JSON.stringify(this._catalog));
   }

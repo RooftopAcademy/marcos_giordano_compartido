@@ -6,13 +6,13 @@ import returnHome from "./helpers/returnHome";
 import { commonComponentsRendering } from "./viewsLogic/commonComponentsRendering";
 
 //Instanciate the store
-let store: Store = new Store();
+const store: Store = new Store();
 store.loadCatalog();
 store.cart.load();
 store.loadUser();
 
 //common components rendering
-let commonComponents: CommmonComponentsInterface = {
+const commonComponents: CommmonComponentsInterface = {
   header: document.getElementById("header")!,
   mainContent: document.getElementById("main-content")!,
   footer: document.getElementById("footer")!,

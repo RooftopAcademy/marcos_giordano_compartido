@@ -18,11 +18,11 @@ function viewRendering(mainContent: HTMLElement): void {
 
 //Selector for product types loading
 function populateProductTypesSelectInput(): void {
-  let typeSelector: HTMLSelectElement = document.getElementById(
+  const typeSelector: HTMLSelectElement = document.getElementById(
     "type-selector"
   ) as HTMLSelectElement;
-  for (let item in Object.values(ProductTypeEnum)) {
-    let newOption: HTMLOptionElement = document.createElement("option");
+  for (const item in Object.values(ProductTypeEnum)) {
+    const newOption: HTMLOptionElement = document.createElement("option");
     newOption.value = Object.keys(ProductTypeEnum)[item];
     newOption.innerHTML = Object.values(ProductTypeEnum)[item];
     typeSelector.appendChild(newOption);
@@ -31,11 +31,11 @@ function populateProductTypesSelectInput(): void {
 
 //Form events
 function newProductFormEvents(store: Store): void {
-  let newProductForm: HTMLFormElement = document.getElementById(
+  const newProductForm: HTMLFormElement = document.getElementById(
     "new-product-form"
   )! as HTMLFormElement;
 
-  let newProductSubmitButton: HTMLInputElement = document.getElementById(
+  const newProductSubmitButton: HTMLInputElement = document.getElementById(
     "new-product-submit-button"
   ) as HTMLInputElement;
 
@@ -44,7 +44,7 @@ function newProductFormEvents(store: Store): void {
     function (event: Event): void {
       event.preventDefault();
       try {
-        let newProduct: Product = new Product();
+        const newProduct: Product = new Product();
         verifyNewProduct(newProduct, newProductForm);
         store.newProduct(newProduct);
         displayInfoContainer("El producto ha sido creado correctamente.");

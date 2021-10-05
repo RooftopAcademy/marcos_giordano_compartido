@@ -3,14 +3,14 @@ export default function displayInfoContainer(
   showCancelButton: boolean = false,
   performFunction?: Function
 ) {
-  let domElements: NodeListOf<HTMLElement> = document.querySelectorAll(
+  const domElements: NodeListOf<HTMLElement> = document.querySelectorAll(
     "header, main, footer"
   )!;
-  let infoContainer: HTMLElement = document.getElementById("info-container")!;
+  const infoContainer: HTMLElement = document.getElementById("info-container")!;
 
   disableDomElements(domElements);
   showInfoContainer(infoContainer, text);
-  let infoContainerOKButton = addOkButton();
+  const infoContainerOKButton = addOkButton();
   removeTrailingCancelButton(infoContainer);
   addCancelButton(infoContainerOKButton);
 
@@ -19,7 +19,7 @@ export default function displayInfoContainer(
   */
 
   function addOkButton(): HTMLButtonElement {
-    let infoContainerOKButton: HTMLButtonElement = document.getElementById(
+    const infoContainerOKButton: HTMLButtonElement = document.getElementById(
       "info-container-ok-button"
     ) as HTMLButtonElement;
 
@@ -30,7 +30,7 @@ export default function displayInfoContainer(
 
   function addCancelButton(infoContainerOKButton: HTMLButtonElement): void {
     if (showCancelButton) {
-      let cancelButton = createCancelButton();
+      const cancelButton = createCancelButton();
       infoContainerOKButton.after(cancelButton);
 
       cancelButton.addEventListener("click", function () {
@@ -66,7 +66,7 @@ function enableDomElements(domElements: NodeListOf<HTMLElement>): void {
 
 function showInfoContainer(infoContainer: HTMLElement, text: string): void {
   infoContainer.classList.add("display-info-container");
-  let paragraph: HTMLParagraphElement = document.getElementById(
+  const paragraph: HTMLParagraphElement = document.getElementById(
     "info-container-paragraph"
   ) as HTMLParagraphElement;
   paragraph.innerText = text;
@@ -77,7 +77,7 @@ function hideInfoContainer(infoContainer: HTMLElement): void {
 }
 
 function removeTrailingCancelButton(infoContainer: HTMLElement): void {
-  let existsCancelButton = document.getElementById(
+  const existsCancelButton = document.getElementById(
     "info-container-cancel-button"
   );
   if (existsCancelButton) {
@@ -86,7 +86,7 @@ function removeTrailingCancelButton(infoContainer: HTMLElement): void {
 }
 
 function createCancelButton(): HTMLButtonElement {
-  let cancelButton = document.createElement("button");
+  const cancelButton = document.createElement("button");
   cancelButton.innerHTML = "Cancelar";
   cancelButton.id = "info-container-cancel-button";
   return cancelButton;

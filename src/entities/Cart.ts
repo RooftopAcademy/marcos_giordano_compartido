@@ -15,11 +15,11 @@ export default class Cart {
   }
 
   public load(): void {
-    let loadData: string | null = localStorage.getItem("cartProducts");
+    const loadData: string | null = localStorage.getItem("cartProducts");
     if (loadData) {
-      let savedProducts: Array<Product> = JSON.parse(loadData);
+      const savedProducts: Array<Product> = JSON.parse(loadData);
       savedProducts.forEach((element) => {
-        let product: Product = new Product();
+        const product: Product = new Product();
         product.create(element);
         this._products.push(product);
       });

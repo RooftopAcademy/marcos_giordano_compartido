@@ -15,7 +15,7 @@ function viewRendering(mainContent: HTMLElement): void {
 
 //take products from store and render
 function renderProductItems(store: Store): void {
-  let productContainer: HTMLElement =
+  const productContainer: HTMLElement =
     document.getElementById("product-container")!;
 
   store.showCatalog().forEach((product: Product) => {

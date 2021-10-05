@@ -18,16 +18,16 @@ function viewRendering(mainContent: HTMLElement, store: Store): void {
 
 //Add cart products to the cart view table
 function addCartProducts(store: Store, mainContent: HTMLElement): void {
-  let cart: Array<Product> = store.cart.showAll();
-  let cartReduced: Array<CartItem> = arrangeCartElements(cart);
+  const cart: Array<Product> = store.cart.showAll();
+  const cartReduced: Array<CartItem> = arrangeCartElements(cart);
   fillCartViewTable(cartReduced);
 }
 
 //take product from cart and arrange by id
 function arrangeCartElements(cart: Array<Product>): Array<CartItem> {
-  let cartReduced: Array<CartItem> = [];
+  const cartReduced: Array<CartItem> = [];
   cart.forEach((item) => {
-    let itemSearch: Array<CartItem> = cartReduced.filter(
+    const itemSearch: Array<CartItem> = cartReduced.filter(
       (p: CartItem) => p.item.id == item.id
     );
     if (itemSearch.length === 0) {
@@ -44,7 +44,7 @@ function arrangeCartElements(cart: Array<Product>): Array<CartItem> {
 
 //load cart products in cart view table
 function fillCartViewTable(cartReduced: Array<CartItem>) {
-  let cartTable: HTMLElement = document.getElementById("cart-table")!;
+  const cartTable: HTMLElement = document.getElementById("cart-table")!;
   if (cartReduced.length != 0) {
     cartReduced.forEach((item: CartItem) => {
       cartTable.innerHTML += cartItem(item);
@@ -54,8 +54,8 @@ function fillCartViewTable(cartReduced: Array<CartItem>) {
 
 // Remove products from cart button event
 function cleanCartButtonEvent(store: Store, mainContent: HTMLElement): void {
-  let cleanCartBtn: HTMLElement = document.getElementById("clean-cart-btn")!;
-  if (cleanCartBtn != null) {
+  const cleanCartBtn: HTMLElement = document.getElementById("clean-cart-btn")!;
+  if (cleanCartBtn) {
     cleanCartBtn.addEventListener("click", function () {
       store.cart.clear();
       viewRendering(mainContent, store);

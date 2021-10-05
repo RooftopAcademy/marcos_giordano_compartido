@@ -1,0 +1,30 @@
+.user-content {
+  padding: 20px;
+  width: 100%;
+  min-height: 70vh;
+}
+
+.user-content > * {
+  margin-bottom: 20px;
+}
+
+.button-link {
+  cursor: pointer;
+}
+
+#privilege {
+  background-color: #d1030f;
+  color: white;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media (max-width: 540px) {
+  .user-content > h2 {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1280px) {
+}

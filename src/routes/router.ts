@@ -27,24 +27,24 @@ export default function router(
   store: Store,
   mainContent: HTMLElement
 ) {
-  let rawPath: string = searchRawHashValue(path);
-  let view = findView(rawPath);
+  const rawPath: string = searchRawHashValue(path);
+  const view = findView(rawPath);
   view.viewRendering(store, mainContent);
 }
 
 function searchRawHashValue(path: string): string {
-  let pathArray: Array<string> = path.split("/");
+  const pathArray: Array<string> = path.split("/");
   return pathArray[pathArray.length - 1].split("?")[0];
 }
 
 function findView(rawPath: string): ViewInterface {
-  let foundViews = routes.filter((view) => {
+  const foundViews = routes.filter((view) => {
     return view.path == rawPath;
   });
   if (foundViews.length > 0) {
     return foundViews[0];
   } else {
-    let errorView = routes.filter((view) => {
+    const errorView = routes.filter((view) => {
       return view.path == "error";
     });
     window.location.hash = "error";
