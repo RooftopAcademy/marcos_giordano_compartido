@@ -4,13 +4,13 @@ import Store from "../entities/Store";
 import userView from "../views/userView";
 import displayInfoContainer from "../components/infoContainer";
 import returnHome from "../helpers/returnHome";
-import { commonComponentsRendering } from "./commonComponentsRendering";
 import addUserNameToNavBar from "../helpers/addUserNameToNavBar";
+import StoreUser from "../entities/StoreUser";
 
 export function userViewLogic(store: Store, mainContent: HTMLElement) {
   viewRendering(mainContent, store);
   const navBarContainer = loadNavBarContainer();
-  logInEvent(store, navBarContainer, mainContent);
+  logInEvent(store);
   logOutEvent(store, navBarContainer, mainContent);
   privilegeEvents(store, navBarContainer);
 }
@@ -28,11 +28,7 @@ function loadNavBarContainer(): HTMLElement {
 }
 
 // Log in events
-function logInEvent(
-  store: Store,
-  navBarContainer: HTMLElement,
-  mainContent: HTMLElement
-) {
+function logInEvent(store: Store) {
   let logInForm: HTMLFormElement = document.getElementById(
     "log-in-form"
   ) as HTMLFormElement;
@@ -42,18 +38,44 @@ function logInEvent(
       const inputMail = logInForm["mail-adress"].value.trim();
       const logInUser = store.verifyUserExists(inputMail)[0];
       const inputPassword = logInForm["password"].value.trim();
-      if (logInUser) {
-        if (inputPassword === logInUser.password) {
-          store.user = logInUser;
-          addUserNameToNavBar(store.user.firstName.toUpperCase());
-          returnHome();
-        } else {
-          displayInfoContainer("El password ingresado es incorrecto.");
-        }
-      } else {
-        displayInfoContainer("El usuario ingresado no existe.");
-      }
+      verifyUserPassword(logInUser, inputPassword, store);
+      renderComponentsAccordingUserPrivileges(store);
     });
+  }
+}
+
+function verifyUserPassword(
+  logInUser: StoreUser,
+  inputPassword: string,
+  store: Store
+) {
+  if (logInUser) {
+    if (inputPassword === logInUser.password) {
+      store.user = logInUser;
+      addUserNameToNavBar(store.user.firstName.toUpperCase());
+      returnHome();
+    } else {
+      displayInfoContainer("El password ingresado es incorrecto.");
+    }
+  } else {
+    displayInfoContainer("El usuario ingresado no existe.");
+  }
+}
+
+function renderComponentsAccordingUserPrivileges(store: Store) {
+  const navBarContainer: HTMLElement =
+    document.getElementById("nav-bar-container")!;
+
+  if (store.user.privilege === PrivilegeEnum.admin) {
+    const newProductLink: HTMLAnchorElement = createNewProductButton();
+    navBarContainer.appendChild(newProductLink);
+  } else {
+    const productCreationLink: HTMLAnchorElement = document.getElementById(
+      "product-creation-link"
+    ) as HTMLAnchorElement;
+    if (productCreationLink) {
+      navBarContainer.removeChild(productCreationLink);
+    }
   }
 }
 
@@ -67,8 +89,6 @@ function logOutEvent(
   const logOutButton: HTMLButtonElement = document.getElementById(
     "log-out"
   ) as HTMLButtonElement;
-  const userName: NodeListOf<HTMLElement> =
-    document.querySelectorAll(".js-user");
 
   if (logOutButton) {
     logOutButton.addEventListener("click", () => {
