@@ -9,7 +9,8 @@ import { commonComponentsRendering } from "./viewsLogic/commonComponentsRenderin
 const store: Store = new Store();
 store.loadCatalog();
 store.cart.load();
-store.loadUser();
+store.loadUsers();
+store.getLogedUser();
 
 //common components rendering
 const commonComponents: CommmonComponentsInterface = {
