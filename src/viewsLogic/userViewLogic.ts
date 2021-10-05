@@ -42,12 +42,16 @@ function logInEvent(
       const inputMail = logInForm["mail-adress"].value.trim();
       const logInUser = store.verifyUserExists(inputMail)[0];
       const inputPassword = logInForm["password"].value.trim();
-      if (inputPassword === logInUser.password) {
-        store.user = logInUser;
-        addUserNameToNavBar(store.user.firstName.toUpperCase());
-        returnHome();
+      if (logInUser) {
+        if (inputPassword === logInUser.password) {
+          store.user = logInUser;
+          addUserNameToNavBar(store.user.firstName.toUpperCase());
+          returnHome();
+        } else {
+          displayInfoContainer("El password ingresado es incorrecto.");
+        }
       } else {
-        displayInfoContainer("El password ingresado es incorrecto.");
+        displayInfoContainer("El usuario ingresado no existe.");
       }
     });
   }
