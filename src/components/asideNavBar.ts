@@ -7,7 +7,7 @@ export default function asideNavBar(store: Store): string {
         <a class="button-link" href="#/productList"
             >PRODUCTOS</a
         >
-        <a class="button-link" href="#/signUp">REGISTRARSE</a>
+        <a class="button-link" href="#/register">REGISTRARSE</a>
         <div class="home-content-aside-login">
             <a class="button-link js-user" href="#/user">
                 <i class="fas fa-user"></i> 

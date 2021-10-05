@@ -3,28 +3,28 @@ import Store from "../entities/Store";
 import StoreUser from "../entities/StoreUser";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
 import returnHome from "../helpers/returnHome";
-import signUpView from "../views/signUpView";
+import registerView from "../views/registerView";
 
-export function signUpViewLogic(store: Store, mainContent: HTMLElement) {
+export function registerViewLogic(store: Store, mainContent: HTMLElement) {
   viewRendering(mainContent);
-  signUpFormEvents(store);
+  registerFormEvents(store);
 }
 //view rendering
 function viewRendering(mainContent: HTMLElement): void {
-  mainContent.innerHTML = signUpView();
+  mainContent.innerHTML = registerView();
 }
 
 //Sign up for events
-function signUpFormEvents(store: Store): void {
-  const signUpForm: HTMLFormElement = document.getElementById(
-    "sign-up-form"
+function registerFormEvents(store: Store): void {
+  const registerForm: HTMLFormElement = document.getElementById(
+    "form"
   )! as HTMLFormElement;
 
-  signUpForm["submit-button"].addEventListener("click", (event: Event) => {
+  registerForm["submit-button"].addEventListener("click", (event: Event) => {
     event.preventDefault();
     try {
       const newUser: StoreUser = new StoreUser();
-      verifyUser(newUser, signUpForm);
+      verifyUser(newUser, registerForm);
       store.user = newUser;
       addUserNameToNavBar(newUser);
       setViewAccordingToUserPrivilieges(newUser);
@@ -38,15 +38,15 @@ function signUpFormEvents(store: Store): void {
 
 //verify user creation according to UserStore Class rules
 
-function verifyUser(newUser: StoreUser, signUpForm: HTMLFormElement): void {
-  newUser.firstName = signUpForm["first-name"].value;
-  newUser.lastName = signUpForm["last-name"].value;
-  newUser.mailAdress = signUpForm["mail-adress"].value;
+function verifyUser(newUser: StoreUser, registerForm: HTMLFormElement): void {
+  newUser.firstName = registerForm["first-name"].value;
+  newUser.lastName = registerForm["last-name"].value;
+  newUser.mailAdress = registerForm["mail-adress"].value;
 
-  if (signUpForm["password"].value != signUpForm["password-repeat"].value) {
+  if (registerForm["password"].value != registerForm["password-repeat"].value) {
     throw Error("El campo 'Contraseña' y 'Repetir contraseña' no coinciden.");
   } else {
-    newUser.password = signUpForm["password"].value;
+    newUser.password = registerForm["password"].value;
   }
 }
 

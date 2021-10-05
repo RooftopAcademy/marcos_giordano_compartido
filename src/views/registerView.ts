@@ -1,12 +1,12 @@
-export default function signUpView() {
+export default function registerView() {
   return `
-  <div class="sign-up" id="main-content">
-    <div class="sign-up-title">
+  <div class="register" id="main-content">
+    <div class="register-title">
       <h1>Registrate aquí!</h1>
     </div>
-    <div class="sign-up-content">
-      <div class="sign-up-form">
-        <form id="sign-up-form">
+    <div class="register-content">
+      <div class="form">
+        <form id="form">
           <div class="form-text-input-container">
             <label>Nombre: </label>
             <input
