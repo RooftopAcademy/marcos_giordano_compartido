@@ -65,7 +65,6 @@ export default class StoreUser {
     return this._password;
   }
   set password(p: string) {
-    p = p.trim();
     switch (true) {
       case p.length < 6:
         throw Error("La clave debe tener al menos 6 caracteres");
@@ -87,7 +86,7 @@ export default class StoreUser {
     this._firstName = user._firstName.trim();
     this._lastName = user._lastName.trim();
     this._mailAdress = user._mailAdress.trim();
-    this._password = user._password.trim();
+    this._password = user._password;
     this._privilege = user._privilege;
   }
 }
