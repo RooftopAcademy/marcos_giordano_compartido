@@ -7,6 +7,7 @@ import createRemoveButton from "../components/removeButton";
 import returnHome from "../helpers/returnHome";
 import displayInfoContainer from "../components/infoContainer";
 import returnErrorView from "../helpers/returnErrorView";
+import NullProduct from "../entities/NullProduct";
 
 export function productDetailsViewLogic(
   store: Store,
@@ -19,16 +20,13 @@ export function productDetailsViewLogic(
   removeProductEvents(product.id, store);
 }
 
-//get product Id
+//get product
 
 function getProduct(store: Store): Product {
   const productID: string = window.location.href.split("?")[1].split("=")[1];
-  let product: Product;
-  try {
-    product = store.getProductById(productID)[0];
-  } catch {
+  const product = store.getProductById(productID);
+  if (product instanceof NullProduct) {
     returnErrorView();
-    product = new Product();
   }
   return product;
 }
@@ -60,8 +58,10 @@ function buyProductEvents(product: Product, store: Store): void {
       updateProductsQuantityInCart(store);
     });
 
-    if (store.user.privilege == PrivilegeEnum.admin) {
-      buyButton.after(createRemoveButton());
+    if (store.user) {
+      if (store.user.privilege == PrivilegeEnum.admin) {
+        buyButton.after(createRemoveButton());
+      }
     }
   });
 }
