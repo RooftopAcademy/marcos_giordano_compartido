@@ -6,6 +6,9 @@ import userView from "../views/userView";
 export function userViewLogic(store: Store, mainContent: HTMLElement) {
   viewRendering(mainContent, store);
   const navBarContainer = loadNavBarContainer();
+
+  logInEvent(store, navBarContainer, mainContent);
+
   logOutEvent(store, navBarContainer, mainContent);
   privilegeEvents(store, navBarContainer);
 }
@@ -96,4 +99,19 @@ function removeNewProductLink(navBarContainer: HTMLElement) {
   if (productCreationLink) {
     navBarContainer.removeChild(productCreationLink);
   }
+}
+
+//Log in events
+function logInEvent(
+  store: Store,
+  navBarContainer: HTMLElement,
+  mainContent: HTMLElement
+) {
+  let logInForm: HTMLFormElement = document.getElementById(
+    "log-in-form"
+  ) as HTMLFormElement;
+
+  logInForm.addEventListener("input", function () {
+    console.log(logInForm["mail-adress"].value);
+  });
 }
