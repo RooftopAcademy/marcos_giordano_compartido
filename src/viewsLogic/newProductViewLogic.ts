@@ -33,7 +33,7 @@ function populateProductTypesSelectInput(): void {
 function newProductFormEvents(store: Store): void {
   const newProductForm: HTMLFormElement = document.getElementById(
     "form"
-  )! as HTMLFormElement;
+  ) as HTMLFormElement;
 
   const newProductSubmitButton: HTMLInputElement = document.getElementById(
     "new-product-submit-button"

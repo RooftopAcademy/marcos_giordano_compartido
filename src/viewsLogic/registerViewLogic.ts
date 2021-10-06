@@ -18,7 +18,7 @@ function viewRendering(mainContent: HTMLElement): void {
 function registerFormEvents(store: Store): void {
   const registerForm: HTMLFormElement = document.getElementById(
     "form"
-  )! as HTMLFormElement;
+  ) as HTMLFormElement;
 
   registerForm["submit-button"].addEventListener("click", function () {
     try {
