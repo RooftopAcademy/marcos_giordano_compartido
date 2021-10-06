@@ -13,6 +13,7 @@ export default class StoreUser {
     return this._firstName;
   }
   set firstName(n: string) {
+    n = n.trim();
     switch (true) {
       case n.length < 3:
         throw Error("El Nombre debe poseer al menos 3 caracteres.");
@@ -31,6 +32,7 @@ export default class StoreUser {
     return this._lastName;
   }
   set lastName(n: string) {
+    n = n.trim();
     switch (true) {
       case n.length < 3:
         throw Error("El Apellido debe poseer al menos 3 caracteres.");
@@ -49,6 +51,7 @@ export default class StoreUser {
     return this._mailAdress;
   }
   set mailAdress(m: string) {
+    m = m.trim();
     const mailRegEx: RegExp = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
     switch (true) {
       case !mailRegEx.test(m.toLowerCase()):
@@ -62,6 +65,7 @@ export default class StoreUser {
     return this._password;
   }
   set password(p: string) {
+    p = p.trim();
     switch (true) {
       case p.length < 6:
         throw Error("La clave debe tener al menos 6 caracteres");
@@ -80,10 +84,10 @@ export default class StoreUser {
   }
 
   public create(user: any) {
-    this._firstName = user._firstName;
-    this._lastName = user._lastName;
-    this._mailAdress = user._mailAdress;
-    this._password = user._password;
+    this._firstName = user._firstName.trim();
+    this._lastName = user._lastName.trim();
+    this._mailAdress = user._mailAdress.trim();
+    this._password = user._password.trim();
     this._privilege = user._privilege;
   }
 }

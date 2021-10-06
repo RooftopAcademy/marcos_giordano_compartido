@@ -7,7 +7,7 @@ import { newProductViewLogic } from "../viewsLogic/newProductViewLogic";
 import { productDetailsViewLogic } from "../viewsLogic/productDetailsViewLogic";
 import { productListViewLogic } from "../viewsLogic/productListViewLogic";
 import { searchViewLogic } from "../viewsLogic/searchViewLogic";
-import { signUpViewLogic } from "../viewsLogic/signUpViewLogic";
+import { registerViewLogic } from "../viewsLogic/registerViewLogic";
 import { userViewLogic } from "../viewsLogic/userViewLogic";
 
 const routes: Array<ViewInterface> = [
@@ -15,7 +15,7 @@ const routes: Array<ViewInterface> = [
   { path: "productList", viewRendering: productListViewLogic },
   { path: "productDetails", viewRendering: productDetailsViewLogic },
   { path: "cart", viewRendering: cartViewLogic },
-  { path: "signUp", viewRendering: signUpViewLogic },
+  { path: "register", viewRendering: registerViewLogic },
   { path: "user", viewRendering: userViewLogic },
   { path: "newProduct", viewRendering: newProductViewLogic },
   { path: "search", viewRendering: searchViewLogic },

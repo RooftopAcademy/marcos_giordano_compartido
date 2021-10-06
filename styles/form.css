@@ -1,3 +1,29 @@
+.form-title {
+  text-align: center;
+  margin: 20px;
+}
+
+.form,
+.form-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  padding: 10px 20px 20px 20px;
+  width: 100%;
+
+  font-size: 16px;
+}
+
+.form form {
+  width: 100%;
+}
+
+.form label {
+  margin-bottom: 5px;
+}
+
 .form-text-input-container {
   display: flex;
   flex-direction: column;
@@ -60,6 +86,12 @@
 }
 
 @media (min-width: 540px) {
+}
+
+@media (max-width: 750px) {
+  .form-aside {
+    display: none;
+  }
 }
 
 @media (min-width: 1280px) {
