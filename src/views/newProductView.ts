@@ -39,12 +39,12 @@ export default function newProductView() {
 
           <div class="form-text-input-container">
             <label>Descripción:</label>
-            <input
+            <textarea
               type="text"
-              class="form-text-input"
+              class="form-text-textarea"
               name="product-description"
               placeholder="Descripcion del producto"
-            />
+            ></textarea>
           </div>
 
           <div class="form-text-input-container">
