@@ -28,6 +28,11 @@ body {
   min-height: 100vh;
 }
 
+body::-webkit-scrollbar {
+  width: 0px;
+  background-color: #f5f5f5;
+}
+
 .app-wrapper {
   display: flex;
   flex-direction: column;
