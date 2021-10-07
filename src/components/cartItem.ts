@@ -5,7 +5,12 @@ export default function cartItem(item: CartItem): string {
     <tr>
         <td>${item.item.name}</td>
         <td>${item.item.price}</td>
-        <td>${item.amount}</td>
+        <td class="cart-table-item">
+          <button class="cart-button js-remove">&minus;</button>
+          ${item.amount}
+          <button class="cart-button js-add">&plus;</button>
+        </td>
+        
         <td>${item.amount * item.item.price}</td>
     </tr>
 `;
