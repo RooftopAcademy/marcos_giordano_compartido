@@ -114,6 +114,10 @@
   border-color: gray;
 }
 
+.form-button:hover {
+  background-color: darkred;
+}
+
 @media (min-width: 540px) {
 }
 
