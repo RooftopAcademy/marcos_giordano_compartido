@@ -6,7 +6,7 @@ export default function cartItem(item: CartItem): string {
         <td>${item.item.name}</td>
         <td>${item.item.price}</td>
         <td class="cart-table-item">
-          <button class="cart-button js-remove">&minus;</button>
+          <button class="cart-button js-substract">&minus;</button>
           ${item.amount}
           <button class="cart-button js-add">&plus;</button>
         </td>
