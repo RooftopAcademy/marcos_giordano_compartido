@@ -7,7 +7,7 @@ import { updateProductsQuantityInCart } from "./productDetailsViewLogic";
 
 export function cartViewLogic(store: Store, mainContent: HTMLElement) {
   viewRendering(mainContent, store);
-  addCartProducts(store, mainContent);
+  addCartProducts(store);
   cleanCartButtonEvent(store, mainContent);
 }
 
@@ -17,7 +17,7 @@ function viewRendering(mainContent: HTMLElement, store: Store): void {
 }
 
 //Add cart products to the cart view table
-function addCartProducts(store: Store, mainContent: HTMLElement): void {
+function addCartProducts(store: Store): void {
   const cart: Array<Product> = store.cart.showAll();
   const cartReduced: Array<CartItem> = arrangeCartElements(cart);
   fillCartViewTable(cartReduced);
