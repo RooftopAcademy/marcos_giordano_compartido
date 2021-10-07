@@ -132,6 +132,10 @@ export default class Product {
   }
   //#endregion stock
 
+  public getPriceWithDiscount() {
+    return this._price * (1 - this._discount / 100);
+  }
+
   public create(prod: Product): void {
     this._id = prod._id;
     this._name = prod._name;
