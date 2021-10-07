@@ -1,13 +1,13 @@
 import cartItem from "../components/cartItem";
-import Product from "../entities/Product";
-import CartItem from "../interfaces/CartItemInterface";
 import Store from "../entities/Store";
 import cartView from "../views/cartView";
 import { updateProductsQuantityInCart } from "./productDetailsViewLogic";
+import CartItemInterface from "../interfaces/CartItemInterface";
 
 export function cartViewLogic(store: Store, mainContent: HTMLElement) {
   viewRendering(mainContent, store);
   addCartProducts(store);
+  changeProductAmount(store);
   cleanCartButtonEvent(store, mainContent);
 }
 
@@ -18,38 +18,46 @@ function viewRendering(mainContent: HTMLElement, store: Store): void {
 
 //Add cart products to the cart view table
 function addCartProducts(store: Store): void {
-  const cart: Array<Product> = store.cart.showAll();
-  const cartReduced: Array<CartItem> = arrangeCartElements(cart);
-  fillCartViewTable(cartReduced);
-}
-
-//take product from cart and arrange by id
-function arrangeCartElements(cart: Array<Product>): Array<CartItem> {
-  const cartReduced: Array<CartItem> = [];
-  cart.forEach((item) => {
-    const itemSearch: Array<CartItem> = cartReduced.filter(
-      (p: CartItem) => p.item.id == item.id
-    );
-    if (itemSearch.length === 0) {
-      cartReduced.push({
-        item: item,
-        amount: 1,
-      });
-    } else {
-      itemSearch[0].amount++;
-    }
-  });
-  return cartReduced;
+  const cart: Array<CartItemInterface> = store.cart.showAll();
+  fillCartViewTable(cart);
 }
 
 //load cart products in cart view table
-function fillCartViewTable(cartReduced: Array<CartItem>) {
+function fillCartViewTable(cartReduced: Array<CartItemInterface>) {
   const cartTable: HTMLElement = document.getElementById("cart-table")!;
   if (cartReduced.length != 0) {
-    cartReduced.forEach((item: CartItem) => {
+    cartReduced.forEach((item: CartItemInterface) => {
       cartTable.innerHTML += cartItem(item);
     });
   }
+}
+
+//add or substract the product quantity
+function changeProductAmount(store: Store) {
+  substractProductAmountEvent(store);
+  addProductAmountEvent(store);
+}
+
+function substractProductAmountEvent(Store: Store) {
+  const substractButtons: NodeListOf<HTMLElement> =
+    document.querySelectorAll(".js-substract");
+
+  substractButtons.forEach((substractButton) => {
+    substractButton.addEventListener("click", function () {
+      console.log(this.dataset.productId);
+    });
+  });
+}
+
+function addProductAmountEvent(Store: Store) {
+  const addButtons: NodeListOf<HTMLElement> =
+    document.querySelectorAll(".js-add");
+
+  addButtons.forEach((addButton) => {
+    addButton.addEventListener("click", function () {
+      console.log(this.dataset.productId);
+    });
+  });
 }
 
 // Remove products from cart button event
