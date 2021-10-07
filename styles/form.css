@@ -106,16 +106,16 @@
   border-color: #d1030f;
 }
 
+.form-button:hover {
+  background-color: darkred;
+}
+
 .form-button:active {
   color: #d1030f;
   background-color: white;
 
   border-width: 1px;
   border-color: gray;
-}
-
-.form-button:hover {
-  background-color: darkred;
 }
 
 @media (min-width: 540px) {
