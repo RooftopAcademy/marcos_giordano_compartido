@@ -1,17 +1,22 @@
 import CartItem from "../interfaces/CartItemInterface";
 
-export default function cartItem(item: CartItem): string {
+export default function cartItem(cartItem: CartItem): string {
   return `
     <tr>
-        <td>${item.item.name}</td>
-        <td>${item.item.price}</td>
+        <td>${cartItem.item.name}</td>
+        <td>${cartItem.item.getPriceWithDiscount().toFixed(0)}</td>
         <td class="cart-table-item">
-          <button class="cart-button js-substract">&minus;</button>
-          ${item.amount}
-          <button class="cart-button js-add">&plus;</button>
-        </td>
+          <button class="cart-button js-substract" data-product-id="${
+            cartItem.item.id
+          }">&minus;</button>
+          ${cartItem.amount}
+          <button class="cart-button js-add" data-product-id="${
+            cartItem.item.id
+          }">&plus;</button>
         
-        <td>${item.amount * item.item.price}</td>
+        <td>${(cartItem.amount * cartItem.item.getPriceWithDiscount()).toFixed(
+          0
+        )}</td>
     </tr>
 `;
 }
