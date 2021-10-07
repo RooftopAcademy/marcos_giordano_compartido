@@ -16,13 +16,12 @@ export default function editProductView(product: Product) {
               placeholder="Nombre del producto"
               class="form-text-input"
               name="product-name"
-              value=${product.name}
             />
           </div>
 
           <div class="form-text-input-container">
             <label>Tipo:</label>
-            <select class="form-text-input" name="product-type" id="type-selector" value="${product.type}">
+            <select class="form-text-input" name="product-type" id="type-selector">
               <!-- javascript rendered -->
             </select>
           </div>
@@ -57,7 +56,6 @@ export default function editProductView(product: Product) {
               class="form-text-input"
               name="product-image"
               placeholder="URL de la imagen del producto"
-              value="${product.image}"
             />
           </div>
 
@@ -68,7 +66,6 @@ export default function editProductView(product: Product) {
               class="form-text-input"
               name="product-thumbnail"
               placeholder="URL de la imagen thumbnail del producto"
-              value="${product.thumbnail}"
             />
           </div>
 
@@ -109,7 +106,7 @@ export default function editProductView(product: Product) {
           
           <div class="form-button-container">
             <input
-              type="submit"
+              type="button"
               value="Cancelar Edicion"
               class="form-button"
               id="cancel-edit-product-submit-button"
