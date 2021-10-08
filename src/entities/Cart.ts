@@ -4,13 +4,15 @@ import Product from "./Product";
 export default class Cart {
   private _products: Array<CartItemInterface> = [];
 
-  constructor() {}
+  constructor() {
+    this.load();
+  }
 
   public showAll(): Array<CartItemInterface> {
     return this._products;
   }
 
-  public load(): void {
+  private load(): void {
     const loadData: string | null = localStorage.getItem("cartProducts");
     if (loadData) {
       const savedProducts: Array<CartItemInterface> = JSON.parse(loadData);
