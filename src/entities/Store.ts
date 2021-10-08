@@ -4,17 +4,23 @@ import StoreUser from "./StoreUser";
 import products from "../helpers/products";
 import NullProduct from "./NullProduct";
 import NullStoreUser from "./NullStoreUser";
+import ProductSort from "./ProductSort";
 
-export default class Store {
+export default class Store extends ProductSort {
   private _users: Array<StoreUser> = [];
   private _user: StoreUser = new NullStoreUser();
   private _catalog: Array<Product> = [];
   private _cart: Cart = new Cart();
 
-  constructor() {}
+  constructor() {
+    super();
+    this.loadCatalog();
+    this.loadUsers();
+    this.result = [...this._catalog];
+  }
 
   //Users
-  public loadUsers() {
+  private loadUsers() {
     const loadData: string | null = localStorage.getItem("users");
     let loadDataJson: Array<any>;
     if (loadData) {
@@ -76,7 +82,7 @@ export default class Store {
 
   //Catalog
 
-  public loadCatalog(): void {
+  private loadCatalog(): void {
     let loadData: string | null = localStorage.getItem("products");
     let loadDataJson: Array<any>;
     if (loadData) {
