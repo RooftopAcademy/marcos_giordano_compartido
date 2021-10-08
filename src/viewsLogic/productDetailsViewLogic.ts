@@ -9,6 +9,7 @@ import returnErrorView from "../helpers/returnErrorView";
 import NullProduct from "../entities/NullProduct";
 import createRemoveProductButton from "../components/removeProductButton";
 import createEditProductButton from "../components/editProductButton";
+import returnCart from "../helpers/returnCart";
 
 export function productDetailsViewLogic(
   store: Store,
@@ -54,6 +55,7 @@ function buyProductEvents(product: Product, store: Store): void {
     buyButton.addEventListener("click", function () {
       store.cart.add(product);
       updateProductsQuantityInCart(store);
+      returnCart();
     });
 
     if (store.user.privilege == PrivilegeEnum.admin) {
