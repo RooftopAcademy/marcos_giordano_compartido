@@ -112,6 +112,10 @@ export default class Store {
     return product;
   }
 
+  public editProduct(): void {
+    localStorage.setItem("products", JSON.stringify(this._catalog));
+  }
+
   public removeProduct(id: String) {
     const productIndex: number = this._catalog.findIndex((p) => p.id == id);
     productIndex != -1 ? this._catalog.splice(productIndex, 1) : null;

@@ -3,13 +3,12 @@ import Store from "../entities/Store";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
 import productDetailsView from "../views/productDetailsView";
 import getComments from "../services/jsonPlaceHolderAPI";
-import createRemoveButton from "../components/removeButton";
 import returnHome from "../helpers/returnHome";
 import displayInfoContainer from "../components/infoContainer";
 import returnErrorView from "../helpers/returnErrorView";
 import NullProduct from "../entities/NullProduct";
-import StoreUser from "../entities/StoreUser";
-import NullStoreUser from "../entities/NullStoreUser";
+import createRemoveProductButton from "../components/removeProductButton";
+import createEditProductButton from "../components/editProductButton";
 
 export function productDetailsViewLogic(
   store: Store,
@@ -20,10 +19,10 @@ export function productDetailsViewLogic(
   getProductComments(); //should bringh comments by ProductId from the API
   buyProductEvents(product, store);
   removeProductEvents(product.id, store);
+  editProductEvents(product.id);
 }
 
 //get product
-
 function getProduct(store: Store): Product {
   const productID: string = window.location.href.split("?")[1].split("=")[1];
   const product = store.getProductById(productID);
@@ -34,13 +33,11 @@ function getProduct(store: Store): Product {
 }
 
 //view rendering
-
 function viewRendering(product: Product, mainContent: HTMLElement): void {
   mainContent.innerHTML = productDetailsView(product);
 }
 
 //get product comments
-
 function getProductComments(): void {
   const productCommentsContainer: HTMLElement = document.getElementById(
     "product-comments-container"
@@ -49,7 +46,6 @@ function getProductComments(): void {
 }
 
 //buy button event
-
 function buyProductEvents(product: Product, store: Store): void {
   const buyButtons: NodeListOf<HTMLElement> =
     document.getElementsByName("buy-button")!;
@@ -61,7 +57,8 @@ function buyProductEvents(product: Product, store: Store): void {
     });
 
     if (store.user.privilege == PrivilegeEnum.admin) {
-      buyButton.after(createRemoveButton());
+      buyButton.after(createRemoveProductButton());
+      buyButton.after(createEditProductButton());
     }
   });
 }
@@ -74,8 +71,9 @@ export function updateProductsQuantityInCart(store: Store): void {
 
 //remove button event
 function removeProductEvents(productId: string, store: Store): void {
-  const removeButtons: NodeListOf<HTMLElement> =
-    document.getElementsByName("remove-button")!;
+  const removeButtons: NodeListOf<HTMLElement> = document.getElementsByName(
+    "remove-product-button"
+  )!;
 
   if (removeButtons) {
     removeButtons.forEach((button: HTMLElement) => {
@@ -94,5 +92,19 @@ function removeProductEvents(productId: string, store: Store): void {
     store.removeProduct(productId);
     returnHome();
     displayInfoContainer("El producto ha sido eliminado correctamente.");
+  }
+}
+
+function editProductEvents(productId: string): void {
+  const editButtons: NodeListOf<HTMLElement> = document.getElementsByName(
+    "edit-product-button"
+  )!;
+
+  if (editButtons) {
+    editButtons.forEach((button: HTMLElement) => {
+      button.addEventListener("click", function () {
+        window.location.hash = `/editProduct?id=${productId}`;
+      });
+    });
   }
 }

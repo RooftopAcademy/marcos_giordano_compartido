@@ -76,7 +76,10 @@
   color: #d1030f;
 }
 
-@media (min-width: 650px) {
+@media (min-width: 540px) {
+}
+
+@media (min-width: 900px) {
   .product-aside {
     display: flex;
     flex-direction: column;
@@ -91,9 +94,6 @@
     justify-content: flex-start;
     width: 100%;
   }
-}
-
-@media (min-width: 540px) {
 }
 
 @media (min-width: 1280px) {

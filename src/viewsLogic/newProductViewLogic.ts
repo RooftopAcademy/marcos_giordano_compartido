@@ -33,7 +33,7 @@ function populateProductTypesSelectInput(): void {
 function newProductFormEvents(store: Store): void {
   const newProductForm: HTMLFormElement = document.getElementById(
     "form"
-  )! as HTMLFormElement;
+  ) as HTMLFormElement;
 
   const newProductSubmitButton: HTMLInputElement = document.getElementById(
     "new-product-submit-button"
@@ -65,7 +65,9 @@ function verifyNewProduct(
     .getRandomValues(new Uint32Array(1))[0]
     .toString();
   newProduct.name = newProductForm["product-name"].value;
-  newProduct.type = newProductForm["product-type"].value as ProductTypeEnum;
+  newProduct.type = newProductForm["product-type"][
+    newProductForm["product-type"].selectedIndex
+  ].text as ProductTypeEnum;
   newProduct.price = parseFloat(newProductForm["product-price"].value);
   newProduct.description = newProductForm["product-description"].value;
   newProduct.image = newProductForm["product-image"].value;

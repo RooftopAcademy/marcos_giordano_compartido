@@ -1,8 +1,10 @@
-export default function newProductView() {
+import Product from "../entities/Product";
+
+export default function editProductView(product: Product) {
   return `
     <div class="new-product-container" id="main-content">
       <div class="form-title">
-        <h1>Crear nuevo producto</h1>
+        <h1>Editar producto</h1>
       </div>
 
       <div class="new-product-content">
@@ -30,7 +32,7 @@ export default function newProductView() {
               type="number"
               step="0.01"
               min="0.00"
-              value="0"
+              value="${product.price}"
               class="form-text-input"
               name="product-price"
               placeholder="Precio del producto"
@@ -44,7 +46,7 @@ export default function newProductView() {
               class="form-text-textarea"
               name="product-description"
               placeholder="Descripcion del producto"
-            ></textarea>
+            >${product.description}</textarea>
           </div>
 
           <div class="form-text-input-container">
@@ -73,7 +75,7 @@ export default function newProductView() {
               type="number"
               step="1"
               min="0"
-              value="0"
+              value="${product.stock}"
               placeholder="Unidades de stock disponibles"
               class="form-text-input"
               name="product-stock"
@@ -86,7 +88,7 @@ export default function newProductView() {
               type="number"
               step="0.001"
               min="0.00"
-              value="0"
+              value="${product.discount}"
               class="form-text-input"
               name="product-discount"
               placeholder="Descuento del producto en %"
@@ -96,9 +98,18 @@ export default function newProductView() {
           <div class="form-button-container">
             <input
               type="submit"
-              value="Crear Producto"
+              value="Editar Producto"
               class="form-button"
-              id="new-product-submit-button"
+              id="edit-product-submit-button"
+            />
+          </div>
+          
+          <div class="form-button-container">
+            <input
+              type="button"
+              value="Cancelar Edicion"
+              class="form-button"
+              id="cancel-edit-product-submit-button"
             />
           </div>
         </form>

@@ -20,7 +20,7 @@ export default class StoreUser {
       case n.length > 12:
         throw Error("El Nombre debe poseer como máximo 12 caracteres.");
       case !/^[a-zA-Z]+$/.test(n):
-        throw Error("El Nombre debe contener solo constras.");
+        throw Error("El Nombre debe contener solo letras.");
       default:
         this._firstName =
           n.substring(0, 1).toUpperCase() +
@@ -39,7 +39,7 @@ export default class StoreUser {
       case n.length > 12:
         throw Error("El Apellido debe poseer como máximo 12 caracteres.");
       case !/^[a-zA-Z]+$/.test(n):
-        throw Error("El Apellido debe contener solo constras.");
+        throw Error("El Apellido debe contener solo letras.");
       default:
         this._lastName =
           n.substring(0, 1).toUpperCase() +
@@ -65,7 +65,6 @@ export default class StoreUser {
     return this._password;
   }
   set password(p: string) {
-    p = p.trim();
     switch (true) {
       case p.length < 6:
         throw Error("La clave debe tener al menos 6 caracteres");
@@ -87,7 +86,7 @@ export default class StoreUser {
     this._firstName = user._firstName.trim();
     this._lastName = user._lastName.trim();
     this._mailAdress = user._mailAdress.trim();
-    this._password = user._password.trim();
+    this._password = user._password;
     this._privilege = user._privilege;
   }
 }
