@@ -6,21 +6,6 @@ export default class Cart {
 
   constructor() {}
 
-  public add(product: Product): void {
-    const itemSearch = this._products.filter(
-      (p: CartItemInterface) => p.item.id == product.id
-    );
-    if (itemSearch.length === 0) {
-      this._products.push({
-        item: product,
-        amount: 1,
-      });
-    } else {
-      itemSearch[0].amount++;
-    }
-    localStorage.setItem("cartProducts", JSON.stringify(this._products));
-  }
-
   public showAll(): Array<CartItemInterface> {
     return this._products;
   }
@@ -38,6 +23,48 @@ export default class Cart {
         });
       });
     }
+  }
+
+  public getCartItemById(id: string): CartItemInterface {
+    return this._products.filter((p: CartItemInterface) => p.item.id == id)[0];
+  }
+
+  public add(product: Product): void {
+    const itemSearch = this._products.filter(
+      (p: CartItemInterface) => p.item.id == product.id
+    );
+    if (itemSearch.length === 0) {
+      this._products.push({
+        item: product,
+        amount: 1,
+      });
+    } else {
+      itemSearch[0].amount++;
+    }
+    localStorage.setItem("cartProducts", JSON.stringify(this._products));
+  }
+
+  public substract(id: string): void {
+    const itemSearch = this._products.filter(
+      (p: CartItemInterface) => p.item.id == id
+    );
+    if (itemSearch.length != 0) {
+      if (itemSearch[0].amount > 1) {
+        itemSearch[0].amount--;
+      } else {
+        this._products = this._products.filter(
+          (p: CartItemInterface) => p.item.id != id
+        );
+      }
+      localStorage.setItem("cartProducts", JSON.stringify(this._products));
+    }
+  }
+
+  public remove(id: string): void {
+    this._products = this._products.filter(
+      (p: CartItemInterface) => p.item.id != id
+    );
+    localStorage.setItem("cartProducts", JSON.stringify(this._products));
   }
 
   public clear(): void {
