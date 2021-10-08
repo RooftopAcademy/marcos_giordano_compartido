@@ -5,6 +5,7 @@ import { updateProductsQuantityInCart } from "./productDetailsViewLogic";
 import CartItemInterface from "../interfaces/CartItemInterface";
 import Product from "../entities/Product";
 import pesos from "../helpers/pesosCurrency";
+import displayInfoContainer from "../components/infoContainer";
 
 export function cartViewLogic(store: Store, mainContent: HTMLElement) {
   viewRendering(mainContent, store);
@@ -36,7 +37,6 @@ function fillCartViewTable(cart: Array<CartItemInterface>): void {
 }
 
 //remove a cart item
-
 function removeCartProduct(store: Store, mainContent: HTMLElement): void {
   const removeButtons: NodeListOf<HTMLElement> =
     document.querySelectorAll(".js-remove");
@@ -93,9 +93,17 @@ function addProductAmountEvent(store: Store): void {
     addButton.addEventListener("click", function () {
       if (this.dataset.productId) {
         const product = store.getProductById(this.dataset.productId);
-        store.cart.add(product);
-        updateProductsQuantityInCart(store);
-        refreshAmount(store, product);
+        const cartItem = store.cart.getCartItemById(this.dataset.productId);
+
+        if (cartItem.amount < product.stock) {
+          store.cart.add(product);
+          updateProductsQuantityInCart(store);
+          refreshAmount(store, product);
+        } else {
+          displayInfoContainer(
+            `No es posible adquirir mas de ${cartItem.amount} unidades de éste producto - Stock insuficiente.`
+          );
+        }
       }
     });
   });
