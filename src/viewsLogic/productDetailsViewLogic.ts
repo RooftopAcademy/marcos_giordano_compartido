@@ -53,9 +53,15 @@ function buyProductEvents(product: Product, store: Store): void {
 
   buyButtons.forEach((buyButton: HTMLElement) => {
     buyButton.addEventListener("click", function () {
-      store.cart.add(product);
-      updateProductsQuantityInCart(store);
-      returnCart();
+      if (product.stock == 0) {
+        displayInfoContainer(
+          "No es posible adquirir éste producto - Stock insuficiente."
+        );
+      } else {
+        store.cart.add(product);
+        updateProductsQuantityInCart(store);
+        returnCart();
+      }
     });
 
     if (store.user.privilege == PrivilegeEnum.admin) {
