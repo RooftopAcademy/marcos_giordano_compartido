@@ -116,8 +116,8 @@ export default class Product {
     return this._stock;
   }
   set stock(stock: number) {
-    if (stock <= 0 || isNaN(stock)) {
-      throw Error("El Descuento debe ser mayor a 0.");
+    if (stock < 0 || isNaN(stock)) {
+      throw Error("El Stock debe ser mayor a 0.");
     }
     this._stock = stock;
   }
