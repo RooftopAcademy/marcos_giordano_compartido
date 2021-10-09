@@ -4,19 +4,16 @@ import StoreUser from "./StoreUser";
 import products from "../helpers/products";
 import NullProduct from "./NullProduct";
 import NullStoreUser from "./NullStoreUser";
-import ProductSort from "./ProductSort";
 
-export default class Store extends ProductSort {
+export default class Store {
   private _users: Array<StoreUser> = [];
   private _user: StoreUser = new NullStoreUser();
   private _catalog: Array<Product> = [];
   private _cart: Cart = new Cart();
 
   constructor() {
-    super();
     this.loadCatalog();
     this.loadUsers();
-    this.result = [...this._catalog];
   }
 
   //Users
