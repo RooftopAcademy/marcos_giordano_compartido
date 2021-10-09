@@ -7,13 +7,12 @@
 @import "navigation.css";
 @import "newProductView.css";
 @import "productDetailsView.css";
-@import "productView.css";
+@import "productListView.css";
 @import "searchView.css";
 @import "registerView.css";
 @import "specialClasses.css";
 @import "userView.css";
 @import "form.css";
-@import "productNotFoundView.css";
 
 *,
 *::before,
