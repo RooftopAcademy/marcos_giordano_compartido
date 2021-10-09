@@ -103,6 +103,15 @@ export default class Store extends ProductSort {
     return this._catalog;
   }
 
+  public filterCatalog(text: string): Array<Product> {
+    const filteredProducts = this._catalog.filter(
+      (product) =>
+        product.name.toLowerCase().includes(text.trim().toLowerCase()) ||
+        product.type.toLowerCase().includes(text.trim().toLowerCase())
+    );
+    return filteredProducts;
+  }
+
   //Products
 
   public newProduct(prod: Product): void {
