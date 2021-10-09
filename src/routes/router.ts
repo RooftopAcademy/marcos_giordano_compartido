@@ -10,7 +10,6 @@ import { searchViewLogic } from "../viewsLogic/searchViewLogic";
 import { registerViewLogic } from "../viewsLogic/registerViewLogic";
 import { userViewLogic } from "../viewsLogic/userViewLogic";
 import { editProductViewLogic } from "../viewsLogic/editProductViewLogic";
-import { productNotFoundViewLogic } from "../viewsLogic/productNotFoundViewLogic";
 
 const routes: Array<ViewInterface> = [
   { path: "", viewRendering: homeViewLogic },
@@ -22,7 +21,6 @@ const routes: Array<ViewInterface> = [
   { path: "newProduct", viewRendering: newProductViewLogic },
   { path: "editProduct", viewRendering: editProductViewLogic },
   { path: "search", viewRendering: searchViewLogic },
-  { path: "productNotFound", viewRendering: productNotFoundViewLogic },
   { path: "error", viewRendering: errorViewLogic },
 ];
 
