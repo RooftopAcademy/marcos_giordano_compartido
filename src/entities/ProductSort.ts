@@ -1,10 +1,14 @@
 import Order from "../enums/OrderEnum";
 import Product from "./Product";
 
-export default abstract class ProductSort {
-  public result: Array<Product> = [];
+export default class ProductSort {
+  private result: Array<Product> = [];
   private sortingMethod: { [index: string]: any } = {};
   private cache: Map<{ [index: string]: any }, Array<Product>> = new Map();
+
+  constructor(products: Array<Product>) {
+    this.result = products;
+  }
 
   public setSorting(sortingMethod: Object = {}) {
     this.sortingMethod = sortingMethod;
