@@ -9,10 +9,9 @@ export default function productDetailsView(product: Product) {
       </div>
       <div class="product-details-text">
           <h6 class="product-name">${product.name}</h6>
-          <h3 class="product-price">$${(
-            product.price *
-            (1 - product.discount / 100)
-          ).toFixed(0)}</h3>
+          <h3 class="product-price">$${product
+            .getPriceWithDiscount()
+            .toFixed(0)}</h3>
           <div class="product-details-buttons">
               <button class="button-link" data-product-id="${
                 product.id
@@ -30,10 +29,9 @@ export default function productDetailsView(product: Product) {
     <div class="product-aside">
       <div class="product-aside-text">
           <h6 class="product-name">${product.name}</h6>
-          <h3 class="product-price">$${(
-            product.price *
-            (1 - product.discount / 100)
-          ).toFixed(0)}</h3>
+          <h3 class="product-price">$${product
+            .getPriceWithDiscount()
+            .toFixed(0)}</h3>
           <button class="button-link" data-product-id="${
             product.id
           }" name="buy-button">Comprar</button>

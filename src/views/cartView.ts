@@ -1,4 +1,5 @@
 import Store from "../entities/Store";
+import pesos from "../helpers/pesosCurrency";
 
 export default function cartView(store: Store): string {
   let returnComponent: string;
@@ -8,15 +9,29 @@ export default function cartView(store: Store): string {
     <table class="cart-content-table">
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Precio p/u</th>
-          <th>Cantidad</th>
-          <th>Precio neto</th>
+          <th><h2>Producto</h2></th>
+          <th><h2>Acciones</h2></th>
         </tr>
       </thead>
       <tbody id="cart-table">
         <!-- javascript rendered -->
       </tbody>
+      <tfooter>
+        <tr>
+          <th><h2>Monto total</h2></th>
+          <th><h2 id="final-price">${pesos.format(
+            store.cart
+              .showAll()
+              .map((previousValue) => {
+                return (
+                  previousValue.amount *
+                  previousValue.item.getPriceWithDiscount()
+                );
+              })
+              .reduce((a, b) => a + b)
+          )}</h2></th>
+        </tr>
+      </tfooter>
     </table>
 
     <button class="button-link" id="clean-cart-btn">

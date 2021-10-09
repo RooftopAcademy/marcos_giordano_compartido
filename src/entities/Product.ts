@@ -116,8 +116,8 @@ export default class Product {
     return this._stock;
   }
   set stock(stock: number) {
-    if (stock <= 0 || isNaN(stock)) {
-      throw Error("El Descuento debe ser mayor a 0.");
+    if (stock < 0 || isNaN(stock)) {
+      throw Error("El Stock debe ser mayor a 0.");
     }
     this._stock = stock;
   }
@@ -131,6 +131,10 @@ export default class Product {
     this._stock--;
   }
   //#endregion stock
+
+  public getPriceWithDiscount() {
+    return this._price * (1 - this._discount / 100);
+  }
 
   public create(prod: Product): void {
     this._id = prod._id;

@@ -9,6 +9,7 @@ import returnErrorView from "../helpers/returnErrorView";
 import NullProduct from "../entities/NullProduct";
 import createRemoveProductButton from "../components/removeProductButton";
 import createEditProductButton from "../components/editProductButton";
+import returnCart from "../helpers/returnCart";
 
 export function productDetailsViewLogic(
   store: Store,
@@ -52,8 +53,15 @@ function buyProductEvents(product: Product, store: Store): void {
 
   buyButtons.forEach((buyButton: HTMLElement) => {
     buyButton.addEventListener("click", function () {
-      store.cart.add(product);
-      updateProductsQuantityInCart(store);
+      if (product.stock == 0) {
+        displayInfoContainer(
+          "No es posible adquirir éste producto - Stock insuficiente."
+        );
+      } else {
+        store.cart.add(product);
+        updateProductsQuantityInCart(store);
+        returnCart();
+      }
     });
 
     if (store.user.privilege == PrivilegeEnum.admin) {
