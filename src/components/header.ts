@@ -17,8 +17,8 @@ export default function headerRendering(store: Store): string {
 						</div>
 
 						<div class="navigation-search-bar">
-							<input type="text" />
-							<a class="navigation-button">
+							<input type="text" id="nav-search-input" />
+							<a class="navigation-button" id="nav-search-button">
 								<i class="fas fa-search"></i>
 							</a>
 						</div>
