@@ -18,7 +18,21 @@ function renderProductItems(store: Store): void {
   const productContainer: HTMLElement =
     document.getElementById("product-container")!;
 
-  store.showCatalog().forEach((product: Product) => {
-    productContainer.innerHTML += productItem(product);
-  });
+  const searchText: string = window.location.href.split("?")[1];
+  if (searchText) {
+    const productSearchText = searchText.split("=")[1];
+    const filteredProducts = store.filterCatalog(productSearchText);
+
+    if (filteredProducts.length > 0) {
+      filteredProducts.forEach((product: Product) => {
+        productContainer.innerHTML += productItem(product);
+      });
+    } else {
+      window.location.hash = "/productNotFound";
+    }
+  } else {
+    store.showCatalog().forEach((product: Product) => {
+      productContainer.innerHTML += productItem(product);
+    });
+  }
 }
