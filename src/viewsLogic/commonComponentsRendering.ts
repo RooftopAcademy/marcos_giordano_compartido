@@ -6,7 +6,6 @@ import footerRendering from "../components/footer";
 import headerRendering from "../components/header";
 import PrivilegeEnum from "../enums/PrivilegeEnum";
 import CommmonComponentsInterface from "../interfaces/CommonComponentsinterface";
-import NullStoreUser from "../entities/NullStoreUser";
 import StoreUser from "../entities/StoreUser";
 
 export function commonComponentsRendering(
@@ -17,6 +16,7 @@ export function commonComponentsRendering(
   commonComponents.footer.innerHTML = footerRendering();
   commonComponents.asideNavBarContainer.innerHTML = asideNavBar(store);
   sideNavRendering(store);
+  searchBarEvent();
   burgerButtonRendering(commonComponents);
 }
 
@@ -29,4 +29,18 @@ function sideNavRendering(store: Store) {
       navBarContainer.appendChild(newProductLink);
     }
   }
+}
+
+function searchBarEvent() {
+  const searchButton: HTMLButtonElement = document.getElementById(
+    "nav-search-button"
+  ) as HTMLButtonElement;
+  const searchInput: HTMLInputElement = document.getElementById(
+    "nav-search-input"
+  ) as HTMLInputElement;
+
+  searchButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    window.location.hash = `#/productList?search=${searchInput.value}`;
+  });
 }
