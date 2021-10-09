@@ -1,3 +1,3 @@
 export default function returnErrorView() {
-  window.location.hash = "error";
+  window.location.hash = "/error";
 }
