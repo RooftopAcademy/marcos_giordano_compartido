@@ -13,6 +13,7 @@
 @import "specialClasses.css";
 @import "userView.css";
 @import "form.css";
+@import "productNotFoundView.css";
 
 *,
 *::before,
