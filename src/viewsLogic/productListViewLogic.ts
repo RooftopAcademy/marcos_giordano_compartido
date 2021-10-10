@@ -4,6 +4,7 @@ import ProductSort from "../entities/ProductSort";
 import Store from "../entities/Store";
 import Order from "../enums/OrderEnum";
 import ProductTypeEnum from "../enums/ProductTipeEnum";
+import SortingMethod from "../interfaces/SortingMethod";
 import productListView from "../views/productListView";
 
 let products: Array<Product>;
@@ -62,6 +63,7 @@ function renderProductItems(
 function clearProductItems(): void {
   const productContainer: HTMLElement =
     document.getElementById("product-container")!;
+
   productContainer.innerHTML = "";
 }
 
@@ -84,91 +86,83 @@ function populateProductTypesSelectInput(initialValue?: string): void {
 
 //products filtering and ordering
 function filteringProducts(store: Store, mainContent: HTMLElement) {
-  typeSelectorEvents(store, mainContent);
-  nameOrderSelectorEvents(store, mainContent);
-  priceOrderSelectorEvents(store, mainContent);
-}
-
-function typeSelectorEvents(store: Store, mainContent: HTMLElement) {
   const typeSelector: HTMLSelectElement = document.getElementById(
     "product-type-selector"
   ) as HTMLSelectElement;
 
-  typeSelector.addEventListener("change", () => {
-    let filteredProducts: Array<Product>;
-    if (typeSelector.value == "all") {
-      filteredProducts = [...products];
-    } else {
-      filteredProducts = [...products].filter(
-        (product) => product.type == typeSelector.value
-      );
-    }
-
-    clearProductItems();
-    renderProductItems(filteredProducts, mainContent, store);
-  });
-}
-
-function nameOrderSelectorEvents(store: Store, mainContent: HTMLElement) {
   const nameOrderSelector: HTMLSelectElement = document.getElementById(
     "product-name-order-selector"
   ) as HTMLSelectElement;
 
-  nameOrderSelector.addEventListener("change", () => {
-    let orderedProducts: Array<Product>;
-
-    let sortingMethod = {
-      name: Order.ASC,
-    };
-
-    if (nameOrderSelector.value == "none") {
-      orderedProducts = [...products];
-    } else {
-      const sorting = new ProductSort([...products]);
-
-      if (nameOrderSelector.value == "DESC") {
-        sortingMethod = {
-          name: Order.DESC,
-        };
-      }
-
-      sorting.setSorting(sortingMethod);
-      orderedProducts = sorting.getSorting() as Array<Product>;
-    }
-
-    clearProductItems();
-    renderProductItems(orderedProducts, mainContent, store);
-  });
-}
-
-function priceOrderSelectorEvents(store: Store, mainContent: HTMLElement) {
   const priceOrderSelector: HTMLSelectElement = document.getElementById(
     "product-price-order-selector"
   ) as HTMLSelectElement;
 
-  priceOrderSelector.addEventListener("change", () => {
-    let orderedProducts: Array<Product>;
+  let filteredProducts: Array<Product> = [...products];
 
-    let sortingMethod = {
-      name: Order.ASC,
-    };
+  typeSelector.addEventListener("change", reRenderFilteredProducts);
 
-    if (priceOrderSelector.value == "none") {
-      orderedProducts = [...products];
-    } else {
-      const sorting = new ProductSort([...products]);
+  nameOrderSelector.addEventListener("change", reRenderFilteredProducts);
 
-      if (priceOrderSelector.value == "DESC") {
-        sortingMethod = {
-          name: Order.DESC,
-        };
-      }
+  priceOrderSelector.addEventListener("change", reRenderFilteredProducts);
 
-      sorting.setSorting(sortingMethod);
-      orderedProducts = sorting.getSorting() as Array<Product>;
-    }
+  function reRenderFilteredProducts() {
+    filteredProducts = checkSelectorsStatus(
+      typeSelector,
+      nameOrderSelector,
+      priceOrderSelector,
+      filteredProducts
+    );
 
     clearProductItems();
-    renderProductItems(orderedProducts, mainContent, store);
-  });
+    renderProductItems(filteredProducts, mainContent, store);
+
+    typeSelector.removeEventListener("change", reRenderFilteredProducts);
+
+    nameOrderSelector.removeEventListener("change", reRenderFilteredProducts);
+
+    priceOrderSelector.removeEventListener("change", reRenderFilteredProducts);
+  }
+}
+
+function checkSelectorsStatus(
+  typeSelector: HTMLSelectElement,
+  nameOrderSelector: HTMLSelectElement,
+  priceOrderSelector: HTMLSelectElement,
+  filteredProducts: Array<Product>
+): Array<Product> {
+  let sortingMethod: SortingMethod = {};
+  let sorting: ProductSort;
+
+  if (typeSelector.value != "all") {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.type == typeSelector.value
+    );
+  }
+
+  if (
+    nameOrderSelector.value == "ASC" ||
+    nameOrderSelector.value == "DESC" ||
+    priceOrderSelector.value == "ASC" ||
+    priceOrderSelector.value == "DESC"
+  ) {
+    nameOrderSelector.value == "ASC"
+      ? (sortingMethod.name = Order.ASC)
+      : undefined;
+    nameOrderSelector.value == "DESC"
+      ? (sortingMethod.name = Order.DESC)
+      : undefined;
+    priceOrderSelector.value == "ASC"
+      ? (sortingMethod.price = Order.ASC)
+      : undefined;
+    priceOrderSelector.value == "DESC"
+      ? (sortingMethod.price = Order.DESC)
+      : undefined;
+
+    sorting = new ProductSort(filteredProducts);
+    sorting.setSorting(sortingMethod);
+    filteredProducts = sorting.getSorting() as Array<Product>;
+  }
+
+  return filteredProducts;
 }
