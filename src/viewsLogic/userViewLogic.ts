@@ -6,6 +6,7 @@ import displayInfoContainer from "../components/infoContainer";
 import returnHome from "../helpers/returnHome";
 import addUserNameToNavBar from "../helpers/addUserNameToNavBar";
 import StoreUser from "../entities/StoreUser";
+import { getUserByEMail } from "../services/usersService";
 
 export function userViewLogic(store: Store, mainContent: HTMLElement) {
   viewRendering(mainContent, store);
@@ -36,7 +37,7 @@ function logInEvent(store: Store) {
   if (logInForm) {
     logInForm["submit-button"].addEventListener("click", function () {
       const inputMail = logInForm["mail-adress"].value.trim();
-      const logInUser = store.verifyUserExists(inputMail)[0];
+      const logInUser = getUserByEMail(inputMail);
       const inputPassword = logInForm["password"].value.trim();
       verifyUserPassword(logInUser, inputPassword, store);
       renderComponentsAccordingUserPrivileges(store);
@@ -45,7 +46,7 @@ function logInEvent(store: Store) {
 }
 
 function verifyUserPassword(
-  logInUser: StoreUser,
+  logInUser: StoreUser | null,
   inputPassword: string,
   store: Store
 ) {
