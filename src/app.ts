@@ -7,9 +7,6 @@ import { commonComponentsRendering } from "./viewsLogic/commonComponentsRenderin
 
 //Instanciate the store
 const store: Store = new Store();
-store.loadCatalog();
-store.cart.load();
-store.loadUsers();
 store.getLogedUser();
 
 //common components rendering

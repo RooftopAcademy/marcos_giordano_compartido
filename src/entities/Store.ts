@@ -11,10 +11,13 @@ export default class Store {
   private _catalog: Array<Product> = [];
   private _cart: Cart = new Cart();
 
-  constructor() {}
+  constructor() {
+    this.loadCatalog();
+    this.loadUsers();
+  }
 
   //Users
-  public loadUsers() {
+  private loadUsers() {
     const loadData: string | null = localStorage.getItem("users");
     let loadDataJson: Array<any>;
     if (loadData) {
@@ -76,7 +79,7 @@ export default class Store {
 
   //Catalog
 
-  public loadCatalog(): void {
+  private loadCatalog(): void {
     let loadData: string | null = localStorage.getItem("products");
     let loadDataJson: Array<any>;
     if (loadData) {
@@ -95,6 +98,15 @@ export default class Store {
 
   public showCatalog(): Array<Product> {
     return this._catalog;
+  }
+
+  public filterCatalog(text: string): Array<Product> {
+    const filteredProducts = this._catalog.filter(
+      (product) =>
+        product.name.toLowerCase().includes(text.trim().toLowerCase()) ||
+        product.type.toLowerCase().includes(text.trim().toLowerCase())
+    );
+    return filteredProducts;
   }
 
   //Products
