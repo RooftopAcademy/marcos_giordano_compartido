@@ -4,30 +4,16 @@ import StoreUser from "./StoreUser";
 import products from "../helpers/products";
 import NullProduct from "./NullProduct";
 import NullStoreUser from "./NullStoreUser";
+import { getUserByEMail, postUsers, users } from "../services/usersService";
+import { loadCatalog, postCatalog } from "../services/catalogService";
 
 export default class Store {
-  private _users: Array<StoreUser> = [];
   private _user: StoreUser = new NullStoreUser();
   private _catalog: Array<Product> = [];
   private _cart: Cart = new Cart();
 
   constructor() {
     this.loadCatalog();
-    this.loadUsers();
-  }
-
-  //Users
-  private loadUsers() {
-    const loadData: string | null = localStorage.getItem("users");
-    let loadDataJson: Array<any>;
-    if (loadData) {
-      loadDataJson = JSON.parse(loadData);
-      loadDataJson.forEach((element) => {
-        const user: StoreUser = new StoreUser();
-        user.create(element);
-        this._users.push(user);
-      });
-    }
   }
 
   //Loged user
@@ -41,19 +27,14 @@ export default class Store {
   }
 
   public registerUser(user: StoreUser) {
-    const existUser = this.verifyUserExists(user.mailAdress);
-    if (existUser.length == 0) {
+    if (getUserByEMail(user.mailAdress)) {
+      throw new Error("El usuario que está intentando crear ya existe.");
+    } else {
       this._user = user;
       localStorage.setItem("user", JSON.stringify(this._user));
-      this._users.push(this._user);
-      localStorage.setItem("users", JSON.stringify(this._users));
-    } else {
-      throw new Error("El usuario que está intentando crear ya existe.");
+      users.push(this._user);
+      postUsers();
     }
-  }
-
-  public verifyUserExists(userMail: string) {
-    return this._users.filter((userEl) => userEl.mailAdress == userMail);
   }
 
   public getLogedUser() {
@@ -74,26 +55,13 @@ export default class Store {
 
   public saveUser(): void {
     localStorage.setItem("user", JSON.stringify(this._user));
-    localStorage.setItem("users", JSON.stringify(this._users));
+    postUsers();
   }
 
   //Catalog
 
-  private loadCatalog(): void {
-    let loadData: string | null = localStorage.getItem("products");
-    let loadDataJson: Array<any>;
-    if (loadData) {
-      loadDataJson = JSON.parse(loadData);
-    } else {
-      localStorage.setItem("products", JSON.stringify(products()));
-      loadData = localStorage.getItem("products")!;
-      loadDataJson = JSON.parse(loadData) as Array<any>;
-    }
-    loadDataJson.forEach((element) => {
-      const prod: Product = new Product();
-      prod.create(element);
-      this._catalog.push(prod);
-    });
+  private loadCatalog() {
+    this._catalog = loadCatalog();
   }
 
   public showCatalog(): Array<Product> {
@@ -113,7 +81,7 @@ export default class Store {
 
   public newProduct(prod: Product): void {
     this._catalog.push(prod);
-    localStorage.setItem("products", JSON.stringify(this._catalog));
+    postCatalog(this._catalog);
   }
 
   public getProductById(id: string): Product {
@@ -125,13 +93,13 @@ export default class Store {
   }
 
   public editProduct(): void {
-    localStorage.setItem("products", JSON.stringify(this._catalog));
+    postCatalog(this._catalog);
   }
 
   public removeProduct(id: String) {
     const productIndex: number = this._catalog.findIndex((p) => p.id == id);
     productIndex != -1 ? this._catalog.splice(productIndex, 1) : null;
-    localStorage.setItem("products", JSON.stringify(this._catalog));
+    postCatalog(this._catalog);
   }
 
   //Cart

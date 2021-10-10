@@ -153,7 +153,7 @@ function cleanCartButtonEvent(store: Store, mainContent: HTMLElement): void {
   const cleanCartBtn: HTMLElement = document.getElementById("clean-cart-btn")!;
   if (cleanCartBtn) {
     cleanCartBtn.addEventListener("click", function () {
-      store.cart.clear();
+      store.cart.clearAll();
       viewRendering(mainContent, store);
       updateProductsQuantityInCart(store);
     });
