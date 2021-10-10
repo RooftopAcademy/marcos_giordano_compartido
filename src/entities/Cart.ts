@@ -1,5 +1,10 @@
 import CartItemInterface from "../interfaces/CartItemInterface";
 import Product from "./Product";
+import {
+  getCartItems,
+  postCartItems,
+  removeAllCartItems,
+} from "../services/cartService";
 
 export default class Cart {
   private _products: Array<CartItemInterface> = [];
@@ -13,10 +18,9 @@ export default class Cart {
   }
 
   private load(): void {
-    const loadData: string | null = localStorage.getItem("cartProducts");
+    const loadData = getCartItems();
     if (loadData) {
-      const savedProducts: Array<CartItemInterface> = JSON.parse(loadData);
-      savedProducts.forEach((element) => {
+      loadData.forEach((element) => {
         const product: Product = new Product();
         product.create(element.item);
         this._products.push({
@@ -43,7 +47,7 @@ export default class Cart {
     } else {
       itemSearch[0].amount++;
     }
-    localStorage.setItem("cartProducts", JSON.stringify(this._products));
+    postCartItems(this._products);
   }
 
   public substract(id: string): void {
@@ -58,7 +62,7 @@ export default class Cart {
           (p: CartItemInterface) => p.item.id != id
         );
       }
-      localStorage.setItem("cartProducts", JSON.stringify(this._products));
+      postCartItems(this._products);
     }
   }
 
@@ -66,11 +70,11 @@ export default class Cart {
     this._products = this._products.filter(
       (p: CartItemInterface) => p.item.id != id
     );
-    localStorage.setItem("cartProducts", JSON.stringify(this._products));
+    postCartItems(this._products);
   }
 
-  public clear(): void {
+  public clearAll(): void {
     this._products = [];
-    localStorage.removeItem("cartProducts");
+    removeAllCartItems();
   }
 }
