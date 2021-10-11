@@ -16,7 +16,7 @@ export default function homeView() {
     </div>
 
     <div class="content-partner">
-      <a href="#/./register.html" class="content-partner-link">
+      <a href="#/register" class="content-partner-link">
         <div>
           <i class="fas fa-hands-helping fa-2x"></i>
           <h2>Hacete socio de nuestro club de descuentos!!!</h2>
