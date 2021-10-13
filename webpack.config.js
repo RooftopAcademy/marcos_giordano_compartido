@@ -1,8 +1,12 @@
+const path = require("path");
+
 module.exports = {
   entry: "./src/app.ts",
   output: {
     chunkFormat: "commonjs",
-    filename: "./bundle.js",
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "public/js"),
+    publicPath: "public",
     libraryTarget: "umd",
     libraryExport: "default",
   },
