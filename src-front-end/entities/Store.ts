@@ -1,11 +1,10 @@
 import Cart from "./Cart";
 import Product from "./Product";
 import StoreUser from "./StoreUser";
-import products from "../helpers/products";
 import NullProduct from "./NullProduct";
 import NullStoreUser from "./NullStoreUser";
-import { getUserByEMail, postUsers, users } from "../services/usersService";
 import { loadCatalog, postCatalog } from "../services/catalogService";
+import { createUser, editUser } from "../services/userServices";
 
 export default class Store {
   private _user: StoreUser = new NullStoreUser();
@@ -26,15 +25,20 @@ export default class Store {
     localStorage.setItem("user", JSON.stringify(this._user));
   }
 
-  public registerUser(user: StoreUser) {
-    if (getUserByEMail(user.mailAdress)) {
-      throw new Error("El usuario que está intentando crear ya existe.");
-    } else {
-      this._user = user;
-      localStorage.setItem("user", JSON.stringify(this._user));
-      users.push(this._user);
-      postUsers();
-    }
+  public async registerUser(user: StoreUser) {
+    await createUser(user).then((result) => {
+      if (result.status == 201) {
+        this._user = user;
+        result.json().then((res) => {
+          this._user.id = res._id;
+          localStorage.setItem("user", JSON.stringify(this._user));
+        });
+      } else if (result.status == 409) {
+        throw new Error("El usuario que está intentando crear ya existe");
+      } else {
+        throw new Error("Error en el servidor");
+      }
+    });
   }
 
   public getLogedUser() {
@@ -53,9 +57,9 @@ export default class Store {
     localStorage.removeItem("user");
   }
 
-  public saveUser(): void {
+  public refreshUser(): void {
     localStorage.setItem("user", JSON.stringify(this._user));
-    postUsers();
+    editUser(this._user);
   }
 
   //Catalog

@@ -24,10 +24,16 @@ function registerFormEvents(store: Store): void {
     try {
       const newUser: StoreUser = new StoreUser();
       verifyInputData(newUser, registerForm);
-      store.registerUser(newUser);
-      addUserNameToNavBar(newUser.firstName.toUpperCase());
-      displayInfoContainer("El usuario ha sido creado correctamente.");
-      returnHome();
+      store
+        .registerUser(newUser)
+        .then(() => {
+          addUserNameToNavBar(newUser.firstName.toUpperCase());
+          displayInfoContainer("El usuario ha sido creado correctamente.");
+          returnHome();
+        })
+        .catch((error) => {
+          displayInfoContainer(`${error}`);
+        });
     } catch (error) {
       displayInfoContainer(`${error}`);
     }
