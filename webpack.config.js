@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/app.ts",
+  entry: "./src-front-end/app.ts",
   output: {
     chunkFormat: "commonjs",
     filename: "bundle.js",

@@ -6,7 +6,7 @@ import displayInfoContainer from "../components/infoContainer";
 import returnHome from "../helpers/returnHome";
 import addUserNameToNavBar from "../helpers/addUserNameToNavBar";
 import StoreUser from "../entities/StoreUser";
-import { getUserByEMail } from "../services/usersService";
+import { getUserByEMail } from "../services/userServices";
 
 export function userViewLogic(store: Store, mainContent: HTMLElement) {
   viewRendering(mainContent, store);
@@ -37,10 +37,14 @@ function logInEvent(store: Store) {
   if (logInForm) {
     logInForm["submit-button"].addEventListener("click", function () {
       const inputMail = logInForm["mail-adress"].value.trim();
-      const logInUser = getUserByEMail(inputMail);
       const inputPassword = logInForm["password"].value.trim();
-      verifyUserPassword(logInUser, inputPassword, store);
-      renderComponentsAccordingUserPrivileges(store);
+
+      getUserByEMail(inputMail).then((res) => {
+        const logInUser = new StoreUser();
+        logInUser.create(res);
+        verifyUserPassword(logInUser, inputPassword, store);
+        renderComponentsAccordingUserPrivileges(store);
+      });
     });
   }
 }
@@ -114,7 +118,7 @@ function privilegeEvents(store: Store, navBarContainer: HTMLElement): void {
 
     privilegeOptions.addEventListener("change", function () {
       setUserPrivilege(privilegeOptions, navBarContainer, store);
-      store.saveUser();
+      store.refreshUser();
     });
   }
 }

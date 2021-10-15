@@ -1,6 +1,7 @@
 import PrivilegeEnum from "../enums/PrivilegeEnum";
 
 export default class StoreUser {
+  private _id: string = "";
   private _firstName: string = "";
   private _lastName: string = "";
   private _mailAdress: string = "";
@@ -8,6 +9,12 @@ export default class StoreUser {
   private _privilege: PrivilegeEnum = PrivilegeEnum.normal;
 
   constructor() {}
+  get id(): string {
+    return this._id;
+  }
+  set id(id: string) {
+    this._id = id;
+  }
 
   get firstName(): string {
     return this._firstName;
@@ -83,6 +90,7 @@ export default class StoreUser {
   }
 
   public create(user: any) {
+    this._id = user._id;
     this._firstName = user._firstName.trim();
     this._lastName = user._lastName.trim();
     this._mailAdress = user._mailAdress.trim();
