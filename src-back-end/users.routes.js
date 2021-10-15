@@ -1,39 +1,43 @@
 const shortid = require("shortid");
 
 module.exports = function UserRoutes(app) {
-  users = [
-    {
-      id: "ZmNQ4ux9k",
-      firstName: "Marcos",
-      lastName: "Giordano",
-      mailAdress: "marcos_l14@hotmail.com",
-      password: "111111",
-      privilege: "admin",
-    },
-  ];
+  users = require("./data/users.json");
 
   app.get("/users", (req, res) => {
-    return res.json(users);
+    res.json(users);
   });
 
   app.post("/users", (req, res) => {
-    const user = req.body;
+    console.log(req.body);
+    const userInput = req.body;
 
-    if (user.name && user.lastname && user.email && user.password) {
-      user.id = shortid.generate();
-      users.push(user);
-      return res.status(201).json({ id: user.id });
+    const existsUser = users.find(
+      (user) => user._mailAdress == userInput._mailAdress
+    );
+    if (existsUser) {
+      return res.status(409).json({ message: "The user already exists" });
+    }
+
+    if (
+      userInput._firstName &&
+      userInput._lastName &&
+      userInput._mailAdress &&
+      userInput._password
+    ) {
+      userInput._id = shortid.generate();
+      users.push(userInput);
+      return res.status(201).json({ _id: userInput._id });
     }
 
     return res.status(400).json({ message: "Email or password missing" });
   });
 
-  app.get("/users/:id", (req, res) => {
-    if (!req.params.id) {
+  app.get("/users/:mail", (req, res) => {
+    if (!req.params.mail) {
       return res.status(404);
     }
 
-    const user = users.find((u) => u.id === req.params.id);
+    const user = users.find((user) => user._mailAdress === req.params.mail);
 
     return res.status(200).json(user);
   });
@@ -43,14 +47,17 @@ module.exports = function UserRoutes(app) {
       return res.status(404);
     }
 
-    const user = users.find((u) => u.id === req.params.id);
+    const user = users.find((user) => user._id === req.params.id);
 
     if (!user) {
       return res.status(404);
     }
 
-    user.email = req.body.email;
-    user.password = req.body.password;
+    user._firstName = req.body._firstName;
+    user._lastName = req.body._lastName;
+    user._mailAdress = req.body._mailAdress;
+    user._password = req.body._password;
+    user._privilege = req.body._privilege;
 
     const index = users.findIndex((u) => u.id === user.id);
     users[index] = user;
@@ -59,12 +66,10 @@ module.exports = function UserRoutes(app) {
   });
 
   app.delete("/users/:id", (req, res) => {
-    if (!req.params.id) {
-      return res.status(404);
-    }
-
-    users = users.filter((u) => u.id !== req.params.id);
-
-    return res.status(204);
+    //   if (!req.params.id) {
+    //     return res.status(404);
+    //   }
+    //   users = users.filter((u) => u.id !== req.params.id);
+    //   return res.status(204);
   });
 };

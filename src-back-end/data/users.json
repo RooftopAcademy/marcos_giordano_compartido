@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "ZmNQ4ux9k",
+    "_firstName": "Marcos",
+    "_lastName": "Giordano",
+    "_mailAdress": "marcos_l14@hotmail.com",
+    "_password": "111111",
+    "_privilege": "ADMIN"
+  },
+  {
+    "_id": "ZmNQ9ux9k",
+    "_firstName": "Pepe",
+    "_lastName": "Argento",
+    "_mailAdress": "pepe.argento@hotmail.com",
+    "_password": "222222",
+    "_privilege": "NORMAL"
+  }
+]
