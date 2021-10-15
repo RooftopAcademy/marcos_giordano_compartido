@@ -8,6 +8,7 @@ const app = express();
 app.use(express.static("public"));
 app.use(Cors());
 app.use(express.json());
+app.use(express.urlencoded());
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "public", "index.html"));
@@ -16,8 +17,7 @@ app.get("/", (req, res) => {
 usersRoutes(app);
 
 app.get("/*", (req, res) => {
-  res.send("Error 404");
-  res.status(404);
+  res.status(404).end();
 });
 
 app.listen(process.env.PORT || 3000, () => console.log("Server running..."));
